@@ -1,0 +1,26 @@
+Task ID,Semester,Subsystem,Task,Start,Finish,Owner,Dependency,Status
+F01,I,FP,"Freeze F450 propulsion, battery, mass budget",2026-10-22,2026-10-28,Ankit,None,Plan
+F02,I,FP,Procure; assemble and bench-check flight stack,2026-10-30,2026-11-13,Ankit,F01; delivery,Plan
+F03,I,FP,Takeover/pose demo; loaded flights if authorized,2026-11-16,2026-11-30,Ankit,F02; G01; safe bench exit,Conditional
+D01,I,DT,Define health schema; build status replay,2026-10-26,2026-11-06,Shisir,None,Plan
+D02,I,DT,Timestamp ≥300 updates; inject stream/pose losses,2026-11-09,2026-11-20,Shisir,D01; A01,Plan
+A01,I,SA,Receive/identify sensor; capture and decode packets,2026-10-26,2026-11-06,Abhinav,Actual sensor delivery,Conditional
+A02,I,SA,10-min recorder; independent range/timing checks,2026-11-09,2026-11-20,Abhinav,A01; payload recorder delivery,Conditional
+G01,I,GC,Site request; RTK/link/port plan; route prototype,2026-10-26,2026-11-06,Pritam,None; 3-week approval lead,Plan
+G02,I,GC,"Waypoint, command and bounded-buffer tests",2026-11-09,2026-11-20,Pritam,G01; stream definition,Plan
+P01,I,PC,"Common frame, labeled fixtures, export path",2026-10-26,2026-11-06,Aalok,None,Plan
+P02,I,PC,Held-out analysis; three ≥1 GB exports,2026-11-09,2026-11-20,Aalok,P01; A02 for physical claims,Plan
+R01,I,RD,Findings interface and evidence contract,2026-10-26,2026-11-06,Saugat,None,Plan
+R02,I,RD,Integrate warnings/evidence; demo and release,2026-11-09,2026-12-04,Saugat,R01; P02; D02,Plan
+S01,II,FP,Complete loaded platform integration,2027-01-11,2027-02-05,Ankit,F03; unresolved hardware,Assumed calendar
+S02,II,FP,"Endurance, tracking and repeat survey flights",2027-03-08,2027-03-26,Ankit,S01; approved site; S06,Assumed calendar
+S03,II,DT,Integrated health and fault characterization,2027-02-08,2027-02-26,Shisir,D02; S01,Assumed calendar
+S04,II,DT,Field logs and acceptance evidence audit,2027-03-29,2027-04-16,Shisir,S02; S03,Assumed calendar
+S05,II,SA,Camera/mount/timing calibration,2027-01-11,2027-02-05,Abhinav,A02; hardware,Assumed calendar
+S06,II,SA,Controlled movement and usable-envelope checks,2027-02-08,2027-03-05,Abhinav,S05,Assumed calendar
+S07,II,GC,"Mission, corrections and communications integration",2027-01-11,2027-02-12,Pritam,G02; approved site plan,Assumed calendar
+S08,II,GC,Field missions and recovery evidence,2027-03-08,2027-03-26,Pritam,S07; S01; S06; site approval,Assumed calendar
+S09,II,PC,Geometry/image pipeline and held-out protocol,2027-01-11,2027-02-12,Aalok,P02,Assumed calendar
+S10,II,PC,"Field errors, fusion evaluation; optional repeat survey",2027-03-29,2027-04-16,Aalok,S09; S02; S06,Assumed calendar
+S11,II,RD,Review interface and geographic exports,2027-01-11,2027-02-12,Saugat,R02,Assumed calendar
+S12,II,RD,"Acceptance package, reproducible release and demo",2027-04-19,2027-04-23,Saugat,S10; S04; S11,Assumed calendar

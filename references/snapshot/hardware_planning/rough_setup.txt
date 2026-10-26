@@ -1,0 +1,18 @@
+
+DIY Assembly Checklist & Cost Summary
+
+
+Component	Recommendation / Selection	Estimated Cost
+Frame & Propulsion	F450 Frame + 2212 Motors + ESCs + Props Combo	$50
+Flight Controller	SpeedyBee F405 V4 Flight Controller Stack	$65
+RTK GPS (Rover)	Holybro H-RTK F9P Rover Lite	$205
+Battery	3S or 4S 4200mAh LiPo Battery	$35
+Radio Controller	FlySky FS-i6X Transmitter & Receiver	$50
+Total Estimated Build Cost	Everything needed to fly your payload safely	~$405
+
+
+By assembling this yourself, you get a fully functional, centimeter-accurate RTK survey drone platform for around $405 total. This setup easily handles the 1.5kg takeoff weight capacity required for your sensors and battery while comfortably clearing your 10-minute flight time goal
+
+
+- InnoMaker 1080P USB 2.0 UVC Camera Board
+- Orange Pi Zero 3 H618 Quad Core Development Board

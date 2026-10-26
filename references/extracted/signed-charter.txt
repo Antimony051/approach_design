@@ -1,0 +1,427 @@
+Dept. of Electrical & Computer Engineering
+                                                                       ECE 4512 – Capstone Design I
+                                                                                          Spring 2026
+
+
+
+
+PaveWatch: Autonomous Surface Deformation Monitoring
+  Shisir BaralPM,1, Abhinav DhakalCS,1, Aalok Uprety1, Ankit Dhakal2, Pritam Adhikari1, Saugat
+                                             Karki1
+                                        Jingdao ChenA, 3
+           PM                                                 1
+              – Project Manager                                  – Computer Engineering
+            CS                                                 2
+               – Chief Scientist                                 – Electrical Engineering
+            A
+              – Faculty Advisor                         3 – Computer Science & Engineering
+
+
+The Problem:
+Sidewalks, roads, parking areas, and other paved surfaces gradually crack, heave, settle, and
+erode because of factors such as tree-root growth, freeze-thaw cycles, loading, weather, and
+normal wear. Because this deterioration often develops slowly, defects may go undocumented
+until they become large enough to create safety hazards, increase maintenance costs, or
+require more extensive repairs. The American Society of Civil Engineers (ASCE) gave U.S.
+roads a D+ in its 2025 Report Card for America’s Infrastructure and estimated a national
+infrastructure funding gap of approximately $3.7 trillion.
+
+Surface deterioration is also a safety concern for pedestrians. According to the National Safety
+Council and the National Council on Aging (NCOA), falls are the leading cause of injury-related
+death among older adults, resulting in more than 43,000 deaths in 2024 and approximately 3.85
+million emergency-room visits in 2023, with an estimated annual economic impact of roughly
+$80 billion. Uneven or deteriorated walking surfaces can create trip hazards, making early
+identification and tracking of pavement deformation important for maintenance planning and
+public safety.
+
+Current pavement inspection methods often depend on personnel visually examining large
+areas and documenting defects manually. This process can be slow, labor-intensive, and
+subject to human errors. It can also be difficult to determine whether a crack, settlement area, or
+other defect has changed significantly between inspections when measurements are not
+collected in a repeatable way. Industry reporting from DSLRpros indicates that drone-based
+infrastructure inspection can reduce inspection time by as much as 70% and reduce costs by
+approximately 40% to 60% compared with conventional inspection crews. These limitations
+create a need for a repeatable inspection system that can collect consistent surface
+measurements, compare conditions over time, and automatically identify areas that require
+closer attention.
+
+Proposed Solution:
+The gap between what can be measured automatically and what is still commonly inspected
+manually is where PaveWatch fits in. PaveWatch is a proposed autonomous unmanned aerial
+vehicle (UAV) system designed to survey sidewalks, roads, parking areas, and other exposed
+paved surfaces along repeatable flight paths. Its purpose is to detect, measure, and track
+surface deformation such as cracking, heaving, settlement, and erosion over multiple inspection
+dates.
+
+For each survey, an operator defines the inspection area and uploads a pre-planned route. The
+UAV then follows that route using GPS-based navigation while a sensing payload collects high-
+resolution measurements of the pavement surface. After each flight, the collected data will be
+
+
+                                                                                                   1
+                                                          Dept. of Electrical & Computer Engineering
+                                                                      ECE 4512 – Capstone Design I
+                                                                                         Spring 2026
+
+offloaded to cloud servers for processing. The processing system will organize and align the
+new survey data, generate a georeferenced representation of the inspected surface, and
+compare it with historic survey data. Differences between the current and baseline
+measurements will be used to identify changes in surface elevation, crack development,
+settlement, or other measurable deformation.
+
+The system will present the results through a user-accessible reporting interface. This allows
+engineers or maintenance personnel to identify where deterioration is occurring, determine how
+it is changing over time, and prioritize locations for further inspection or repair.
+
+By automating repeatable data collection and comparison over time, PaveWatch is intended to
+reduce the amount of manual inspection required, improve consistency between inspections,
+provide objective records of surface condition, and help maintenance personnel identify
+developing pavement problems before they become more severe.
+
+
+Process Diagram:
+
+
+
+
+The process begins by planning the mission and defining the survey area and flight path. The
+drone then flies autonomously and collects sensor and GPS data. After the flight, the data is
+transferred to a computer or server, where it is processed and compared with the stored
+baseline survey. Any significant surface changes are identified and flagged. Finally, the results
+are displayed in a report or dashboard and stored for future inspections.
+
+
+
+
+                                                                                                  2
+                                                        Dept. of Electrical & Computer Engineering
+                                                                    ECE 4512 – Capstone Design I
+                                                                                       Spring 2026
+
+
+
+
+System Diagram:
+
+
+
+
+The system is split into six subsystems. The Flight Platform, Power & Control subsystem
+handles autonomous flight, navigation, and power distribution, while the Sensor Payload & Data
+Acquisition subsystem collects surface and imaging data. Diagnostics & Telemetry monitors
+system health and sends status information to the ground station. The Ground Control &
+Communications subsystem is used to plan missions, send commands, and monitor the drone.
+After the flight, the collected data is sent to Data Processing & Change Detection, where it is
+analyzed and compared with previous survey data. The final results are then sent to Reporting,
+Database, & Alerts for storage, visualization, and notification of any detected changes.
+
+
+
+
+                                                                                                3
+                                                           Dept. of Electrical & Computer Engineering
+                                                                       ECE 4512 – Capstone Design I
+                                                                                          Spring 2026
+
+
+                                      Team Charter
+                                      Aerovengers
+                   Autonomous Surface Deformation Monitoring
+                                 S206, S323
+
+
+         Department /
+          Company                                Advisors
+               CSE                Jingdao Chen             chenjingdao@cse.msstate.edu
+
+        Expected Meeting Time & Frequency w/ Advisor(s):
+
+                     Wednesday, 2:00 PM in 314 Butler Hall
+
+Membership:
+
+        Project Manager                                         Chief Scientist
+               Shisir Baral                                        Abhinav Dhakal
+
+     SB3771                     CPE                        AD2432                   CPE
+
+
+
+                                Other Team Members
+              Pritam Adhikari                                       Ankit Dhakal
+
+      PA511                 EE                    AD2436               CPE
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+               Saugat Karki                                         Aalok Uprety
+
+     SK2088                     CPE                        AU160                    CPE
+
+
+
+
+Mode & Frequency of Communication:
+
+
+                                                                                                   4
+                                                               Dept. of Electrical & Computer Engineering
+                                                                           ECE 4512 – Capstone Design I
+                                                                                              Spring 2026
+
+We will meet for a team meeting every week, Saturdays 8:30 pm - 10:00 pm for an in-person meeting.
+The meetings will be held at the PMs apartment, unless specified otherwise. Anyone unable to be present
+will join remotely via a video call. Updates will be sent to the group chat when required.
+All the shared documents will be saved and shared via OneDrive and Teams Channel. Relevant files may
+be shared via GitHub.
+We plan to meet with our advisors once a week at the specified time.
+
+Submission Schedule:
+The team will complete internal reviews before each official course deadline.
+
+             Deliverable                      Internal Review / Milestone             Deadline
+
+Proposal/Team Charter First Draft        Team review and submission check        August 27, 2026
+
+Proposal/Team Charter Final Draft        Complete edits                          August 31, 2026
+
+Proposal/Team Charter Final Draft        Advisor review                          September 2, 2026
+
+Proposal/Team Charter Final Draft        Final submission check                  September 3, 2026
+
+Problem Statement Peer Review Draft      Draft complete                          September 2, 2026
+
+PDR First Draft                          Draft complete                          September 7, 2026
+
+PDR First Draft                          Team review                             September 8, 2026
+
+PDR First Draft                          Final submission check                  September 10, 2026
+
+Problem Statement First Draft            Draft complete                          September 10, 2026
+
+Problem Statement First Draft            Team review                             September 12, 2026
+
+Problem Statement First Draft            Final submission check                  September 13, 2026
+
+PDR Final Draft                          Complete team and advisor review        September 14, 2026
+
+PDR Final Draft                          Freeze final submission                 September 15, 2026
+
+Problem Statement Final Draft            Complete team review                    September 19, 2026
+
+Problem Statement Final Draft            Advisor review                          September 21, 2026
+
+Problem Statement Final Draft            Final submission check                  September 22, 2026
+
+Design Requirements Specification
+                                         Complete draft and peer reviews         October 6, 2026
+First Draft and Peer Review
+
+MSDR Document                            Complete document                       October 12, 2026
+
+MSDR Document                            Team review                             October 15, 2026
+
+MSDR Document                            Finalize                                October 18, 2026
+
+Design Requirements Specification
+                                         Advisor review                          October 16, 2026
+Final Draft
+
+Design Requirements Specification
+                                         Finalize                                October 18, 2026
+Final Draft
+
+
+                                                                                                       5
+                                                           Dept. of Electrical & Computer Engineering
+                                                                       ECE 4512 – Capstone Design I
+                                                                                          Spring 2026
+
+Demonstration Rubric First Draft     Team review                             October 22, 2026
+
+Approach Peer Review Draft           Complete draft and peer reviews         October 22, 2026
+
+Approach First Draft                 Team review                             October 28, 2026
+
+Approach First Draft                 Finalize                                October 29, 2026
+
+Approach Final Draft                 Team review                             November 7, 2026
+
+Approach Final Draft                 Advisor review                          November 10, 2026
+
+Approach Final Draft                 Finalize                                November 12, 2026
+
+Demonstration Rubric Final           Team review                             November 18, 2026
+
+Demonstration Rubric Final           Finalize                                November 19, 2026
+
+Final Demonstration                  Working demonstration ready             November 16, 2026
+
+Final Demonstration                  Integration testing complete            November 20, 2026
+
+Final Demonstration                  Full rehearsal                          November 23, 2026
+
+Final Demonstration                  Final acceptance testing complete       November 27, 2026
+
+Final DR PP, Document, and Website   Complete drafts                         November 20, 2026
+
+Final DR PP, Document, and Website   Team review                             November 27, 2026
+
+Final DR PP, Document, and Website   Advisor review and testing              December 2, 2026
+
+
+
+
+Team Roles:
+
+                                     Project Subsystems
+
+
+                                                                                                   6
+                                                                  Dept. of Electrical & Computer Engineering
+                                                                              ECE 4512 – Capstone Design I
+                                                                                                 Spring 2026
+
+                                                                                       Aalok Uprety
+      Flight Platform, Power & Control             Ankit Dhakal (lead)
+                                                                                        (support)
+1
+      This subsystem makes the drone fly, and supplies power to every other subsystem.
+                                                       Shisir Baral                    Ankit Dhakal
+      Diagnostics & Telemetry
+                                                         (lead)                         (support)
+2
+      Monitors the drone’s health, system status, faults, and real-time telemetry.
+                                                     Abhinav Dhakal                    Saugat Karki
+      Sensor Payload & Data Acquisition
+                                                         (lead)                         (support)
+3
+      This subsystem collects sensor and camera data during flight and saves it for later processing.
+
+                                                  Pritam Adhikari                 Abhinav Dhakal
+      Ground Control & Communications
+                                                       (lead)                         (support)
+4     This subsystem lets the operator plan missions, send position corrections, and monitor the drone
+      from the ground.
+      Data Processing & Change                     Aalok Uprety                     Shisir Baral
+      Detection                                        (lead)                         (support)
+5     This subsystem processes the collected data and finds where the surface has changed over
+      time.
+                                                   Saugat Karki                   Pritam Adhikari
+      Reporting, Database & Alerts
+                                                       (lead)                         (support)
+6     This subsystem stores results, shows them on a dashboard, and alerts staff when a problem is
+      found.
+
+
+Potential Obstacles:
+Technically: The team may disagree on technical decisions such as sensor selection, hardware platforms,
+software tools, or implementation approaches.
+Financially: Budget limitations may create disagreements over purchasing decisions, example might be
+buing a prebuilt component that will make the work easier but cost more.
+Logistically: Scheduling test sites, obtaining permission to operate the UAV, coordinating access to
+equipment, and arranging times when team members are available may cause delays.
+
+Conflict Resolution:
+For resolving conflicts, we plan to resolve them through our weekly meetings. Opposing viewpoints are
+laid out clearly, then everyone is asked to provide their thoughts on the matter. If the discussions fail to be
+fruitful, we will move to anonymous voting to decide what to do (tools like strawpoll.com may be utilized).
+Major decisions will require consultation with the advisor and majority support (4/6).
+If the votes are tied still, the CS and PM will make the final decision for their respective fields.
+
+Additional Comments or Concerns:
+[Signatures on the Next Page.]
+
+
+
+
+Signatures
+                                      Team Signatures
+
+                                                                                                              7
+                                                     Dept. of Electrical & Computer Engineering
+                                                                 ECE 4512 – Capstone Design I
+                                                                                    Spring 2026
+
+
+
+
+_______________________         09/04/2026    ________________________         09/04/2026
+       Signature                    Date              Signature                   Date
+             Shisir Baral                                 Abhinav Dhakal
+          Project Manager                                 Chief Scientist
+
+
+
+
+________________________         09/04/2026   ________________________        09/04/2026
+        Signature                   Date              Signature                   Date
+            Pritam Adhikari                                Ankit Dhakal
+                Member                                       Member
+
+
+
+
+________________________         09/04/2026   ________________________         09/04/2026
+        Signature                   Date              Signature                   Date
+             Saugat Karki                                  Aalok Uprety
+               Member                                        Member
+
+
+
+                                Advisor Signatures
+    Jing Dao Digitally signed
+             by Jing Dao Chen
+
+    Chen     Date: 2026.09.05
+             10:35:24 -05'00'
+________________________     _________        ________________________           _________
+        Signature                Date                  Signature                     Date
+            Jingdao Chen                              [External Advisor’s Name]
+   Computer Science and Engineering                 [External Advisor’s Institution]
+           Faculty Advisor                                External Advisor
+
+
+
+
+                                                                                             8
+                                                                Dept. of Electrical & Computer Engineering
+                                                                            ECE 4512 – Capstone Design I
+                                                                                               Spring 2026
+
+References:
+
+American Society of Civil Engineers. "2025 Report Card for America's Infrastructure." ASCE, 2025,
+infrastructurereportcard.org.
+
+American Society of Civil Engineers. "Wastewater." 2025 Report Card for America's Infrastructure, ASCE,
+2025, infrastructurereportcard.org/cat-item/wastewater-infrastructure/.
+
+DSLRpros. "Drone Infrastructure Inspection Solutions Guide." DSLRpros, 29 Aug. 2025,
+www.dslrpros.com/blogs/drone-trends/drone-infrastructure-inspection-for-bridges-roads-and-
+buildings.
+
+National Council on Aging. "Get the Facts on Falls Prevention." NCOA, ncoa.org/article/get-the-facts-on-
+falls-prevention/.
+
+National Safety Council. "Older Adult Falls." Injury Facts, NSC, 26 Mar. 2026, injuryfacts.nsc.org/home-
+and-community/safety-topics/older-adult-falls/.
+
+United States, Occupational Safety and Health Administration. "Investigation into Two Workers' Deaths in
+Edmund Finds Arkansas Contractor Failed to Test Oxygen Level in Confined Space, Provide Rescue
+Equipment." OSHA, 7 Dec. 2022, www.osha.gov/news/newsreleases/region6/12072022.
+
+AI Acknowledgment
+Generative artificial intelligence (AI) tools were used in the preparation of this document. AI-assisted
+image editing was used extensively to refine the visual presentation, layout, and formatting of the
+Process Diagram and System Diagram. The diagrams were reviewed by the team to ensure that the
+final versions accurately represent the intended project workflow and system architecture.
+
+AI tools were also used as a final-pass writing aid to review portions of the document for grammar, clarity,
+organization, and readability. The project concept, engineering decisions, technical content, source
+selection, and final submitted material were reviewed and approved by the team. The team remains
+responsible for the accuracy and content of the final document.
+
+
+
+
+                                                                                                           9

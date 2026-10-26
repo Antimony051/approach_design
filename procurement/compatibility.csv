@@ -1,0 +1,17 @@
+check_id,owners,check,interface_ids,selected_parts_and_revisions,document_evidence,bench_or_fit_evidence,status,remaining_question
+COMP-01,FP,Exact motor KV / battery voltage / prop / ESC / frame,IF-01/IF-02,,,,NOT_CHECKED,Exact matched bundle and thrust-current data; no duplicate ESC topology
+COMP-02,FP,Controller revision firmware target GCS and outputs,IF-02/IF-03,,,,NOT_CHECKED,H7 v1.5 vs v1.3 targets differ; older PX4/Pixhawk plan separate
+COMP-03,FP+GC,Every UART I2C receiver output and logging port,IF-09/IF-10/IF-11/IF-12,,,,NOT_CHECKED,Allocate pins and rates with no conflicts; inversion and logic levels
+COMP-04,FP,Battery charger connectors polarity leads and cell counts,IF-01,,,,NOT_CHECKED,Owned 2S does not establish 4S capability; connector change not voltage change
+COMP-05,FP+SA,Power tree regulator/BEC and conductor/current limits,IF-01/IF-03/IF-04/IF-05,,,,NOT_CHECKED,Do not parallel unapproved regulator outputs; lowest shared wire rating applies
+COMP-06,SA,Delivered picoScan plug pinout Ethernet power modes licenses,IF-04/IF-06,,,,NOT_CHECKED,Do not assume Pro/PTP/IMU/system plug or included cables
+COMP-07,SA,Camera host interface mode driver timing and exposure,IF-07,,,,NOT_CHECKED,USB3 camera on USB2 may reduce mode; monochrome changes color plan
+COMP-08,SA,Recorder expansion hub storage bus and boot/power support,IF-05/IF-06/IF-07/IF-08,,,,NOT_CHECKED,Simultaneous capture and thermal/write demand not nominal port speeds
+COMP-09,FP+SA,Recorder pose link signal levels pinout and ground,IF-09,,,,NOT_CHECKED,Independent payload power; TX/RX crossover; exact connector orientation
+COMP-10,GC,RC matched pair telemetry frequency antennas and host cables,IF-11/IF-12,,,,NOT_CHECKED,RC configuration Bluetooth is not a mission telemetry link
+COMP-11,GC+DT,GC3 bounded stream buffer ordering and fresh health,IF-13/IF-14,,,,NOT_CHECKED,Requirement meaning unresolved; do not assume raw video over SiK
+COMP-12,FP+SA,Installed mass CG mounting ground clearance optics cable bends,IF-18,,,,NOT_CHECKED,Liters and manufacturer unloaded endurance do not prove installed fit or flight
+COMP-13,SA+PC,Acquisition time pose frame and calibration uncertainty,IF-06/IF-07/IF-09,,,,NOT_CHECKED,≤20 ms bound and S3 end-to-end accuracy need independent evidence
+COMP-14,PC+RD,Transfer workstation storage report and geographic schema,IF-15/IF-16,,,,NOT_CHECKED,Integrity and warnings; geographic accuracy distinct from local frame
+COMP-15,GC+FP,RTK corrections if that path selected,IF-17,,,,NOT_CHECKED,Rover requires real source transport access/cost; no automatic cm result
+COMP-16,FP,Complete loaded endurance and calibrated energy reserve,IF-01/IF-05/IF-18,,,,NOT_CHECKED,Planning calculations not passing 3-flight evidence

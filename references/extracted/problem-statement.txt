@@ -1,0 +1,91 @@
+1. PROBLEM STATEMENT
+Paved surfaces require regular monitoring to identify deterioration before it becomes a safety or
+maintenance concern. Manual inspections can be labor-intensive and inconsistent, while image-based
+methods face limitations related to lighting and surface-depth measurement. These challenges complicate
+the collection of repeatable condition data. The following sections present the need for improved
+pavement-condition monitoring, the objective of PaveWatch, and relevant background on existing
+inspection approaches.
+1.1 Need Statement
+Paved surfaces such as sidewalks, parking areas and campus roads gradually develop cracks, potholes,
+settlement, and other surface distress because of traffic loading, moisture and drainage conditions [1].
+These changes can reduce serviceability and create hazards, but they may be difficult to identify early or
+compare across inspection dates. An audit by the Los Angeles City Controller found that, over the five
+fiscal years preceding the audit, the city faced more than 1,700 sidewalk injury claims and 1,020 lawsuits,
+paying over $35 million in settlements. The City lacked a complete inventory of sidewalk repair needs,
+while a comprehensive assessment was estimated to cost over $10 million and take two to three years [2].
+A 2019 New York City Comptroller audit of the Parks Department’s Trees & Sidewalks Program found
+an average wait of 101 days from a service request to inspection and 419 days from inspection to repair
+[3]. Current pavement-condition methods include manual surveys and 2D imaging, but these approaches
+can be labor-intensive, variable between inspections, and affected by environmental conditions or
+limitations in measuring surface depth [4][5]. Maintenance organizations therefore need a practical
+method for collecting repeatable, location-referenced condition data and identifying changes that warrant
+further inspection or repair. This need is directly relevant to Mississippi State University, where Campus
+Services is responsible for sidewalks, parking facilities, roadways, paving, preventive maintenance, and
+accessibility improvements [6].
+1.2 Objective Statement
+The objective of PaveWatch is to provide an unmanned aerial vehicle (UAV) platform for repeatable
+inspection of paved areas, such as sidewalks and parking lots, and location-referenced reporting of their
+condition. An operator marks the survey area and flight path, and the UAV collects surface and position
+data along that path. PaveWatch will combine multiple sensor inputs to address limitations of individual
+sensing methods. The system will organize the collected data, compare it with an earlier survey when
+available, and identify candidate changes that warrant closer inspection, such as signs of pavement
+settlement or heaving. Its report will provide a list of candidate concerns and a preliminary ranking for
+review. As the final step in reporting, designated municipal or campus maintenance personnel will review
+the findings and determine which locations require further inspection or repair and how that work should
+be prioritized. PaveWatch is meant to support maintenance and engineering decisions, not to replace the
+judgment of a qualified inspector or diagnose structural problems on its own.
+1.3 Background and Related Work
+Pavement condition depends on both the surface and the supporting soil. Moisture infiltration and
+inadequate drainage can weaken underlying materials, while expansive soils can swell as they absorb
+water and cause pavement heave or unevenness [1]. These mechanisms help explain the need for repeated
+monitoring as environmental conditions change. Existing assessment methods include standardized visual
+surveys, 2D and 3D imaging, and UAV photogrammetry [5][7][8]. Manual visual surveys are labor-
+intensive and subject to variability between inspectors. Two-dimensional imaging can document visible
+distress, but shadows, stains, poor contrast, and image resolution complicate interpretation, and these
+systems do not directly measure surface depth [5]. Three-dimensional imaging adds depth information
+through additional sensing equipment and processing [5]. UAV inspection also requires flight planning,
+safe site operations, and processing and interpretation of collected data [8][9]. Automated collection
+therefore does not, by itself, eliminate the need to interpret and review inspection results. A formal patent
+search is still required before making any claim of novelty or patentability.
+2. REFERENCES
+[1] Federal Highway Administration, Geotechnical Aspects of Pavements Reference Manual, Fed. Hwy.
+        Admin., Washington, DC, USA, Rep. FHWA-NHI-05-037, May 2006, ch. 3. [Online]. Available:
+        https://www.fhwa.dot.gov/engineering/geotech/pubs/05037/03a.cfm (accessed Sept. 10, 2026).
+[2] Los Angeles City Controller, Repairing L.A.'s Broken Sidewalk Strategy, Los Angeles, CA, USA,
+        Audit Rep., Nov. 2021. [Online]. Available:
+        https://controller.lacity.gov/audits-and-reports/sidewalks/ (accessed Sept. 13, 2026).
+[3] Office of the New York City Comptroller, Audit Report On The Department Of Parks And
+        Recreation’s Trees & Sidewalks Program, New York, NY, USA, Audit Rep., 2019. [Online].
+        Available: https://comptroller.nyc.gov/reports/audit-report-on-the-department-of-parks-and-
+        recreations-trees-sidewalks-program/ (accessed Oct. 2, 2026).
+[4] Federal Highway Administration, Practical Guide for Quality Management of Pavement Condition
+        Data Collection, U.S. Dept. Transp., Fed. Hwy. Admin., Washington, DC, USA, Tech. Rep.,
+        2013. [Online]. Available:
+        https://www.fhwa.dot.gov/pavement/management/qm/data_qm_guide.pdf (accessed Sept. 10,
+        2026).
+[5] Federal Highway Administration, "Pavements — 2D and 3D Imaging Technology," FHWA
+        InfoTechnology, U.S. Dept. Transp. [Online]. Available: https://infotechnology.fhwa.dot.gov/2d-
+        and-3d-imaging-technology/ (accessed Sept. 13, 2026).
+[6] Mississippi State University Campus Services, "Services," Mississippi State Univ., Mississippi State,
+        MS, USA, 2024. [Online]. Available: https://www.campusservices.msstate.edu/about/services
+        (accessed Sept. 11, 2026).
+[7] J. S. Miller and W. Y. Bellinger, Distress Identification Manual for the Long-Term Pavement
+          Performance Program, Fed. Hwy. Admin., McLean, VA, USA, Rep. FHWA-HRT-13-092, May
+          2014. [Online]. Available:
+          https://www.fhwa.dot.gov/publications/research/infrastructure/pavements/ltpp/13092/index.cfm
+          (accessed Sept. 12, 2026).
+[8] A. J. Puppala and S. S. C. Congress, Implementation of Unmanned Aerial Systems Using Close-
+         Range Photogrammetry Techniques for Quantitative (Metric) and Qualitative (Inspection) Tasks
+         Related to Roadway Assets and Infrastructures: Final Report, Texas Dept. Transp., Austin, TX,
+         USA, Tech. Rep. TxDOT 5-6944-01-IPR1, Dec. 2021. [Online]. Available:
+         https://rosap.ntl.bts.gov/view/dot/60031 (accessed Sept. 9, 2026).
+[9] Federal Aviation Administration, "Small Unmanned Aircraft Systems (UAS) Regulations (Part 107),"
+        U.S. Dept. Transp., FAA, Jul. 2026. [Online]. Available: https://www.faa.gov/newsroom/small-
+        unmanned-aircraft-systems-uas-regulations-part-107 (accessed Sept. 13, 2026).
+AI Acknowledgement Statement
+Generative AI tools (Google Gemini, Claude, ChatGPT) were utilized during the drafting of this
+document for grammatical proofreading, refining statements, reference reformatting to IEEE standards,
+document layout verification against instructor guidelines, and initial background statistical research. All
+AI-assisted research and statistical claims were independently cross-referenced and manually verified
+against primary source documentation. The authors have thoroughly reviewed and edited all content and
+take full responsibility for the technical accuracy and originality of this work.

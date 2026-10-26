@@ -1,0 +1,19 @@
+interface_id,owners,from,to,kind,existing_concept,electrical_or_mechanical_constraints,connector_and_pin_map,timing_capacity_failure_questions,requirement_ids,bom_ids,evidence,status
+IF-01,FP,Flight battery,Power monitor / distribution,Power,Flight battery,Selected pack voltage incl full/low/transient,TBD,Continuous/burst current and polarity,FP1,,,UNRESOLVED
+IF-02,FP,Distribution,ESCs / motors,Power and motor signals,Matched propulsion,Battery voltage; controller logic TBD,TBD,Motor order; arm/disarm and signal loss,FP1/FP3,,,UNRESOLVED
+IF-03,FP,Control power source,Flight controller / GNSS / radios,Power,BEC/module decision,Regulated outputs; do not parallel sources casually,TBD,Startup and power-loss behavior,FP1/S6,,,UNRESOLVED
+IF-04,SA+FP,Payload sensor branch,picoScan,Power,Fused sensor branch,Source record says 9–30 V DC; delivered plug TBD,TBD,Startup/transients; fuse; ground return,C5/SA1,,,UNRESOLVED
+IF-05,SA+FP,Payload regulator,Recorder / camera / SSD / cooling,Power,Dedicated payload supply,Required voltage/current and input range TBD,TBD,Simultaneous load; drop; brownout; orderly shutdown,SA1,,,UNRESOLVED
+IF-06,SA,picoScan,Recorder Ethernet,Range data,Ethernet / proposed Compact UDP,Source record: 10/100; M12 D-coded 4-pin to host,TBD,Segments/sequences; device and host times; loss,SA1/SA2,,,UNRESOLVED
+IF-07,SA,Camera,Recorder,Image data / timing,USB or CSI depends on selected pair,Bus mode; supply; optional trigger levels TBD,TBD,Exposure timing; frame ID; queue/drop detection,SA1/SA2/S5,,,UNRESOLVED
+IF-08,SA,Recorder,SSD / boot storage,Storage,USB or selected storage interface,Host bandwidth/power and data cable TBD,TBD,Sustained rate; free space; retained files after fault,SA1/PC3,,,UNRESOLVED
+IF-09,FP+SA,Flight controller,Recorder,Pose / flight state,Proposed MAVLink serial,Exact UART; logic levels; TX/RX/GND; independent power,TBD,Native boot time; rate; quality; stale/missing pose,S6/SA2,,,UNRESOLVED
+IF-10,FP+GC,GNSS / compass,Flight controller,Navigation,UART / I2C or selected interface,Exact revision/rail/connector/pinout TBD,TBD,Fix quality; time; compass calibration,FP2/FP4,,,UNRESOLVED
+IF-11,GC+FP,RC receiver,Flight controller,Manual control,Matched RC protocol e.g. SBUS,Receiver voltage; signal inversion; port TBD,TBD,Failsafe and acknowledged takeover,FP3,,,UNRESOLVED
+IF-12,GC,Ground station / telemetry pair,Flight controller,Commands / acknowledgements,MAVLink over selected telemetry,Air power/serial; ground USB; antenna frequency TBD,TBD,Ack timing; disconnection; separate RC,GC1/GC2,,,UNRESOLVED
+IF-13,DT+GC,Flight and acquisition health,Operator display,Status / warnings,Transport/aggregation TBD,Shared hardware allocation TBD,TBD,Source/display times; age; event IDs; freshness,DT1–DT3,,,UNRESOLVED
+IF-14,GC+SA,Buffered stream producer,Ground consumer,Historical stream backlog,GC3 interpretation unresolved,Define stream/rate/buffer and transport,TBD,60 s capacity; backlog before new stream; control freshness,GC3,,,UNRESOLVED
+IF-15,SA+PC,Payload storage,Operator laptop / processor,Post-flight export,USB/Ethernet/Wi-Fi decision TBD,Correct host/cable/storage devices TBD,TBD,Three ≥1 GB packages; ≤30 min each; hashes,PC3,,,UNRESOLVED
+IF-16,PC+RD,Processing output,Report/database/reviewer,Findings / evidence,Schema/export/hosting TBD,Local vs geographic frame; units,TBD,Source/calibration/run IDs; invalidity preserved,RD1,,,UNRESOLVED
+IF-17,GC+FP,Correction source if selected,GNSS rover if selected,Conditional corrections,RTK/PPK method TBD,Source/base/service and delivery path TBD,TBD,Fixed/float; outages; recurring cost,S3/S6,,,UNRESOLVED
+IF-18,FP+SA,Airframe mount,Sensor/recorder assemblies,Mechanical,Plate/rails/brackets TBD,No connector assignment,TBD,CG; fasteners; scan/FOV; cable bends; clearance,FP1/SA3,,,UNRESOLVED

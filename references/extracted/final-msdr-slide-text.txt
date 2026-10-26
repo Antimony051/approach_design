@@ -1,0 +1,793 @@
+## Slide 1
+
+MID SEMESTER DESIGN REVIEW
+PaveWatch
+UAV inspection of paved-surface geometry and visible distress
+Aerovengers
+ ▪ 
+Mississippi State University
+ECE 4512
+ ▪ 
+SICK$10K Challenge Participant
+Faculty advisor: Jingdao Chen
+
+## Slide 2
+
+PROJECT TEAM
+Meet our team.
+2
+S
+hisir 
+B
+aral
+Project Manager
+Diagnostics & Telemetry
+A
+bhinav 
+D
+hakal
+Chief Scientist
+Sensor Payload & Data Acquisition
+A
+nkit
+ D
+hakal
+Team Member
+Flight Platform, Power & Control
+P
+ritam
+ A
+dhikari
+Team Member
+Ground Control & Communications
+A
+alok
+ U
+prety
+Team Member
+Data Processing & Change Detection
+S
+augat 
+K
+arki
+Team Member
+Reporting, Database & Alerts
+Faculty advisor: 
+Jingdao Chen
+Not Siblings
+
+## Slide 3
+
+PROBLEM
+Pavement inspection problem
+2
+References: [1], [2]
+1,700+
+sidewalk injury claims
+>$35 million
+in settlements
+Los Angeles
+ ▪ 
+five fiscal years [1]
+Intended users
+Campus facilities and municipal maintenance teams
+Inspection need
+Repeatable locations, images, and surface measurements for follow-up inspection and maintenance records.
+
+## Slide 4
+
+DESIGN RATIONALE
+Inspection approaches
+2
+References: [2]
+1
+Manual inspection
+PRIMARY INFORMATION
+Direct observation and inspector judgment
+PAVEWATCH DESIGN CONTRIBUTION
+Location-linked records for follow-up inspection
+2
+RGB imaging
+PRIMARY INFORMATION
+Visible distress, texture, and context
+PAVEWATCH DESIGN CONTRIBUTION
+Pair images with laser-derived surface measurements
+3
+Photogrammetry
+PRIMARY INFORMATION
+Image-derived surface reconstruction
+PAVEWATCH DESIGN CONTRIBUTION
+Use direct range profiles as a geometry input
+4
+PaveWatch
+PRIMARY INFORMATION
+Laser profiles + images + aircraft pose
+PAVEWATCH DESIGN CONTRIBUTION
+A referenced survey package and maintenance review interface
+
+## Slide 5
+
+FEATURES
+Design features
+2
+F1
+Supervised survey
+The operator sets the area and route, then supervises the flight from the ground station.
+F2
+Surface assessment
+Finds raised or sunken areas, steps, slopes and visible cracks.
+F3
+Evidence review
+Each finding comes with images, measurements and data-quality warnings.
+F4
+Referenced data
+Every reading is tied to the drone's position, orientation and time.
+
+## Slide 6
+
+SYSTEM DESIGN
+Survey workflow
+6
+Current-survey geometry and visible distress form the baseline.
+Previous-survey comparison is an optional extension.
+
+## Slide 7
+
+SYSTEM DESIGN
+Subsyst
+em 
+architect
+ure
+7
+Onboard: laser profiles, images, pose, and timestamps.
+After landing: transfer → processing → evidence review and report.
+Ground Control & Communication
+GC · Pritam
+Operator mission planning
+Ground control station
+Operator radio link
+Commands
+(mission, control)
+Link health, status, telemetry
+Flight Platform, Power & Control
+FP · Ankit
+Battery
+Power regulation & distribution
+GNSS / IMU navigation
+Flight controller
+Propulsion
+(motors & control)
+Sensor Payload & Data Acquisition
+SA · Abhinav
+Payload power unit
+Camera
+2D LiDAR
+Data capture, time alignment
+Onboard storage
+Data Processing & Change Detection
+PC · Aalok
+Survey data ingest
+Computer Vision
+Point cloud processing
+3D surface modeling
+Alignment and georeferencing
+Surface feature detection
+Quality checks and filtering
+Reporting, Database & Alerts
+RD · Saugat
+Dashboard & report review
+Database
+(surveys & results)
+Notifications
+Results & alert engine
+Location-referenced maps and condition reports
+Geotagged results, alerts, and updates
+Diagnostics & Telemetry
+DT · Shisir
+Power monitor
+Health & telemetry aggregator
+Flight logs (pose & health)
+Health status
+Time-stamped raw data
+
+## Slide 8
+
+SYSTEM DESIGN
+System architecture in detail
+2
+Power
+Flight control
+Command / telemetry
+Survey / processing data
+Results / alerts
+Ground Control & Communications
+GC · Pritam
+Flight Platform, Power & Control
+FP · Ankit
+Sensor Payload & Data Acquisition
+SA · Abhinav
+Reporting, Database & Alerts
+RD · Saugat
+Diagnostics & Telemetry
+DT · Shisir
+Data Processing & Change Detection
+PC · Aalok
+Operator / mission planning
+Ground control station
+Ground / air radio link
+Commands / status
+Commands & corrections
+Battery
+Power regulation & distribution
+GNSS / IMU navigation
+Flight controller
+Propulsion: ESCs & motors
+Payload power rail
+Surface sensors & cameras
+Data capture & time alignment
+Onboard storage
+Regulated power
+Data
+Position, time & capture trigger
+Vehicle status & pose
+Live health, faults & telemetry
+Post-flight download
+Dashboard: reports & review
+Notifications
+Database: surveys & results
+Results & alert engine
+Power monitor
+Health & telemetry aggregator
+Flight logs: pose & health
+Record
+Survey data import
+Computer Vision
+Point cloud preprocessing
+Surface feature detection
+Pose / health metadata
+Location-referenced findings & candidate changes
+Earlier survey data, when available
+
+## Slide 9
+
+REQUIREMENTS
+System requirements: flight and geometry
+2
+F1 / S1
+Survey duration
+10 min
+of flight with the payload recording
+ACCEPTANCE TARGET
+≥
+10 min flight with acquisition active; ≥20% calibrated usable energy remaining at landing
+EVALUATION
+Three loaded flights
+F2 / S2
+Surface geometry
+100–150 mm
+raised, depressed and step features
+ACCEPTANCE TARGET
+100–150 mm geometry in regions ≥0.5 × 0.5 m; recall ≥90%, precision ≥80%; report gradients
+EVALUATION
+≥
+10 feature cases and ≥10 negative regions
+F2 / S3
+Measurement and location
+60 mm · 0.5 m
+height error and centroid error limits
+ACCEPTANCE TARGET
+≥
+90% of detected targets jointly meet height error ≤60 mm and centroid error ≤0.5 m
+EVALUATION
+Independent height and location references; height uncertainty ≤10 mm
+
+## Slide 10
+
+REQUIREMENTS
+System requirements: data and imagery
+2
+F3 / S4
+Data collection
+10 min
+of range and image recording
+ACCEPTANCE TARGET
+Record range and images for ≥10 min; identify stream gaps >1 s
+EVALUATION
+Concurrent recording and controlled gap injection
+F2–F3 / S5
+Visible concerns
+≥
+80%
+precision and recall for each class
+ACCEPTANCE TARGET
+Per-class precision and recall ≥80%; crack-like targets ≥20 mm × 0.2 m; depressions ≥0.5 × 0.5 m
+EVALUATION
+≥
+10 positives per class and ≥10 nuisance-only regions
+F4 / S6
+Position and orientation
+3D pose
+attached to every measurement
+ACCEPTANCE TARGET
+Record 3D position and orientation for ≥10 min; reference each quantitative observation
+EVALUATION
+Clock/frame/mount checks and missing-reference tests
+
+## Slide 11
+
+CONSTRAINTS
+Operating and integration constraints
+2
+References: [13], [14], [15]
+SURVEY
+5–8 m
+1–2 m/s
+Survey operation
+PLANNING BOUND
+5–8 m above pavement; 1–2 m/s; dry daylight
+DESIGN RESPONSE
+Plan route spacing, exposure, and scan coverage together
+≤
+400
+FT AGL
+Flight/site
+PLANNING BOUND
+Part 107 operating case; VLOS; <55 lb; ≤400 ft AGL; campus request ≥3 weeks ahead
+DESIGN RESPONSE
+Schedule site authorization before field trials
+UNDER
+$700
+Aircraft budget
+PLANNING BOUND
+Under $700 for aircraft, flight battery, RC, and navigation; recording payload excluded
+DESIGN RESPONSE
+Compare complete aircraft configurations and delivered quotes
+650 g
+800 g MAX
+Payload installation
+PLANNING BOUND
+650 g target; 800 g upper planning case; picoScan supply 9–30 V DC
+DESIGN RESPONSE
+Allocate mass, mounting space, and separate payload power branches
+
+## Slide 12
+
+STANDARDS
+Applicable standards
+2
+References: [16], [17], [18]
+IEEE 802.3-2022
+Ethernet connection from LiDAR to recorder
+Relevance
+Provides a standard wired interface for transferring LiDAR measurements to the onboard recorder.
+IETF RFC 7946
+Geographic finding exports in GeoJSON
+Relevance
+Allows geolocated pavement findings to be shared with compatible mapping and GIS tools
+IETF RFC 8446
+TLS 1.3 for network upload and report access
+Relevance
+Protects uploaded survey data and remotely accessed reports through encrypted connections
+
+## Slide 13
+
+COMPONENT SELECTION
+ ▪ 
+1 OF 3
+Flight-system options
+2
+References: [3], [4], [5], [6], [24]
+PLANNING CHOICE
+F450 DIY + SpeedyBee F405 V4
+X500 v2 ARF + Kakute H7 Mini v1.5
+S500 v2 kit + Pixhawk 6C
+Cost
+$405 estimate
+$657.17 subtotal
+$669.20 subtotal
+Build
+Custom assembly from separate parts
+Almost ready to fly (ARF) frame with matched motors and propellers
+Kit with matched propulsion and integrated flight electronics
+Positioning (GPS)
+F9P high-precision GNSS rover (concept)
+M10 GNSS with compass
+M10 GNSS
+Ground link
+FlySky RC radio
+SiK telemetry radio
+SiK telemetry radio
+Battery
+3S or 4S, still to select
+4S 5 Ah (4 cells, 5,000 mAh)
+4S 5 Ah
+Main trade-off
+Lowest cost, but the most assembly and setup work
+250 mm payload rails make mounting the LiDAR easier
+Most integrated electronics, at the highest cost
+Planning choice: X500 v2, for its payload rails and configurable electronics. Costs cover different parts lists.
+
+## Slide 14
+
+COMPONENT SELECTION
+ ▪ 
+2 OF 3
+Recorder options
+2
+References: [7], [8], [9]
+PLANNING CHOICE
+Orange Pi Zero 3 + expansion board
+Raspberry Pi 4 (2 GB)
+Pi Zero 2 W + Ethernet/USB hub
+Board cost
+About $50 with expansion board
+About $60
+About $35 with hub
+LiDAR connection
+Gigabit Ethernet
+Gigabit Ethernet
+Ethernet through a USB adapter
+Camera and SSD connection
+USB 2.0
+USB 3.0, plus a CSI ribbon-camera port
+CSI camera, with USB shared through the hub
+Main trade-off
+Cheapest compact option, but USB 2.0 may limit data rate
+Faster USB 3.0 path, but larger and costs more
+Smallest, but LiDAR, camera and SSD share one USB link
+Prices exclude the camera, SSD, power and enclosure.
+Planning choice: Orange Pi Zero 3 with USB camera and external SSD. We'd switch to the Pi 4 if measured data rates need USB 3.0.
+
+## Slide 15
+
+COMPONENT SELECTION
+ ▪ 
+3 OF 3
+Camera options
+2
+References: [10], [11], [12]
+PLANNING CHOICE
+InnoMaker U20CAM-1080P
+InnoMaker U20CAM-9281M
+Arducam B0495 / AR0234
+Price
+$18.69 listed
+$32.99 listed
+Quote required
+Image
+Color, 1080p (exact mode to confirm)
+1280 × 800, grayscale
+1920 × 1200, color
+Shutter (motion handling)
+Not stated
+Global shutter: the whole frame is captured at once
+Global shutter
+Connection and control
+USB 2.0, plug-and-play (UVC)
+USB, with external trigger and manual exposure
+USB 3.0; on USB 2.0 it drops to 960 × 600 at 10 fps
+Main trade-off
+Cheapest, but resolution and lens coverage need checking
+Good timing control, but no color, so the color recording plan would change
+Best image, but needs a USB 3.0 recorder for full resolution
+Planning choice: InnoMaker color USB camera; select lens and exposure for the survey envelope.
+
+## Slide 16
+
+PROJECT SCHEDULE
+Capston
+e I 
+schedul
+e
+2
+Oct 22
+Oct 29
+Nov 05
+Nov 12
+Nov 19
+Nov 26
+Dec 03
+FP / Ankit
+Aircraft, battery, and mass plan
+FP / Ankit
+Procurement, assembly, bench checks
+FP / Ankit
+Takeover and pose; flight checks
+DT / Shisir
+Health fields and replay
+DT / Shisir
+Health latency and fault tests
+SA / Abhinav
+Sensor commissioning and packets
+SA / Abhinav
+Recorder, timing, and range tests
+GC / Pritam
+Site, navigation, and link plan
+GC / Pritam
+Mission and buffered-stream tests
+PC / Aalok
+Frames, fixtures, and export path
+PC / Aalok
+Held-out analysis and export tests
+RD / Saugat
+Findings interface and evidence
+RD / Saugat
+Integrated reporting and demo
+Oct 30
+ ▪ 
+Approach draft     Nov 13
+ ▪ 
+Approach final     Nov 20
+ ▪ 
+Demo rubric
+Nov 30
+ ▪ 
+Demonstration     Dec 4
+ ▪ 
+Final document
+
+## Slide 17
+
+PROJECT SCHEDULE
+Capstone II schedule
+2
+Jan 13
+Jan 25
+Feb 08
+Feb 22
+Mar 08
+Mar 22
+Apr 05
+Apr 19
+FP / Ankit
+Loaded aircraft integration
+FP / Ankit
+Endurance and repeat flights
+DT / Shisir
+Integrated health characterization
+DT / Shisir
+Field-log and evidence audit
+SA / Abhinav
+Camera, mount, and timing calibration
+SA / Abhinav
+Controlled-motion evaluation
+GC / Pritam
+Mission and communications integration
+GC / Pritam
+Field missions and recovery
+PC / Aalok
+Geometry and image evaluation protocol
+PC / Aalok
+Field errors and fusion evaluation
+RD / Saugat
+Review interface and geographic export
+RD / Saugat
+Acceptance package and final demo
+Planned dates
+ ▪ 
+Jan 11–Apr 23, 2027
+Integration → calibration → field evaluation → acceptance and release
+
+## Slide 18
+
+DEMONSTRATION PLAN
+Capst
+one I 
+demo
+nstrat
+ion 
+delive
+rables
+2
+Demonstration package: recorded survey, health evidence, processing results, and repeatable test procedures.
+Abhinav Dhakal
+Sensor Acquisition
+PERFORMANCE CRITERIA
+At least 10 minutes of synchronized LiDAR and image data, with gaps over 1 s flagged. Timing offset from the motion reference stays within 20 ms, and at least 90% of range errors are within 60 mm.
+METHOD AND DELIVERED ARTIFACT
+Bench recording of targets at 5, 6.5 and 8 m, with at least 10 observations each, plus independent timing events at the start, middle and end. Delivers the data package, timing plots and range-error table.
+Shisir Baral
+Diagnostics & Telemetry
+PERFORMANCE CRITERIA
+At least 90% of health updates (battery, sensor, storage, flight mode) reach the operator within 4 s over a 10-minute run. Sensor loss or missing pose data triggers a warning.
+METHOD AND DELIVERED ARTIFACT
+Timestamp at least 300 updates at the source and the display, inject five gaps per stream, and disconnect the sensor and pose inputs. Delivers the status view and the latency and fault logs.
+Aalok Uprety
+Data Processing
+PERFORMANCE CRITERIA
+At least 90% of reference points are within 1 m horizontally and 0.2 m vertically after transforming into a common frame. Detection is scored against S2, S3 and S5 (geometry, measurement and visible-defect targets), and three exports of 1 GB or more each finish within 30 minutes.
+METHOD AND DELIVERED ARTIFACT
+Reconstruct a known surface from three sensor poses and check it against at least 10 reference points. Test on geometry and image cases held out from tuning, and check each export for missing or corrupted files. Delivers the findings, evaluation tables and export logs.
+
+## Slide 19
+
+EVALUATION
+Verificati
+on plan
+2
+Capstone I Demonstration Verification
+Subsystem / owner
+Testing method
+Success criteria and evidence
+Sensor Acquisition
+Abhinav
+Record LiDAR and images simultaneously for 10 minutes. Measure known targets at 5, 6.5, and 8 m, using at least 10 observations per condition. Check independent timing events throughout recording.
+Flag gaps longer than 1 s; residual timing error ≤20 ms; at least 90% of range errors ≤60 mm.
+Deliver: 
+recording, timing plots, and range-error table.
+Diagnostics & Telemetry
+Shisir
+Collect at least 300 timestamped health updates over 10 minutes. Inject five gaps longer than 1 s per stream, then interrupt sensor and pose inputs.
+At least 90% of updates arrive within 4 s. Display gap and missing-input warnings.
+Deliver: 
+status display, latency results, and fault-response log.
+Data Processing
+Aalok
+Check coordinate transforms using three known sensor poses and at least 10 independent reference points. Evaluate held-out geometry and image cases. Perform three integrity-checked exports of at least 1 GB each.
+At least 90% of frame checks meet ≤1 m X/Y and ≤0.2 m Z error. Evaluate detection and geometry against S2/S3/S5. Each export finishes within 30 minutes.
+Deliver: 
+processed findings, evaluation tables, and export logs.
+Use independent reference measurements and reserve evaluation cases before tuning.
+
+## Slide 20
+
+PROJECT OUTLOOK
+Future work
+2
+1
+Capstone I
+FALL 2026
+Commission acquisition, demonstrate data-quality monitoring, and produce a traceable processing package.
+2
+Capstone II
+SPRING 2027
+Integrate the loaded aircraft and evaluate surface accuracy, imagery, and repeatability in field trials.
+3
+Further development
+AFTER CAPSTONE
+Evaluate repeat-survey changes, paired image/range analysis, and the time and cost of the inspection workflow.
+
+## Slide 21
+
+PROJECT OUTLOOK
+Broader impact
+2
+Maintenance use: 
+Provide campus and public-works staff with location-linked evidence for targeted follow-up and condition records.
+FOR PEOPLE AND COMMUNITIES
+Safer sidewalks and roads through earlier repairs
+Accessibility: flag trip hazards for wheelchair users
+Lower inspection cost for budget-strained cities and campuses
+WHERE ELSE IT COULD WORK
+Airport runways and taxiways
+Dams and levees
+Railway corridors
+LONG-TERM VALUE
+Image and LiDAR datasets for AI training
+Inspection as a service
+Long-term pavement wear records
+Starting maintenance earlier extends pavement life and lowers life-cycle cost; full reconstruction costs about three times as much as rehabilitation [25].
+
+## Slide 22
+
+REFERENCES
+References: inspection and aircraft
+2
+[1] Los Angeles Controller
+ ▪ 
+Sidewalk audit (2021)
+controller.lacity.gov/audits/sidewalks
+[2] FHWA
+ ▪ 
+2D and 3D pavement imaging
+infotechnology.fhwa.dot.gov/2d-and-3d-imaging-technology/
+[3] Holybro
+ ▪ 
+X500 v2 ARF / frame specifications
+holybro.com/products/x500-v2-kits
+[4] Holybro
+ ▪ 
+S500 v2 development kit
+holybro.com/products/s500-v2-development-kit
+[5] ArduPilot
+ ▪ 
+SpeedyBee F405 V3/V4
+ardupilot.org/copter/docs/common-speedybeef4-v3.html
+[6] Holybro
+ ▪ 
+Kakute H7 Mini
+holybro.com/products/kakute-h7-mini
+[24] Holybro
+ ▪ 
+H-RTK F9P GNSS series
+holybro.com/products/h-rtk-f9p-gnss-series
+[25] WSDOT / TRAC
+ ▪ 
+Benefit estimation of preservation projects (2018)
+wsdot.wa.gov/research/reports/fullreports/877-1.pdf
+
+## Slide 23
+
+REFERENCES
+References: acquisition hardware
+2
+[7] Orange Pi
+ ▪ 
+Zero 3
+www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-3.html
+[8] Raspberry Pi
+ ▪ 
+Pi 4 Model B
+www.raspberrypi.com/products/raspberry-pi-4-model-b/
+[9] Raspberry Pi
+ ▪ 
+Zero 2 W
+www.raspberrypi.com/products/raspberry-pi-zero-2-w/
+[10] InnoMaker
+ ▪ 
+U20CAM-1080P
+www.inno-maker.com/product/u20cam-1080p/
+[11] InnoMaker
+ ▪ 
+U20CAM-9281M
+www.inno-maker.com/product/u20cam-9281m/
+[12] Arducam
+ ▪ 
+B0495 / AR0234 datasheet
+www.arducam.com/downloads/datasheet/B0495_AR0234_Global_Shutter_USB3.0_Camera_Module_Datasheet.pdf
+[13] SICK
+ ▪ 
+picoScan150 operating instructions
+www.sick.com/media/docs/1/91/691/operating_instructions_picoscan150_2d_lidar_sensors_en_im0106691.pdf
+
+## Slide 24
+
+REFERENCES
+References: interfaces and operation
+2
+[14] 14 CFR Part 107
+ ▪ 
+Small unmanned aircraft
+www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107
+[15] Mississippi State
+ ▪ 
+UAS policy 79.11
+www.policies.msstate.edu/sites/www.policies.msstate.edu/files/policies/7911.pdf
+[16] IEEE 802.3-2022
+ ▪ 
+Ethernet
+standards.ieee.org/ieee/802.3/10422/
+[17] IETF RFC 7946
+ ▪ 
+GeoJSON
+www.rfc-editor.org/rfc/rfc7946
+[18] IETF RFC 8446
+ ▪ 
+TLS 1.3
+www.rfc-editor.org/rfc/rfc8446
+
+## Slide 25
+
+REFERENCES
+References: aircraft electronics
+2
+[19] Holybro
+ ▪ 
+Micro M10 GNSS / compass
+holybro.com/products/micro-m10-gps
+[20] Holybro
+ ▪ 
+SiK telemetry radio
+holybro.com/products/sik-telemetry-radio-v3
+[21] Holybro
+ ▪ 
+PM02 V3 power module
+holybro.com/products/pm02-v3-12s-power-module
+[22] RadioLink
+ ▪ 
+T8FB specifications
+www.radiolink.com/t8fb_specification
+[23] RCBattery
+ ▪ 
+4S 5 Ah battery
+rcbattery.com/liperior-5000mah-4s-35c-14-8v-lipo-battery-with-xt90-plug.html

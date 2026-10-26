@@ -1,0 +1,8 @@
+scope,configuration_id,parts_usd,shipping_tax_usd,contingency_usd,delivered_total_usd,ceiling_operator,ceiling_usd,status,notes
+aircraft,UNSELECTED,,,,,<,700,UNPRICED,Flight battery RC navigation included; telemetry and usable charging plan visible; payload excluded
+recording-payload,UNSELECTED,,,,,,,UNPRICED,Camera recorder SSD power harness mount; supplied sensor separately inventoried
+ground-demo,UNSELECTED,,,,,,,UNPRICED,Actual workstation availability supply fixtures references export hardware
+fabrication-spares,UNSELECTED,,,,,,,UNPRICED,Allocate shared consumables once; reconcile airborne items with relevant scope
+operational,UNSELECTED,,,,,,,UNPRICED,Determine site/flight equipment applicable to chosen operation
+whole-project-acquisition,UNSELECTED,,,,,,,FUNDING_UNCONFIRMED,Avoid summing overlapping scopes; old $999/$1000 is historical context
+recurring-monthly,UNSELECTED,,,,,,,OPTIONAL_UNPRICED,Cloud/correction/license plans only if selected; separate from acquisition

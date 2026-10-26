@@ -1,0 +1,11 @@
+item_id,owner,assembly,target_allocation_g,selected_installed_g,quantity,dimensions_mm,mount_location,clearance_cable_cg_notes,source,status
+MASS-01,SA,picoScan body,220,,,,,60 × 60 × 82 mm historical body dimensions,SRC-008/SRC-021 manufacturer value; excludes system plug,ALLOCATION
+MASS-02,SA,System plug and Ethernet/power harness,90,,,,,Include connectors and actual cable lengths,SRC-008 planning allocation,ALLOCATION
+MASS-03,SA,Recorder cooling and light protection,90,,,,,Board plus expansion cooling enclosure,SRC-008 planning allocation,ALLOCATION
+MASS-04,SA,Camera and cable,20,,,,,Lens and retainer included,SRC-008 planning allocation,ALLOCATION
+MASS-05,SA,SSD and cable,30,,,,,Actual installed enclosure/cable,SRC-008 planning allocation,ALLOCATION
+MASS-06,FP+SA,Regulation filtering fuses,40,,,,,Include input/output conductors,SRC-008 planning allocation,ALLOCATION
+MASS-07,FP+SA,Mount fasteners retention,100,,,,,Rigid optical transform and ground clearance,SRC-008 planning allocation,ALLOCATION
+MASS-08,shared,Unallocated payload mass margin,60,,,,,Margin is not a physical part,SRC-008 planning allocation,ALLOCATION
+MASS-09,FP,Complete aircraft excluding flight battery and survey payload,,,,,,Do not count kit mass and its included parts twice,Unknown until selected build reconciled,UNKNOWN
+MASS-10,FP,Flight battery and adapter,,,,,,Owned 2S pack dimensions/masses unknown,Candidate 507 g only in SRC-008; not selected,UNKNOWN

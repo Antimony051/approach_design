@@ -1,0 +1,173 @@
+PaveWatch by Aerovengers
+Problem Statement and Design Requirement Specifications First DraftECE 4512, Capstone Design I · Mississippi State UniversityShisir Baral, Abhinav Dhakal, Aalok Uprety, Ankit Dhakal, Pritam Adhikari, and Saugat KarkiFaculty advisor: Jingdao Chen · October 15, 2026
+1. Problem Statement
+Paved surfaces require regular monitoring to identify deterioration before it becomes a safety or maintenance concern. Manual inspections can be labor-intensive and inconsistent, while image-based methods face limitations related to lighting and surface-depth measurement. These challenges complicate the collection of repeatable condition data. The following sections present the need for improved pavement-condition monitoring, the objective of PaveWatch, and relevant background on existing inspection approaches.
+1.1. Need Statement
+Paved surfaces such as sidewalks, parking areas and campus roads gradually develop cracks, potholes, settlement, and other surface distress because of traffic loading, moisture and drainage conditions [1]. These changes can reduce serviceability and create hazards, but they may be difficult to identify early or compare across inspection dates. An audit by the Los Angeles City Controller found that, over the five fiscal years preceding the audit, the city faced more than 1,700 sidewalk injury claims and 1,020 lawsuits, paying over $35 million in settlements. The City lacked a complete inventory of sidewalk repair needs, while a comprehensive assessment was estimated to cost over $10 million and take two to three years [2]. A 2019 New York City Comptroller audit of the Parks Department’s Trees & Sidewalks Program found an average wait of 101 days from a service request to inspection and 419 days from inspection to repair [3]. Current pavement-condition methods include manual surveys and 2D imaging, but these approaches can be labor-intensive, variable between inspections, and affected by environmental conditions or limitations in measuring surface depth [4], [5]. Maintenance organizations therefore need a practical method for collecting repeatable, location-referenced condition data and identifying changes that warrant further inspection or repair. This need is directly relevant to Mississippi State University, where Campus Services is responsible for sidewalks, parking facilities, roadways, paving, preventive maintenance, and accessibility improvements [6].
+1.2. Objective Statement
+The objective of PaveWatch is to provide an unmanned aerial vehicle (UAV) platform for repeatable inspection of paved areas, such as sidewalks and parking lots, and location-referenced reporting of their condition. An operator marks the survey area and flight path, and the UAV collects surface and position data along that path. PaveWatch combines multiple sensor inputs to address limitations of individual sensing methods. The system organizes the collected data and identifies candidate surface concerns, including raised or depressed areas, vertical discontinuities, and surface gradients. An earlier survey provides additional change information when available. Its report presents candidate concerns with supporting images and available geometric measurements. Designated municipal or campus maintenance personnel use the findings to decide which locations require further inspection or repair. PaveWatch is meant to support maintenance and engineering decisions, not to replace the judgment of a qualified inspectoror diagnose structural problems on its own.
+1.3. Background and Related Work
+Pavement condition depends on both the surface and the supporting soil. Moisture infiltration and inadequate drainage can weaken underlying materials, while expansive soils can swell as they absorb water and cause pavement heave or unevenness [1]. These mechanisms help explain the need for repeated monitoring as environmental conditions change. Existing assessment methods include standardized visual surveys, 2D and 3D imaging, and UAV photogrammetry [5], [7], [8]. Manual visual surveys are labor-intensive and subject to variability between inspectors. Two-dimensional imaging can document visible distress, but shadows, stains, poor contrast, and image resolution complicate interpretation, and these systems do not directly measure surface depth [5]. Three-dimensional imaging adds depth information through additional sensing equipment and processing [5]. UAV inspection also requires flight planning, safe site operations, and processing and interpretation of collected data [8], [9]. Automated collection thereforedoes not, by itself, eliminate the need to interpret and review inspection results. A formal patent search is still required before making any claim of novelty or patentability.
+These needs guide the survey, surface-measurement, and reporting requirements in Section 2.
+2. Design Requirement Specifications
+PaveWatch inspects paved areas and provides location-referenced evidence of surface concerns for maintenance review. A survey identifies current surface geometry and visible distress; an earlier survey may provide additional change information but is not required for surface assessment. This section defines system performance, subsystem demonstrations, imposed constraints, and applicable standards. Subsystem boundaries follow the signed team charter [10]; Section 1 defines the project need, and the development plan provides technical context [11].
+The prototype addresses a controlled sidewalk or parking-area segment in dry daylight, with a proposed survey envelope of 5–8 m above the pavement at 1–2 m/s. Initial geometry assessment concerns broad raised or depressed areas, vertical discontinuities, and surface gradients. Fine crack-width measurement, subsurface condition, and structural diagnosis remain outside the acceptance scope. Numerical limits are proposed acceptance targets, not measured performance or confirmed customer commitments.
+2.1. Features and Requirements
+Four features (F1–F4) connect user needs to six system requirements (S1–S6). Subsystem identifiers connect the demonstrations to the applicable system requirements.
+2.1.1. Features and System Design Requirements
+Table 2-1 connects each feature to system performance and explains the selected limits.
+
+Features
+System Design Requirements
+Justification
+F1. Survey operation.
+S1. Survey duration:The complete aircraft sustains at least 10 min of flight with acquisition active and lands with at least 20% of its calibrated usable energy remaining.
+Ten minutes accommodates multiple passes, turns, and repositioning at a small test site. The remaining energy provides recovery margin.
+F2. Surface geometry and visible concerns.
+S2. Surface geometry assessment:For raised or depressed features and vertical discontinuities of 100–150 mm, evaluated over pavement regions at least 0.5 m × 0.5 m, candidate detection has recall ≥90% and precision ≥80% on a held-out evaluation set. The system also reports surface gradients for evaluated sloped regions. A previous survey is not required.
+The initial target concerns broad geometry with several spatial observations. The 100–150 mm range defines a controlled prototype evaluation scope; smaller features remain characterization cases. Height differences and gradients describe current pavement condition without requiring historical data.
+F2. Surface geometry and visible concerns.
+S3. Measurement and location:At least 90% of detected evaluation targets have absolute height-difference error ≤60 mm and horizontal centroid error ≤0.5 m in the documented local survey frame.
+A 60 mm height-error allowance and 0.5 m location allowance provide coarse prototype measurements of broad surface features. These limits apply to the complete system, rather than the range sensor alone [12].
+F3. Inspectable evidence.
+S4. Data collection:The system records range and image data for at least 10 min and identifies stream gaps longer than 1 second.
+A bounded recording session and identifiable gaps provide a practical acquisition demonstration.
+F2, F3. Visible surface concerns
+S5. Visible concern detection:Recall and precision are each ≥80% for broad crack-like features ≥20 mm wide and ≥0.2 m long and depression-like visible regions ≥0.5 m × 0.5 m, on held-out imagery within the accepted envelope.
+Visible candidates support image-based inspection [11]. The sizes define prototype evaluation scope without claiming fine crack metrology or requiring a particular detection model.
+F4. Referenced survey data.
+S6. Aircraft position and orientation:During at least 10 min of acquisition, record timestamped three-dimensional aircraft position and orientation. Associate each range profile and image used for quantitative analysis with a position and orientation estimate at its acquisition time in a documented local survey frame. Flag observations without a usable reference.
+Position and attitude connect sensor observations to the surveyed surface. Documented frame, timing, and sensor-mount relationships allow aircraft motion to be accounted for in geometry and image alignment [11].
+Features:
+An operator defines a paved area and collects survey data during a flight.
+A reviewer sees candidate visible distress and measurements of raised or depressed areas, vertical discontinuities, and surface gradients from a survey.
+A reviewer can examine surface images and geometric evidence associated with a finding. Recorded data gaps are visible.
+A reviewer receives candidate visible distress with supporting images from a survey.
+The system records where the aircraft is and how it is oriented so sensor observations can be interpreted in a common reference frame.
+
+For S2, the acceptance set includes at least 10 geometric-feature cases and 10 regions without qualifying features, excluded from parameter tuning. Raised areas, depressions, and vertical discontinuities are represented. Recall is the fraction of reference features detected; precision is the fraction of reported candidates that correspond to reference features.
+For S3, height difference means the elevation difference between the feature and adjacent reference pavement within the same survey. A vertical discontinuity uses the surfaces on either side of the step; an optional historical comparison instead measures the difference between surveys. Reference height uncertainty is ≤10 mm. Calibration, timing, aircraft motion, and range error all contribute to the final errors. Evaluation targets are independent of any controls used for alignment; accuracy and repeatability checks follow pavement-data quality principles [4].
+For S6, position includes three coordinates and attitude includes roll, pitch, and yaw or an equivalent orientation representation. Record frame origin, axes, units, orientation convention, time reference, and sensor-to-aircraft mounting transforms. Position and orientation may be interpolated to acquisition times using the recorded timing relationship. Independent known-position/orientation checks demonstrate that the reference is used correctly.
+2.1.2. Subsystem Requirements and Demonstration Setup
+Table 2-2 retains the six charter subsystems. Live demonstrations may use a bench, simulator, or interface as stated; data analysis uses recorded measurements. Synthetic replay demonstrates only the software behavior it exercises. Airborne performance requires authorized flight records.
+Table 2-2: Subsystem Requirements and Demonstration Setup
+Subsystem / Item
+Requirements
+Demonstration Setup
+
+FP1 (S1):Flight duration is ≥10 min with the complete acquisition payload active and ≥20% calibrated usable energy remaining at the end of asurvey.FP2 (S1):On straight survey legs, ≥90% of samples are within 2 m horizontally of the planned route and within ±1 m of commanded height, for commanded heights of 5–8 m and speeds of 1–2 m/s.FP3 (S1):Operator takeover changes the active control mode within ≤1s in 10 of 10 trials.FP4 (S6):Provide timestamped three-dimensional position, orientation, and reference conventions throughout the ≥10 min acquisition session.The estimated roll and pitch angles shall have an absolute error of ≤ 5 degrees for at least 90% of independently evaluated samples.
+
+FP1: Data analysis:Evaluate three authorized loaded flights against duration and remaining-energy bounds.FP2: Data analysis:Compare five passes with an independent surveyed route/height reference; report 90th-percentile errors.FP3 : Live:Timestamp commands and mode acknowledgements in a simulator or restrained, propeller-free bench setup.FP4: Live and data analysis:Record position and orientation for ≥10 min. Compare roll and pitch against reference angles and verify ≤1 degree error for ≥ 90% of samples. Check timestamps and coordinate frames.
+Diagnostics & Telemetry
+DT1 (S1, S4):Battery, acquisition, storage, and flight-mode status reaches the operator within ≤4 s for ≥90% of updates over a ≥10 min run.DT2 (S4):Identify range and image stream gaps longer than 1 s in the recording or operator display.DT3 (S4, S6):Sensor loss and missing position/orientation references produce an explicit gap or invalid-reference indication.
+DT1: Live and data analysis:Timestamp ≥300 updates at source and display using a shared clock; calculate latency per status field.DT2: Live or replay:Introduce five gaps longer than 1 s per acquisition stream and inspect gap records.DT3: Live or replay:Remove sensor and pose inputs and verify the affected data are identified.
+
+SA1 (S4):Record range and image streams simultaneously for ≥10 min and identify gaps longer than 1 s.SA2 (S3, S6):Residual timing offset between acquisition streams and the motion reference is ≤20 ms throughout the ≥10 min session, including drift.SA3 (S3):At least 90% of independently checked range-target observations have absolute error ≤60 mm.
+SA1: Data analysis:Replay the ≥10 min recording and verify duration, both streams, and introduced gaps.SA2: Data analysis:Use independently timed common motion/light events at session start, middle, and end; include exposure timing when estimating offset and drift.SA3: Data analysis:Evaluate matte range targets at 5, 6.5, and 8 m under representative motion/lighting, with ≥10 observations per condition and retained reference measurements.
+
+GC1 (S1):A trained operator defines, transfers, and verifies a route containing ≥10 waypoints within ≤10 min over five trials.GC2 (S1):Operator-command acknowledgement latency is ≤2 s for ≥90% of commands over the validated site link at distances up to 100 m.GC3 (S2, S4):In the event of communication loss, a data buffer stores up to 60 s of stream data; once reconnected, the buffered data is transmitted before updating new data.
+GC1: Live:Use a simulator/ground station; time of entry, transfer, and readback and compare the route with the source plan.GC2: Live and data analysis:Issue ≥100 commands at 10, 50, and 100 m where site permission allows, with propulsion disabled; record acknowledgement times.GC3: Live or replay:Disconnect the communication link for 30–60 s during active acquisition, restore connection, and verify that all buffered data transmit before live streaming data updates.
+
+PC1 (S6):Transform sensor data into a common coordinate frame using aircraft position, orientation, and sensor calibration. At least 90% of reference points shall have errors ≤1 m in X and Y and ≤0.2 m in Z. Flag all missing or invalid position references.
+PC2 (S2, S3, S5):Detect raised surfaces, depressions, vertical discontinuities, slopes, and visible defects using LiDAR and camera data. Achieve ≥90% recall and ≥80% precision for qualifying geometric features, with S3 measurement limits. Achieve ≥80% precision and recall for each visible-defect class. A previous survey is not required.
+PC3 (S4):Store each completed survey in onboard storage. Allow an operator to connect a laptop and export a survey package containing ≥1 GB of data within 30 minutes.
+PC1: Live and data analysis:Reconstruct a known surface from three sensor positions. Compare at least 10 independent reference points and report coordinate errors. Introduce 10 missing or invalid position references and verify all are flagged.
+PC2: Data analysis:Test ≥10 known geometric features and ≥10 regions without qualifying features. Report detections, height/location errors, and failures. Evaluate known slopes and labeled images. Report per-class precision and recall, and compare image-only and combined results where paired data exist.
+PC3: Live and data analysis:Perform three exports of ≥1 GB each from onboard storage to a laptop. Time each transfer and verify that all three finish within 30 minutes, with no missing or corrupted files.labeled set and publish per-class results and image-only/combined results where paired observations exist.
+
+RD1 (S2, S3, S5):Display survey findings with associated images and available geometric measurements, including units and any data-gap or reference warnings.
+
+RD1: Live:Open representative geometry and image-only findings. Compare displayed evidence, measurements, units, and warnings with the source results.
+
+
+
+2.2. Constraints
+Table 2-3 lists conditions imposed by the operating setting, university policy, federal rules, and the externally specified sensor interface. These constraints are distinct from performance choices such as survey speed or processing latency. The picoScan150 interface imposes particular constraints to the rest of the system as the participation requires the use of this lidar.
+Table 2-3: Constraints
+Type
+Name
+Description
+Legality
+C1. Small-UAS operating category
+The planned non-waivered Part 107 operation uses an aircraft with total takeoff mass <55 lb (approximately 24.95 kg), operates at ≤400 ft above ground, maintains visual line of sight, and uses the required pilot qualifications and airspace permissions [13]. Applicable registration and Remote ID conditions also govern the chosen aircraft/site configuration [14].
+Environmental
+C2. Flight-weather limits
+Flight visibility is ≥3 statute miles; cloud separation is ≥500 ft below and ≥2,000 ft horizontally for the assumed Part 107 operation [13]. These are legal minima, not sufficient conditions for usable pavement measurement. The prototype’s dry-daylight envelope further limits accepted tests.
+Operation
+C3. University site authorization
+MSU requires a UAS Flight Request at least three weeks before the intended operation and approval before campus flight [15]. The authorized site, schedule, and activity boundaries control all flight testing; zero campus flights proceed without the required approval.
+Functionality / interoperability
+C4. Sponsor-specified sensor interface
+The supplied picoScan150 has documented Ethernet interface supports 10/100 Mbit/s operation through the specified four-pin D-coded M12 connection [12].
+Energy
+C5. External electrical limits
+The supplied sensor requires 9–30 V DC at its power connector [12]. Installed supply, transient behavior, connector, and protective components remain within the delivered sensor’s instructions.
+Health and safety
+C6. Laser operating conditions
+The sensor’s documented Class 1 classification depends on operation as specified by the manufacturer under IEC 60825-1 [12], [16]. Integration preserves the optical assembly and labeling; zero unauthorized optical modifications are accepted. Manufacturer instructions govern installation and service. The finished UAV has no independently established laser certification.
+
+
+C1. Small-UAS operating category. These operating conditions are relevant because they define the aircraft and flight procedures that can be used for physical evaluation. The total takeoff mass limit of <55 lb, altitude limit of ≤400 ft above ground, visual-line-of-sight requirement, pilot qualifications, airspace permissions, registration, and Remote ID conditions affect platform selection and flight planning. We will account for the complete installed payload when assessing aircraft mass and confirm the applicable permissions and operating requirements for the selected aircraft and site before flight.
+
+C2. Flight-weather limits. Weather imposes practical limits on both flight control and data quality. Wind gusts may push the aircraft off its planned route, while rain or fog may interfere with image visibility and sensor measurements. The Part 107 visibility and cloud-separation values in the table are legal minima; they do not by themselves ensure safe flight or useful survey data. We will assess weather before each flight and conduct accepted tests in dry daylight conditions within the selected aircraft’s operating limits. The project has not yet set a numerical wind limit, so that limit should be established from the aircraft’s guidance and flight-validation results.
+
+C3. University site authorization. Campus approval and site boundaries govern where and when physical flight testing can occur. The requirement to submit an MSU UAS Flight Request at least three weeks in advance affects test scheduling, while approved activity boundaries may constrain route and test setup. We will include the request lead time in planning and proceed with campus flights only after approval. Bench, simulator, or replay work can support development when an approved flight is not available.
+
+C4. Competition Specified sensor interface. The supplied picoScan150 and its variant-dependent accessories may constrain the acquisition interface and integration layout. A mismatch in the delivered unit’s pinout, profile configuration, or Ethernet connection could prevent operation or damage equipment. We will confirm the delivered variant and its documentation before finalizing the connection, then design to its specified four-pin D-coded M12 interface and 10/100 Mbit/s Ethernet capability as applicable.
+
+C5. External electrical limits. The sensor’s required 9–30 V DC supply constrains power-system selection and integration. Supply compatibility, transient behavior, connector choice, and protective components affect reliable operation and could damage the sensor if inconsistent with its instructions. We will follow the delivered sensor documentation when selecting and integrating its supply, and confirm the flight platform’s allowable electrical limits and installed-mass capacity for the final configuration.
+
+C6. Laser operating conditions. The sensor’s documented Class 1 classification depends on operation as specified by its manufacturer, so changes to the optical assembly or installation could invalidate the project’s safety assumptions. We will preserve the optical assembly and labeling, follow the manufacturer’s installation and service instructions, and avoid unauthorized optical modifications. This addresses the sensor’s specified operating conditions; it does not establish an independent laser certification for the finished UAV.
+
+
+
+
+
+
+
+2.3. Standards
+Table 2-4 identifies four engineering standards relevant to interoperability, laser safety, geographic reporting, and protected communication. Each entry states its application in our project. This section identifies standards that may apply; their applicability will be confirmed as the design develops. The table below summarizes the standards considered for the project.
+
+Table 2-4: Engineering Standards
+Specific Standard
+Standard Document
+Specification / Application
+IEEE 802.3-2022
+IEEE Standard for Ethernet[17].
+The sensor link uses compatible Ethernet physical/data-link interfaces, with 10/100 Mbit/s capability as required by C4. Device/link configuration and the ≥10 min SA1 recording demonstrate interoperability and packet continuity. UDP loss is measured separately; Ethernet compatibility alone does not guarantee complete application data.
+IEC 60825-1:2014
+Safety of Laser Products—Part 1: Equipment Classification and Requirements[16].
+The standard defines laser-product classification and associated requirements. C6 preserves the supplied sensor’s documented Class 1 operating conditions. Acceptance evidence includes the device label, delivered manual, and installation inspection. This inspection verifies use of the documented component; it is not a measurement of accessible emissions or certification of the final product.
+IETF RFC 7946
+The GeoJSON Format, Aug. 2016 [18].
+Geographic candidate exports use GeoJSON Feature/FeatureCollection structures and WGS 84 longitude, latitude in decimal degrees, in that order. Local metric coordinates remain separately identified properties. At least 10 exported findings are parsed and checked against known locations; no local east/north coordinates are presented as geographic geometry.
+IETF RFC 8446
+The Transport Layer Security (TLS) Protocol Version 1.3, Aug. 2018 [19].
+Post-flight upload and report access support TLS 1.3 with server-certificate validation. Negotiated-version logs, a valid-certificate exchange, and an invalid-certificate rejection demonstrate the transport behavior. Transport encryption does not by itself establish access authorization.
+
+IEEE 802.3 may apply to the sensor’s Ethernet link and constrain interface compatibility and link configuration. It does not determine how survey data is exported to a laptop. That transfer method remains to be selected; if USB or Wi-Fi is considered, the team should identify and review the applicable USB specifications or IEEE 802.11 requirements.IEC 60825-1 is as the project uses the supplied laser sensor. Its operating conditions and safety instructions can constrain how the sensor is installed, operated, and serviced. Evidence that the sensor is used as documented does not establish laser certification of the integrated aircraft. RFC 7946 (GeoJSON) is relevant for exporting detected sidewalk problem locations and other geographic findings in a format that mapping and GIS tools can use. It applies to those geographic findings, not necessarily to raw sensor data; local measurements and their reference frame should remain clearly identified to avoid implying unsupported geographic precision.RFC 8446 (TLS 1.3) may apply if survey reports or data are uploaded or accessed through a network service. If that approach is used, it constrains secure transport and certificate validation; the team should confirm whether it applies to the eventual transfer and access design. The standards and alternatives should be reviewed as the architecture develops, with detailed test procedures and evidence retained in the table or verification plan.
+
+
+2.4. References
+
+[1] Federal Highway Administration, Geotechnical Aspects of Pavements Reference Manual, Fed. Hwy. Admin., Washington, DC, USA, Rep. FHWA-NHI-05-037, May 2006, ch. 3. [Online]. Available: https://www.fhwa.dot.gov/engineering/geotech/pubs/05037/03a.cfm (accessed Sept. 10, 2026).
+[2] Los Angeles City Controller, Repairing L.A.’s Broken Sidewalk Strategy, Los Angeles, CA, USA, Audit Rep., Nov. 2021. [Online]. Available: https://controller.lacity.gov/audits-and-reports/sidewalks/ (accessed Sept. 13, 2026).
+[3] Office of the New York City Comptroller, Audit Report On The Department Of Parks And Recreation’s Trees & Sidewalks Program, New York, NY, USA, Audit Rep., 2019. [Online]. Available: https://comptroller.nyc.gov/reports/audit-report-on-the-department-of-parks-and-recreations-trees-sidewalks-program/ (accessed Oct. 2, 2026).
+[4] Federal Highway Administration, Practical Guide for Quality Management of Pavement Condition Data Collection, U.S. Dept. Transp., Fed. Hwy. Admin., Washington, DC, USA, Tech. Rep., 2013. [Online]. Available: https://www.fhwa.dot.gov/pavement/management/qm/data_qm_guide.pdf (accessed Sept. 10, 2026).
+[5] Federal Highway Administration, “Pavements — 2D and 3D Imaging Technology,” FHWA InfoTechnology, U.S. Dept. Transp. [Online]. Available: https://infotechnology.fhwa.dot.gov/2d-and-3d-imaging-technology/ (accessed Sept. 13, 2026).
+[6] Mississippi State University Campus Services, “Services,” Mississippi State Univ., Mississippi State, MS, USA, 2024. [Online]. Available: https://www.campusservices.msstate.edu/about/services (accessed Sept. 11, 2026).
+[7] J. S. Miller and W. Y. Bellinger, Distress Identification Manual for the Long-Term Pavement Performance Program, Fed. Hwy. Admin., McLean, VA, USA, Rep. FHWA-HRT-13-092, May 2014. [Online]. Available: https://www.fhwa.dot.gov/publications/research/infrastructure/pavements/ltpp/13092/index.cfm (accessed Sept. 12, 2026).
+[8] A. J. Puppala and S. S. C. Congress, Implementation of Unmanned Aerial Systems Using Close-Range Photogrammetry Techniques for Quantitative (Metric) and Qualitative (Inspection) Tasks Related to Roadway Assets and Infrastructures: Final Report, Texas Dept. Transp., Austin, TX, USA, Tech. Rep. TxDOT 5-6944-01-IPR1, Dec. 2021. [Online]. Available: https://rosap.ntl.bts.gov/view/dot/60031 (accessed Sept. 9, 2026).
+[9] Federal Aviation Administration, “Small Unmanned Aircraft Systems (UAS) Regulations (Part 107),” U.S. Dept. Transp., FAA, Jul. 2026. [Online]. Available: https://www.faa.gov/newsroom/small-unmanned-aircraft-systems-uas-regulations-part-107 (accessed Sept. 13, 2026).
+[10] Aerovengers, “PaveWatch project proposal and team charter,” ECE 4512, Mississippi State Univ., Mississippi State, MS, USA, signed project document, Sep. 4, 2026.
+[11] Aerovengers, “PaveWatch technical development and validation plan,” Mississippi State Univ., Mississippi State, MS, USA, unpublished design record, Sep. 19, 2026, secs. 1–17, and accompanying application attachment.
+[12] SICK AG,picoScan150: Operating Instructions, document 8028323, secs. 2, 6, and 11. Accessed: Oct. 5, 2026. [Online]. Available: https://www.sick.com/media/docs/1/91/691/operating_instructions_picoscan150_2d_lidar_sensors_en_im0106691.pdf
+[13] Federal Aviation Administration, “Small unmanned aircraft systems,”Code of Federal Regulations, title 14, pt. 107, especially §§ 107.3, 107.12, 107.31, and 107.51. Accessed: Oct. 5, 2026. [Online]. Available: https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107
+[14] Federal Aviation Administration, “Remote identification of drones.” Accessed: Oct. 5, 2026. [Online]. Available: https://www.faa.gov/uas/getting_started/remote_id
+[15] Mississippi State University, “Uncrewed aircraft systems/model aircraft,” Operating Policy 79.11, Jul. 28, 2025, secs. I–II. Accessed: Oct. 5, 2026. [Online]. Available: https://www.policies.msstate.edu/sites/www.policies.msstate.edu/files/policies/7911.pdf
+[16] International Electrotechnical Commission,Safety of Laser Products—Part 1: Equipment Classification and Requirements, IEC 60825-1:2014, ed. 3.0, May 2014. Accessed: Oct. 5, 2026. [Online]. Available: https://webstore.iec.ch/en/publication/3587
+[17] IEEE,IEEE Standard for Ethernet, IEEE Std 802.3-2022, 2022. Accessed: Oct. 5, 2026. [Online]. Available: https://standards.ieee.org/ieee/802.3/10422/
+[18] H. Butler, M. Daly, A. Doyle, S. Gillies, S. Hagen, and T. Schaub, “The GeoJSON format,” IETF, RFC 7946, Aug. 2016. Accessed: Oct. 5, 2026. [Online]. Available: https://www.rfc-editor.org/rfc/rfc7946
+[19] E. Rescorla, “The transport layer security (TLS) protocol version 1.3,” IETF, RFC 8446, Aug. 2018. Accessed: Oct. 5, 2026. [Online]. Available: https://www.rfc-editor.org/rfc/rfc8446
+AI Acknowledgement Statement
+The existing problem statement acknowledges assistance from Google Gemini, Claude, and ChatGPT for drafting, editing, reference formatting, and layout checks. OpenAI ChatGPT/Codex also assisted with formatting this document. The team retains responsibility for reviewing the technical claims, confirming course requirements for AI use, and approving the document.

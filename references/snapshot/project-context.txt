@@ -1,0 +1,70 @@
+# ECE-4512 Capstone Design I
+
+# Course Overview
+The Capstone Course concerns itself with One sememster long project.
+We are designing a UAV system to identify surface deformations on paved surfaces.
+
+## Confirmed project status (October 22, 2026)
+
+- The team has been selected to participate in the SICK$10K Challenge.
+- The competition-provided picoScan LiDAR is on its way; receipt and exact variant
+  have not yet been confirmed.
+- No project hardware has been ordered. The team already has two **2S** batteries
+  and chargers: each pack is 5,200 mAh, 50C, 7.4 V nominal, and 38.48 Wh. The user
+  corrected the initial description of these packs as 6S. Connectors are unknown;
+  XT60 connectors are being considered. Aircraft/payload voltage compatibility
+  and the charger's supported cell counts remain to be checked.
+- The MSDR is scheduled for October 23, 2026, 11:00–11:55 a.m. Central. Team
+  roles are unchanged. The presentation must be on the website by 10:00 a.m.
+- Earlier platform recommendations and acquisition budgets are design proposals,
+  not purchase records or evidence of tested performance.
+- `parts_to_buy.txt` contains the user's candidate F450 / SpeedyBee F405 V4 /
+  H-RTK F9P Rover Lite build. Its $405 total and performance statements are
+  preliminary estimates and have not been validated.
+
+## Presentation decisions (October 23, 2026)
+
+- The user confirmed the picoScan has not arrived and no tests have been done.
+- Use **≤5°** for the FP4 attitude requirement and its test; the user resolved
+  the earlier 5°/1° discrepancy in favor of 5°.
+- Use `hardware_planning/` for the latest component planning. The aircraft
+  ceiling is under $700 including flight battery, RC, and navigation, excluding
+  the recording payload. This differs from a complete project budget.
+- Retain the original F450/SpeedyBee DIY concept among the three flight-system
+  options. The user requested a planning presentation without a drawbacks
+  discussion. Hardware values remain planning inputs.
+- The polished MSDR should use direct titles, team photos from `team_images/`,
+  and the supplied `system_diagram_infographic.png`; omit punchlines, meta
+  commentary, local-file citations, and IEC 60825-1:2014 from this presentation.
+
+## Capstone I demonstration scope (October 23, 2026)
+
+- The user requested a demonstration rubric for acquisition, processing, and
+  diagnostics/telemetry that can be completed without a finished flying aircraft.
+- `Demonstration-Rubric-Draft/PaveWatch_Demonstration_Rubric.docx` and `.pdf`
+  define proposed ground tests using real sensors, measured stand/carriage poses,
+  local recording, and labeled replay. `GROUND-DEMO-PLAN.md` contains execution
+  details and the boundaries against full airborne validation. These are future
+  acceptance checks, not evidence of completed tests or instructor approval.
+- Shisir remains overall reviewer and decision-maker. Pritam supports diagnostics
+  implementation; the existing subsystem ownership remains unchanged.
+- The user's location concept is in `hardware_planning/post_processing_for_location.md`:
+  estimate camera locations after collection using overlapping images with GPS
+  and LiDAR support. P1 now permits measured or post-processed poses and retains
+  its ground-checkpoint error bounds. A known launch coordinate alone does not
+  establish reconstruction scale/orientation or centimeter geographic accuracy;
+  the numerical accuracy claims in that planning note are not verified results.
+
+## Project files
+
+Here's where to find relevant files:
+
+course specific files retrived from canvas mcp -> canvas_archive/
+product design review -> PDR/
+Problem statement -> Problem-Statement-Draft/
+Project website -> Website-Deployment-Prep/
+Team charter -> Proposal-Team-Charter/
+system diagram, editable pptx -> system-diagram/
+
+The Canvas archive is the source for the downloaded course materials; do not
+edit files under `canvas_archive/`.

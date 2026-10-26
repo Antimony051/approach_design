@@ -1,0 +1,30 @@
+bom_id,configuration_id,owner,cost_scope,description,provision_status,manufacturer,part_number_revision_options,quantity,unit,included_in_bom_id,supplier,product_url,checked_date,availability_lead_time,unit_price_usd,extended_price_usd,allocated_shipping_tax_usd,delivered_line_cost_usd,installed_mass_g,dimensions_mm,power_budget_id,interface_ids,requirement_ids,compatibility_evidence,selection_status,notes
+BOM-001,UNSELECTED,FP,aircraft,Aircraft frame and matched propulsion,purchase-candidate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Choose exact frame/motor KV/ESC/prop bundle; kit contents TBD
+BOM-002,UNSELECTED,FP,aircraft,Flight controller and mounting adapter,purchase-candidate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,May be included in kit; exact revision/firmware/mount
+BOM-003,UNSELECTED,FP,aircraft,Flight battery,purchase-candidate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Do not assume owned 2S fits chosen propulsion
+BOM-004,UNSELECTED,FP,aircraft,Power monitor and distribution,purchase-candidate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,May be included; connector/wire ratings and ADC calibration
+BOM-005,UNSELECTED,FP,aircraft,GNSS and compass,purchase-candidate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,May be included; corrections if RTK selected
+BOM-006,UNSELECTED,GC,aircraft,Manual RC transmitter receiver and transmitter cells,purchase-candidate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Matched pair and actual receiver protocol
+BOM-007,UNSELECTED,GC,aircraft,Air and ground telemetry radios antennas cables,purchase-candidate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Count pair/kit inclusions once
+BOM-008,UNSELECTED,FP,aircraft,Flight charger balance/power leads and AC supply,inventory-check,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Owned charger capability unknown; purchase only if needed
+BOM-009,UNSELECTED,SA,payload,Challenge-supplied picoScan and accessories,supplied-unreceived,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Exact variant/system plug/accessories unknown; do not price as purchase
+BOM-010,UNSELECTED,SA,payload,Sensor system plug power cable and Ethernet cable,purchase-if-missing,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Inventory sponsor package first; exact M12/keying/pinout
+BOM-011,UNSELECTED,SA,payload,Recorder SBC and required expansion/hub,purchase-candidate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Joint camera/host/storage/bandwidth choice
+BOM-012,UNSELECTED,SA,payload,Camera lens and data/trigger cable,purchase-candidate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Exact SKU/mode/lens and exposure/timestamps
+BOM-013,UNSELECTED,SA,payload,Survey SSD and retained data cable,purchase-candidate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Sustained writes; mass and installed power
+BOM-014,UNSELECTED,SA,payload,Boot media and adapter if needed,purchase-candidate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Exact recorder OS/media endurance
+BOM-015,UNSELECTED,SA,payload,Recorder cooling and protection,purchase-or-fabricate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Include airflow and retention
+BOM-016,UNSELECTED,FP+SA,payload,Payload regulator filtering fuses harness,purchase-candidate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Split into exact electrical components after power budget
+BOM-017,UNSELECTED,FP+SA,payload,Rigid sensor plate brackets fasteners retention,fabricate-or-purchase,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Include print/material/fastener quantities and spare strategy
+BOM-018,UNSELECTED,FP+SA,payload,Controller to recorder pose-link harness/adapter,purchase-or-fabricate,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Correct logic levels and exact mating connectors
+BOM-019,UNSELECTED,shared,ground-demo,Operator/recorder/processing/reviewer workstation,inventory-check,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Actual available unit not confirmed; avoid duplicate machines
+BOM-020,UNSELECTED,PC+SA,ground-demo,Bench supply and sensor interface leads,inventory-check,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Actual compatible supply not confirmed
+BOM-021,UNSELECTED,FP+PC,ground-demo,Stand carriage measured-position fixture,fabricate-or-purchase,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Ground demo independent of aircraft
+BOM-022,UNSELECTED,SA+PC,ground-demo,Independent timing event fixture/logger,design-unresolved,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Uncertainty compatible with 20 ms objective
+BOM-023,UNSELECTED,PC,ground-demo,Range/height/angle reference tools,inventory-check,,,,,,,,,,,,,,,,,,,,UNRESOLVED,References and independent checkpoints; actual tools TBD
+BOM-024,UNSELECTED,PC,ground-demo,Geometry gradient visual targets and markers,fabricate-or-purchase,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Dimensions from requirements and demo plan
+BOM-025,UNSELECTED,SA+PC,ground-demo,Post-flight export hardware and backup destination,design-unresolved,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Actual storage devices/cables for three ≥1 GB exports
+BOM-026,UNSELECTED,FP,owned-inventory,Two existing 2S packs and chargers,owned,,,2,packs; charger count unspecified,,,,,,,,,,,,,,,,UNRESOLVED,2S 5200 mAh 50C 7.4 V 38.48 Wh each; condition/connectors unknown
+BOM-027,UNSELECTED,FP,fabrication-spares,Spare props connectors wire crimps heatshrink retention,design-unresolved,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Split into needed exact consumables; avoid overlap with kit/aircraft allowance
+BOM-028,UNSELECTED,GC+FP,operational,Site/flight equipment including applicable aircraft identification,design-unresolved,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Determine applicability and cost; not evidence of flight approval
+BOM-029,UNSELECTED,GC+RD,recurring,Corrections cloud hosting storage or licenses if selected,conditional,,,,,,,,,,,,,,,,,,,,UNRESOLVED,Do not assume paid services required or available

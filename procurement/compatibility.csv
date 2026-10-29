@@ -15,3 +15,4 @@ COMP-13,SA+PC,Acquisition time pose frame and calibration uncertainty,IF-06/IF-0
 COMP-14,PC+RD,Transfer workstation storage report and geographic schema,IF-15/IF-16,,,,NOT_CHECKED,Integrity and warnings; geographic accuracy distinct from local frame
 COMP-15,GC+FP,RTK corrections if that path selected,IF-17,,,,NOT_CHECKED,Rover requires real source transport access/cost; no automatic cm result
 COMP-16,FP,Complete loaded endurance and calibrated energy reserve,IF-01/IF-05/IF-18,,,,NOT_CHECKED,Planning calculations not passing 3-flight evidence
+COMP-17,FP+GC+DT,Proximity mode support stopping hold and pilot rejoin,IF-09/IF-11/IF-12/IF-13/IF-19,,references/new-evidence/2026-10-29-supervised-missions.md,,NOT_CHECKED,Select hardware/firmware; mode-specific protection and degraded-position fallback; port load power mass and cost unresolved

@@ -9,3 +9,4 @@ MASS-07,FP+SA,Mount fasteners retention,100,,,,,Rigid optical transform and grou
 MASS-08,shared,Unallocated payload mass margin,60,,,,,Margin is not a physical part,SRC-008 planning allocation,ALLOCATION
 MASS-09,FP,Complete aircraft excluding flight battery and survey payload,,,,,,Do not count kit mass and its included parts twice,Unknown until selected build reconciled,UNKNOWN
 MASS-10,FP,Flight battery and adapter,,,,,,Owned 2S pack dimensions/masses unknown,Candidate 507 g only in SRC-008; not selected,UNKNOWN
+MASS-11,FP+GC,Proximity sensing interfaces mounts and wiring,,,,,,Field of view and blind areas; rotor/optics clearance; CG; include actual installed harness/mount mass,October 29 operating design; no components selected,UNKNOWN

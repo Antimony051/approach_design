@@ -22,6 +22,10 @@ These are handoffs for future design work, not questions the user must answer be
 
 ## Source conflicts to preserve
 
+October 29 refinement is recorded in [supervised mission operation](../subsystems/04-ground-control-communications/supervised-mission-operation.md) and D-009/D-010. Post-processed reference estimation, skip/early-end support, proximity-triggered stopping/holding, pilot detours, and deliberate resumption are the agreed direction. Remaining questions: exact modes/authority and safe rejoin semantics; measured stopping/holding/clearance limits; proximity coverage/failure response; cost/power/mass/port impact; positioning-loss and combined RC/position-loss fallback. IMU-only position holding is not established. This follow-up resolves the earlier live-versus-offline permission question, while final error bounds and evidence remain open.
+
+October 28 GC operational follow-up: [the gap review](../subsystems/04-ground-control-communications/operational-gap-review.md) expands Q-02/03/07/08/11/12/14. Exact centerline tracking is excluded from first-version scope. Define the user's provisional location target (1 m × 1 m horizontal, 20 cm vertical), its confidence and datum, and live versus post-processed applicability. Decide mission/run identity, launch authority, duration semantics, link-loss behavior, and cloud-upload scope before complete user stories. These do not replace existing acceptance criteria.
+
 - September application says “Purchased X500” and uses Pixhawk/PX4/Pi 5/Camera Module 3. October confirmations say no orders; latest slides favor X500 ARF/H7/Orange Pi/USB. The old purchase wording is not inventory evidence.
 - September investigations include 8–12 m / 3–5 m/s camera proposals, 30-minute recording gates, smaller geometric fixtures, and preferred global-shutter CSI cameras. Current requirement/demo numerical targets take precedence; historical characterization remains useful as a lead.
 - The final requirements document's FP4 test says 1° despite its 5° requirement. The user resolved both to 5°; do not reopen it as an unanswered question.

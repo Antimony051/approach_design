@@ -4,3 +4,4 @@ PWR-02,FP,Controller GNSS receiver telemetry,,,,,,,,,,,,UNRESOLVED,Sum all perip
 PWR-03,SA,picoScan body and system plug,,9,,30,4.5,17,,,,,SRC-021 historical manufacturer summary,HISTORICAL_INPUT,17 W refers to cited loaded-output configuration; verify delivered unit and startup
 PWR-04,SA,Recorder camera SSD cooling,,,,,,,,,,,,UNRESOLVED,Older Pi 5 design allowed 5 V / 5 A; not measured and not a regulator selection for Orange Pi
 PWR-05,FP+SA,Power conversion wiring protection losses,,,,,,,,,,,,UNRESOLVED,Avoid double counting output loads; reconcile full energy and current budget
+PWR-06,FP+GC,Proximity sensing and any added processing,,,,,,,,,,,October 29 operating design; no components selected,UNRESOLVED,Include sensors interfaces and processing only once; rail/startup/peak loads and under-$700 aircraft cost impact unresolved

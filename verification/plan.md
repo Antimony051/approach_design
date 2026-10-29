@@ -18,6 +18,21 @@ Control points used for calibration/alignment are separate from evaluation check
 
 ## Full integrated and airborne evaluation
 
+### Supervised interruption checks — October 29 planning additions
+
+The [supervised mission design](../subsystems/04-ground-control-communications/supervised-mission-operation.md) adds the following future checks. Numeric limits, exact modes, hardware, and independent references remain to be selected; these checks do not replace FP3 or other existing acceptance targets.
+
+- Proximity event interrupts mission progression and requests stopping; measure event-to-response time, loaded stopping distance, residual motion, clearance, and achieved hold. Verify each applicable mode and failure if position is invalid. No aircraft motion toward real obstacles is authorized merely by this documentation.
+- Pilot takeover is visible and acknowledged; neutral sticks, sensor clearing, and telemetry reconnect do not restart the mission. Confirm an explicit resume and selected target; reject stale/duplicate requests.
+- Rejoin after a detour does not blindly return to an obstructed waypoint or rewind through the obstacle. Test waypoint/altitude/heading/acquisition-command effects and wrong-target selection in simulation first.
+- Skipped sections and early ending preserve recordings and produce partial-coverage/outcome records. Ending a survey does not command airborne disarming; return/landing is checked separately.
+- Test sensing blind areas, stale/missing/false sensor reports, mode changes, positioning loss, RC/GCS loss, combined failures, and protection priorities. Evaluate vertical coverage and return-path obstruction where relevant.
+- Distinguish attitude stabilization from position holding in estimator-loss checks. Do not pass an IMU-only hover claim based on a level aircraft. Reassess energy/reserve after detours and prolonged holds.
+
+Bench/simulation evidence demonstrates software behavior only; real sensor coverage and loaded flight performance need separate controlled tests and independent measurements.
+
+The October 28 [GC workflow review](../subsystems/04-ground-control-communications/operational-gap-review.md) adds proposed bench/simulation scenarios for mission identity/readback, changed launch position, reboot, duplicate commands, recording readiness, stale/replayed telemetry, link/recorder loss, and interrupted data transfers. They are future checks, not executed tests or new numeric acceptance criteria. Define the user's provisional mapping-reference accuracy convention before evaluating it; verify flight navigation, acquisition-time pose, and final findings separately.
+
 Final evaluation still needs loaded flight duration/energy in three authorized flights; five route/height passes; takeover latency; independent roll/pitch reference using the corrected 5° bound; motion-reference timing; sensor performance under representative motion/lighting; actual site command-link tests; and the complete S2/S3/S5 evaluation. Unloaded manufacturer hover figures, synthetic/replay tests, or static sensor ranges cannot establish those results.
 
 For every run save configuration/revisions, exact input provenance, raw data, reference uncertainty, calibration, commands/software version, denominators, injected faults, residuals/errors, pass/fail rule, output manifests/hashes, and failures/recovery. Keep dataset tuning separate from scored cases. A changed build may require repeated fit, power, timing, and calibration checks.

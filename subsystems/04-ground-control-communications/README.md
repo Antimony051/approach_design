@@ -2,6 +2,12 @@
 
 Lead: **Pritam Adhikari**. Charter support: **Abhinav Dhakal**. Requirements: **GC1–GC3; S1, S4**.
 
+## Current operational discussion — October 29, 2026
+
+The [supervised mission operating design](supervised-mission-operation.md) records the agreed direction: waypoint surveys with pilot detours, proximity-triggered stopping/holding, explicit rejoin/resume, skipped sections, and premature ending with preserved partial data. The proximity implementation, sensing envelope, mode priorities, and degraded-positioning fallback remain unresolved. IMU attitude stabilization is not accepted as a reliable position hold. Post-processed acquisition-time references are permitted in principle, with live clearance still required and final accuracy subject to validation.
+
+See [the workflow and gap review](operational-gap-review.md) for the initial planning/data-management discussion. The user proposes laptop-based planning, mission loading, deliberate launch, onboard-data extraction, and cloud upload, with wired/Bluetooth/shared-RC transports still candidates. Exact sidewalk-centerline tracking is not required for the first version. The desired mapping reference is approximately 1 m × 1 m horizontally and 20 cm vertically, with flexibility if downstream accuracy remains adequate; bound conventions remain open. This does not replace S3, PC1, or the timestamped pose/frame contract. Recorder choice remains open, including the user's Pi 4 example. No implementation is selected by this discussion.
+
 ## Required function
 
 Define, transfer, and verify routes; carry operator commands/acknowledgements and status; support manual recovery and any selected GNSS correction delivery; define link-loss buffering and reconnection.

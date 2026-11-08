@@ -18,6 +18,12 @@ Control points used for calibration/alignment are separate from evaluation check
 
 ## Full integrated and airborne evaluation
 
+### Proposed RGB/depth processing checks — November 3 (D-011)
+
+The [PC fusion proposal](../subsystems/05-data-processing-change-detection/rgb-depth-fusion-proposal.md) adds future evaluation details for S2/S3/S5/S6 and PC1/PC2; it does not replace acceptance targets or establish a pass. Check projection against independent physical targets, coverage at the selected speed/height/mode, scan/exposure motion compensation, depth units/frame, and numerical preservation. Inject missing depth, wrong timing, calibration errors, invalid pose, occlusion, and interrupted processing; verify warnings, RGB-only fallback, and retained raw evidence. Keep observed and estimated depth distinguishable through RD1 reports.
+
+Compare RGB-only, geometry-only, and fused models on identical held-out site/defect/sequence groups; keep neighboring frames, repeated views, crops, and augmentations within their original group. Report per-class precision/recall, applicable geometry height/centroid errors, coverage, nuisance false positives, and IoU where segmentation labels exist. Evaluate synthetic/public inputs separately from real project data. Learned depth completion, if introduced, needs independent geometric error checks before quantitative use. No minimum fusion improvement or new gradient-error limit is implied.
+
 ### Supervised interruption checks — October 29 planning additions
 
 The [supervised mission design](../subsystems/04-ground-control-communications/supervised-mission-operation.md) adds the following future checks. Numeric limits, exact modes, hardware, and independent references remain to be selected; these checks do not replace FP3 or other existing acceptance targets.

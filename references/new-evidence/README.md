@@ -4,3 +4,4 @@ Add dated manufacturer manuals/datasheets, exact supplier quotes, connector draw
 
 - [October 28 ground-control documentation check](2026-10-28-ground-control.md): GCS planning, optical-flow setup, shared RC/MAVLink links, and mission transfer semantics. Published documentation only; no project hardware compatibility or test claims.
 - [October 29 supervised mission documentation](2026-10-29-supervised-missions.md): mission resumption, mode-specific proximity protection, stabilization versus position holding, and Brake limitations. Published documentation only; no selected fallback or passed test.
+- [November 3 RGB/depth fusion assessment](2026-11-03-rgb-depth-fusion.md): manufacturer scan geometry, RGB-D segmentation/depth-completion precedents, paired pavement data, and continued 3D processing. Documentation/papers and labeled sampling calculations; no training or project measurements.

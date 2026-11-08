@@ -1,0 +1,23 @@
+# RGB/depth fusion evidence — November 3, 2026
+
+Checked November 3, 2026. **External documentation and papers, not project measurements.** Exact delivered picoScan part number, firmware, licenses, scan mode, camera variant/mode, and physical calibration remain unconfirmed. This research is later evidence; it does not change the provenance of the initial consolidation or overwrite snapshots. Application assessment: [PC proposal](../../subsystems/05-data-processing-change-detection/rgb-depth-fusion-proposal.md).
+
+| ID | Direct source and relevant section/version | Published support | Limits for this project |
+| --- | --- | --- | --- |
+| RGBD-E01 | [SICK picoScan100 overview](https://sickag.github.io/sick_lidar_developer_guide/picoScan100/), Overview; family includes picoScan120/150 | Single-plane 2D scanning | Not a full depth camera or simultaneous 3D scanner; delivered variant remains unknown |
+| RGBD-E02 | [SICK 3D with 2D LiDARs](https://sickag.github.io/sick_lidar_developer_guide/integration-notes/3d-with-2d-lidars/), introduction and Host-Side Transform | Known sweep motion permits transforming planar observations into 3D | The documented encoder example does not establish UAV pose accuracy or that an encoder is required/selected |
+| RGBD-E03 | [SICK licenses](https://sickag.github.io/sick_lidar_developer_guide/picoScan100/licenses/), Dynamic Sensing Profiles, profile 2: 15 Hz / 0.33° | This profile is listed among manufacturer configurations | Availability depends on exact variant/licenses; no configuration was read from project hardware |
+| RGBD-E04 | [OpenCV Camera Calibration and 3D Reconstruction](https://docs.opencv.org/4.13.0/d9/d0c/group__calib3d.html), Detailed Description and projectPoints; 4.13.0 | Intrinsics, distortion, and frame transforms define projection between XYZ and pixels | Does not estimate all calibration/timing inputs automatically or establish their error |
+| RGBD-E05 | [FuseNet author repository](https://github.com/tum-vision/fusenet), publication, data preparation, training; ACCV 2016 | Established RGB-D semantic segmentation architecture and released implementation | Historical architecture, primarily indoor benchmark context; no pavement/UAV suitability or modern dependency compatibility checked |
+| RGBD-E06 | [Sparse-to-Dense](https://arxiv.org/abs/1709.07492v2), abstract; Ma and Karaman, ICRA 2018 version | Predicts dense depth from sparse measurements plus an RGB image | Predicted depth is not an additional physical observation; benchmark improvements do not transfer automatically |
+| RGBD-E07 | [SHREC 2022 pavement RGB-D paper](https://arxiv.org/abs/2205.13326v5), abstract; July 12, 2022 revision | Direct precedent for pavement pothole/crack segmentation using image and RGB-D data | Depth-camera/benchmark setting differs from swept aerial LiDAR; dataset access, detailed pairing, and reuse terms not audited here |
+| RGBD-E08 | [Stereo Pothole author repository](https://github.com/ruirangerfan/stereo_pothole_datasets), Dataset details and evaluation note; 2019 dataset | Supplies RGB, disparity, transformed disparity, 3D points, and pixel labels | Stereo is not LiDAR; no aerial capture claim. Maintainer excludes specified Dataset 2 results from evaluation. Actual files not downloaded or audited; original SRC-026 assessment preserved |
+| RGBD-E09 | [PointPainting](https://arxiv.org/abs/1911.10150v2), abstract; CVPR 2020 version | Projects points into image segmentation scores and appends scores to 3D inputs | Vehicle-object detection demonstrates a fusion pattern, not pavement-defect accuracy; adapted feature inputs and task training are required |
+
+## Engineering assessment, separate from published claims
+
+RGB-D or relative-height image inputs are feasible candidates for PC2. Main dependencies are valid swept coverage, clock/pose quality, calibration, and appropriately paired training data. Keeping raw profiles and referenced XYZ supports both image and 3D algorithms. Synthetic training can exercise this pipeline but cannot substitute for held-out physical sensor evaluation.
+
+Illustrative calculations use the existing proposed transverse 15 Hz / 0.33° scan mode, uniform 1–2 m/s motion, flat pavement, and 5–8 m height: along-track spacing `v/f` is 66.7–133.3 mm; near-nadir across-track spacing `h*tan(0.33°)` is 28.8–46.1 mm; translation in 20 ms is 20–40 mm. These exclude beam size, invalid returns, scan phase, attitude, and all range/pose/calibration errors. They are not manufacturer accuracy claims or project test results.
+
+No model weights, datasets, simulator, compute hardware, scan license, or cloud service is selected or acquired by this research.

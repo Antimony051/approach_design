@@ -19,6 +19,7 @@ These are handoffs for future design work, not questions the user must answer be
 | Q-13 | PC+Shisir | What numerical gradient-error acceptance bound will be used? | Reference slope fixtures and evaluation | Current requirement asks reporting; no agreed numerical threshold |
 | Q-14 | FP+GC | What site pilot authorization operating equipment and flight limits apply? | Schedule campus lead time Remote ID and loaded flight access | Saved requirements are leads not current approval or legal research |
 | Q-15 | SA+PC+DT | What ground fixtures references timing logger and demo test space are available? | Can commission/demo before aircraft completion | Real sensor still needed; actual tools and instructor acceptance unconfirmed |
+| Q-16 | PC+SA+RD | Which first fusion representation and model should be evaluated: camera-aligned sparse RGB-D or metric RGB/elevation tiles? | Calibration/projection; depth meaning and validity; paired real/synthetic labels; workstation/storage/training cost; report provenance | [November 3 proposal](../subsystems/05-data-processing-change-detection/rgb-depth-fusion-proposal.md) recommends a camera-view experiment retaining 3D points; depth completion optional and separately validated; no model selected |
 
 ## Source conflicts to preserve
 

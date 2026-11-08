@@ -12,6 +12,8 @@ Existing research offers offline geometric reconstruction and image detection, w
 
 Ground-demo P1 permits measured stand/carriage poses or post-processed poses. Its reference-point thresholds do not establish every camera-center position error, global centimeter accuracy, S3 surface accuracy, or moving-aircraft performance.
 
+November 3: the user proposed time-correlated RGB images with an added depth channel and learned surface-defect detection. The [RGB/depth fusion assessment](rgb-depth-fusion-proposal.md) develops this as a candidate PC2 implementation using retained 3D geometry, sparse depth/validity, and paired evaluation. It preserves the single-survey baseline and optional prior-survey comparison. Representation, model, compute, and real sensor validation remain open (D-011/Q-16); no implementation is selected.
+
 ## Work for the design agent
 
 - Specify required raw data, camera calibration, pose/time mapping, sensor transforms, units, quality flags, and retained uncertainty with SA/FP.

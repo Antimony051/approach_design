@@ -28,13 +28,19 @@ Older X500/Kakute, S500/Pixhawk, F450/SpeedyBee, Orange Pi/InnoMaker, Pi Zero, a
 
 ## Planning estimates and conflicts
 
-- Survey plan: dry daylight, **5–8 m**, **0.25–1 m/s**. FP2 still specifies **1–2 m/s**; Q-17 tracks reconciliation. Slower collection does not automatically pass the original condition.
+- Survey plan: dry daylight, **5–8 m**, **approximately 0.25–1 m/s**, confirmed by the user on November 16 (D-019). The speed choice is settled; Q-17 tracks alignment of older FP2 test wording, which still specifies **1–2 m/s**. This clarification does not establish a test pass.
 - Capture plan: roughly 50 Hz at 0.25°–0.33° **if supported**, Camera Module 3 11.9 MP JPEG at 3 fps, ≤1 ms exposure and locked focus. Source estimates: 9–15 MB/s image writes, <1 MB/s other data, 6–10 GB per ten minutes. Exact scan profile and simultaneous performance are unverified.
 - Mass/space: **440–550 g estimated sensing payload**, **650 g target**, older **800 g stress case**, **2.25 kg all-up target**. Reserved envelopes: sensor **120 × 100 × 130 mm**, recorder **120 × 90 × 60 mm**. Source payload wording excludes aircraft, battery, and power distribution; reconcile shared mounts/regulators before comparing totals.
 - Energy: the source's assumed usable-energy/reserve model yields **~8.5 min**, below S1/FP1. APC 10 × 4.7 data are a proxy for the selected 10 × 4.5 prop. See [energy screening](../integration/flight-energy-screen.md) and Q-18.
 - Cost: **$447.09 aircraft hardware before fees** is an unreconciled source estimate. Recorder ~$109, camera ~$25, and survey storage bundle ~$55 are also source estimates, not delivered totals or proof of compliance.
 
 The baseline assesses one survey; previous-survey comparison is optional. Post-processed pose refinement is permitted with independent checks. A known launch coordinate alone does not establish scale, orientation, or centimeter accuracy. The approximate 1 m × 1 m horizontal / 20 cm vertical preference does not replace S3/PC1.
+
+## Timing development — November 16, SRC-036
+
+The [timing design](../integration/camera-lidar-timing.md) incorporates the supplied Camera/LiDAR Timing document. It proposes Pi4 software PTP with CLOCK_REALTIME as common reference, explicit boot/FC clock maps, camera-row exposure midpoints, Compact Type 1 beam acquisition times, and row-dependent pose projection. Confirm installed timestamp event/clock semantics, driver line controls, PTP/streaming entitlements and real-packet epochs before quantitative use.
+
+The first **bench** profile is **3 m, 0.25–0.5 m/s, 2304×1296/10-bit binned HDR-off, ~1 ms exposure, 10–15 recorded fps and SSD**. The current **flight** profile/envelope above remains intact; storage encoding/rate and qualification of actual USB survey media still need measurement. Driver-derived row sweeps are **17.30 ms binned / 68.12 ms full**, not measured values. Proposed bench goals are **P95 absolute residual ≤3 ms, signed median within ±1 ms, drift ≤1 ms over ten minutes**, alongside the unchanged SA2 ≤20 ms criterion. LED/photodiode and encoder references, frozen calibration and fresh scored runs are specified; no timing pass is recorded.
 
 ## People and subsystem ownership
 

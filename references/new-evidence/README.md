@@ -7,3 +7,5 @@ Add dated manufacturer manuals/datasheets, exact supplier quotes, connector draw
 - [November 3 RGB/depth fusion assessment](2026-11-03-rgb-depth-fusion.md): manufacturer scan geometry, RGB-D segmentation/depth-completion precedents, paired pavement data, and continued 3D processing. Documentation/papers and labeled sampling calculations; no training or project measurements.
 
 - [November 16 final approach alignment](2026-11-16-final-approach.md): supplied project DOCX (SRC-034) and readable text (SRC-035), adopted design choices, reported sensor activity, estimates, and conflicts; no new web research or executed tests.
+
+- [November 16 camera/LiDAR timing incorporation](2026-11-16-camera-lidar-timing.md): supplied DOCX/extract/figure (SRC-036–038), per-row/per-beam timing, Pi software PTP/clock mapping, bench profile, and proposed 3 ms goals; external links preserved without new verification; no executed tests.

@@ -1,12 +1,12 @@
 # Reference guide and provenance
 
-[source-index.md](source-index.md) maps SRC IDs to artifacts. [source-manifest.csv](source-manifest.csv) records original repository paths, source SHA-256, snapshot artifact SHA-256, representation, and classification. Original source files were not modified. SRC-034/035 were added November 16, 2026, with the final approach copy/extract under new-evidence; the initial snapshot/extracted directories remain unchanged. No external links were opened to create this folder, and no manufacturer manual was newly downloaded.
+[source-index.md](source-index.md) maps SRC IDs to artifacts. [source-manifest.csv](source-manifest.csv) records original repository paths, source SHA-256, snapshot artifact SHA-256, representation, and classification. Original source files were not modified. SRC-034/035 (final approach) and SRC-036–038 (supplied camera/LiDAR timing DOCX, extract and figure) were added November 16, 2026 under new-evidence; the initial snapshot/extracted directories remain unchanged. No external links were opened to create this folder, and no manufacturer manual was newly downloaded.
 
 ## Reading order and precedence
 
 1. Current user instructions/corrections, including the November 16 request to align with the final approach. Retain the user-confirmed FP4 correction and separate under-$700 aircraft ceiling; dated October sensor status is historical.
 2. Final requirements (SRC-002), applying the documented 5° FP4 user correction. Retain unresolved requirement gaps explicitly.
-3. Final approach SRC-034 (readable text SRC-035) for current implementation, source-reported sensor receipt/streaming, $1000 design limit and estimates. See the [reconciliation](new-evidence/2026-11-16-final-approach.md) for speed/endurance/schema conflicts. No acceptance criteria are silently amended.
+3. Final approach SRC-034 (readable text SRC-035) for current implementation, source-reported sensor receipt/streaming, $1000 design limit and estimates. See the [reconciliation](new-evidence/2026-11-16-final-approach.md) for speed/endurance/schema conflicts. SRC-036 refines the timing plan and introduces a distinct first bench profile plus tighter proposed development goals; see [timing provenance](new-evidence/2026-11-16-camera-lidar-timing.md). No acceptance criteria are silently amended.
 4. Ground-demo proposal SRC-006/SRC-007 for proposed demonstration conditions, and SRC-003 MSDR for prior choices. Neither proves completed tests.
 5. October hardware comparison and planning material, especially SRC-008. These contain existing source leads and on-paper checks, not refreshed stock/prices or new verification.
 6. September investigations and application plans as detailed background. Their recommendations, thresholds, initial inventory, and budget assumptions can be outdated.
@@ -26,6 +26,8 @@ SRC-034 is an OOXML DOCX. SRC-035 extracts body paragraphs and table cells in or
 The final requirements file is an OpenDocument ZIP despite its .docx extension. Its extract reads content.xml paragraphs/headings and omits annotation/comment nodes; it retains document wording, including the stale 1° FP4 test. PDF extracts use pdftotext -layout. Slide extracts read slide XML text in numerical slide order, without claiming rendered layout or speaker-note coverage. The final requirement copies in final_docs/ and Design-Requirement-Specifications/ had identical extracted text when assembled.
 
 Extracts are conveniences; original documents resolve extraction/layout ambiguity. Neither an extract nor this workspace establishes instructor approval, actual inventory changes after the last confirmation, or completed test results.
+
+SRC-037 preserves OOXML math with explicit fraction parentheses/subscripts, line breaks, table markers and hyperlink targets. SRC-038 is the unmodified embedded Figure 1. Neither is a measurement. The supplied timing note's external URLs were retained without a new documentation check.
 
 ## Scope of collection
 

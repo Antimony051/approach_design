@@ -1,6 +1,6 @@
 # Timing, pose, and coordinate contracts to finish
 
-Updated November 16, 2026 for SRC-034 / PW-APPROACH-01: Pi 4, picoScan150 Pro Ethernet, Camera Module 3 CSI, and MicoAir/PX4 serial MAVLink pose. The selected software retains a recorder common reference plus native sensor, camera, and flight-controller times. A monotonic elapsed-time reference remains the working convention to specify. This is a starting contract, not a completed clock design. SA2 requires ≤20 ms residual relative timing, including drift, across ≥10 minutes.
+Updated November 16, 2026 for SRC-034/SRC-036 / PW-APPROACH-01. The [camera/LiDAR timing design](camera-lidar-timing.md) now specifies the proposed row/beam models, calibration, metadata and tests. Pi4 software PTP uses CLOCK_REALTIME as the proposed common reference after device epoch/timescale verification; retain native camera boot time, FC measurement time and monotonic elapsed time with explicit clock maps/segments. This refines the earlier generic monotonic-common-clock proposal. Installed timestamp semantics, PTP features and end-to-end accuracy remain unverified. SA2 stays ≤20 ms including drift across ≥10 min; the newer ≤3 ms P95 / ±1 ms median / ≤1 ms drift goals are proposed bench checks, not replacement requirements or results.
 
 For each stream record: device/configuration, sample or frame ID, native acquisition timestamp and its semantics, timestamp units/epoch/wrap, host receipt time, mapping into the common clock, offset/drift estimate and uncertainty, gaps, and calibration version. Image capture time must identify exposure start/midpoint or documented equivalent. Receipt time alone is not exposure time. LiDAR scan/segment/beam phase must be considered for moving scans.
 
@@ -14,13 +14,15 @@ To complete: choose available sensor timestamp/PTP/trigger methods; verify exact
 
 ## Selected acquisition details still to specify — SRC-034
 
-The LiDAR clock starts unsynchronized; the approach proposes PTP or NTP mapping to the Pi. Verify support/configuration and independently measure residual offset/drift over ≥10 min; nominal synchronization is not a ≤20 ms result. Record Camera Module 3 native timestamps/exposure/readout metadata, not Python receipt time; planned 3 fps and ≤1 ms exposure require a combined-load trial. Account for rolling shutter and beam/segment timing. Freeze PX4 message types/rates/clock mapping, serial latency, units and NED/body-to-survey conversions.
+SRC-036 develops the Pi-grandmaster software-PTP path and conditional NTP fallback. Verify PTP/streaming licenses and actual grandmaster, payload epoch/timescale, clock offset/drift and independent optical/encoder references over ≥10 min. Bracket boot/realtime samples about once/second, preserve native units/clock IDs, and segment steps/restarts/unlocks; no interpolation across invalid segments. For Camera3 use same-request SensorTimestamp/ExposureTime and the optically verified readout-versus-exposure-start model, original sensor-row mapping and applied mode line time. For Compact Type 1 use acquisition endpoints and validated beam order/timing rather than packet receipt. Map PX4 native measurement time, e.g. validated TIMESYNC if supported; freeze message rates and frame conversions. The detailed note retains formulas and validity rules.
 
 A removable common sensor plate keeps LiDAR/camera relative mounting fixed. Whole-plate isolation can still change plate-to-aircraft pose; measure or bound it rather than assuming all transforms stay rigid. Version/check calibration after remounting or focus changes.
 
 Source plans 0.25–1 m/s; SA2's 20 ms corresponds to 5–20 mm translation at those speeds, excluding angular/pose effects. FP2's 1–2 m/s remains a separate unresolved condition. Neither timing compliance nor FP4 alone proves S3.
 
 IF-16 must distinguish local metric XYZ from WGS84 geographic geometry. Record origin, orientation, scale, datum and transform version/uncertainty; a best-effort GPS map point is not a precise ground reference. Q-20 tracks the reporting schema.
+
+SRC-036's first timing bench uses 3 m, 0.25–0.5 m/s, 2304×1296/10-bit HDR-off at 10–15 fps and SSD. This is distinct from current 5–8 m, user-confirmed 0.25–1 m/s, full-resolution 3 fps and USB survey-card flight planning. The 17.30 ms binned sweep and 68.12 ms full-mode sweep are driver-derived estimates to check on the installed stack. Preserve profile/encoding/media IDs and repeat qualification on the actual flight configuration. Per-row reprojection uses beam-time world pose followed by row-time camera pose, including iterative row recovery and rejection when mapping/pose is invalid.
 
 ## Optional RGB/depth products — November 3 (IF-20; D-011)
 

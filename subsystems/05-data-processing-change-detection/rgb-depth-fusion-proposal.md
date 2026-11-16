@@ -25,6 +25,8 @@ flowchart TD
     MODEL --> REPORT
 ```
 
+**Timing detail added November 16 (SRC-036):** use the shared [camera/LiDAR timing design](../../integration/camera-lidar-timing.md) for per-beam motion compensation, original sensor-row exposure midpoints, valid clock segments and iterative row-dependent camera projection. The binned timing bench and tighter development goals are separate from the flight capture plan and formal SA2. This timing method also supports baseline branch association; it does not select a learned model.
+
 ## What a depth view should contain
 
 Start with camera-aligned RGB plus sparse metric depth and a validity mask. The four conceptual channels are R, G, B, and D; a separate mask tells the model which depth values are supported. Preserve depth as numerical data with units and a declared definition, alongside the RGB file. A four-channel neural-network input is not an RGBA photograph: its fourth channel represents depth, not transparency. Existing RGB networks need an adapted input layer or a separate depth encoder and retraining/fine-tuning.

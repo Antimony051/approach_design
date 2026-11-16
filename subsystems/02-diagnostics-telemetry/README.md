@@ -18,6 +18,8 @@ A software bridge must carry recorder faults through **MicoAir/PX4 → RP1 V2/EL
 
 ## Freshness and verification
 
+Persist timing validity from SRC-036: PTP lock loss/relock, clock steps/restart, invalid boot/realtime or FC mapping segments, sensor sequence gaps and missing timestamp/pose metadata. Record source clock/segment IDs and do not label a sync-status flag as measured end-to-end accuracy. Delivery through Pocket remains the separate Q-19 integration task; timing events do not automatically command flight control.
+
 Mark stale/unavailable readings explicitly. Reconnect must not present old battery or fault values as current. Persist local events even if delivery fails; GC3's undefined historical backlog must not displace fresh control/health without an agreed interpretation.
 
 Instrument recorder fault time, forwarded timestamps, Pocket display time, laptop display time, and recovery. Verify DT1's ≥90% ≤4 s over ≥10 min with ≥300 updates/field, >1 s gap detection, sensor loss, invalid pose, recorder heartbeat loss, and simultaneous RC/alert interruption. A local demo display and emulated battery/mode remain permitted by SRC-006/007 if labeled; that does not establish the installed handset path. Pritam supports implementation under Shisir's review; ownership is unchanged.

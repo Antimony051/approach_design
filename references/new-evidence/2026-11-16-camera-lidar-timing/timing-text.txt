@@ -1,0 +1,126 @@
+PaveWatch Camera and LiDAR Timing
+Raspberry Pi Camera Module 3 and SICK picoScan150
+November 16, 2026
+Estimate when each camera row collected light and when each LiDAR beam measured the pavement. Convert both times to the Raspberry Pi 4B clock, then use the aircraft’s position and attitude at those instants to place the LiDAR returns in the image.
+The IMX708 driver timings put the first and last row exposures 17.30 ms apart in the 2304 × 1296 mode. At 0.5 m/s the aircraft moves 8.65 mm during that sweep, about five image pixels at the planned height. Row-level timestamps let us account for that motion in fusion. [1, 2, 4]
+Starting capture settings
+[TABLE]
+Setting | Starting value | Design reason
+Flight geometry | 3 m above pavement / 0.25–0.5 m/s | Use 0.5 m/s when sizing the timing budget.
+Camera sensor mode | 2304 × 1296, 10 bit / 2 × 2 binned, HDR off | Retain the full view with a 17.30 ms calculated row sweep.
+Exposure and cadence | About 1 ms exposure / 10–15 recorded frames/s | Keep the exposure short and verify sustained recording to the SSD.
+LiDAR and clock | Compact UDP stream / Pi as the PTP grandmaster | Retain measurement times and give both streams a common time reference.
+[/TABLE]
+These settings define the first bench configuration. Use the recorded exposure and active sensor mode in the calculations for each run.
+Timing budget at three meters
+At 3 m above flat pavement, the downward-facing Standard lens’s 66° horizontal field of view spans about 3.90 m. Across 2304 columns, that gives an estimated 1.69 mm/pixel. At 0.5 m/s, a 3 ms timing error corresponds to 1.50 mm of translation, or 0.89 pixel. Use 3 ms as the initial camera-to-LiDAR bench target. [4]
+Pitch and roll can tighten that budget. Near the center of the image, 10°/s of pitch or roll at 3 m moves the ground projection about 0.52 m/s. If that shift adds to the 0.5 m/s translation, the one-pixel timing margin falls to about 1.65 ms. Evaluate pose and vibration with the camera on its flight mount.
+How the rolling shutter scans
+Exposure duration (E) is how long one row integrates light. The row interval (τ) is how much later the next row starts. Rows overlap in time. For example, row 1 can start 13.36 µs after row 0 even when both collect light for about 1,000 µs. In normal non-HDR operation, exposure is set for the frame and applies to each row. Auto-exposure can change E between frames. [1–3]
+Figure 1. Each bar is a 1 ms exposure and each dot is its midpoint. Both views use the calculated 13.36 µs row interval for 2304 × 1296.
+Calculating the line time
+Divide the number of pixel-clock periods per line by the pixel rate. W is the sensor output width, Bₕ is horizontal blanking in pixel-clock periods and fₚ is the sensor pixel rate in periods per second. H is the active row count. [2, 3]
+τ = (W + B_h)/(f_p)       Δt_sweep = (H − 1)τ
+[TABLE]
+IMX708 sensor mode | Periods / per line | Pixel rate | Row interval | First to / last row
+2304 × 1296 binned | 7,824 | 585.6 MHz | 13.36 µs | 17.30 ms
+4608 × 2592 full | 15,648 | 595.2 MHz | 26.29 µs | 68.12 ms
+[/TABLE]
+Calculated from the non-HDR modes in Raspberry Pi’s rpi-6.18.y driver. Read the applied controls on the flight Pi because kernel versions can differ. [2, 3]
+Exposure sweep and frame cadence
+The first exposure start to last exposure end spans the row sweep plus E, about 18.30 ms with a 1 ms exposure in this mode. The interval between frame starts also includes the vertical blanking lines. A longer vertical blanking interval can bring the sensor to 10 fps while keeping the same line time. Shortening E reduces motion blur within each row. At 0.5 m/s, a 1 ms exposure spans 0.5 mm of translation, about 0.3 pixel at 3 m. [1–4]
+Assigning a time to each image row
+Use the metadata attached to the captured image request. Picamera2’s SensorTimestamp (S) is a nanosecond timestamp associated with first-pixel readout. ExposureTime is the applied shutter duration in microseconds. Multiply it by 1,000 to get E in nanoseconds before using the equation. [1]
+Let y be the zero-based row index in sensor readout order, and express τ in nanoseconds per row. Use δ for the measured camera offset, defined as the observed optical time minus the predicted time. Start with δ = 0 and fit it on the bench.
+t_mid(y) = S − (E)/(2) + yτ + δ
+The row starts exposing half an exposure before this midpoint and finishes half an exposure after it. Use the midpoint as the effective observation time for short exposures. The image still integrates motion over E.
+Worked frame
+Take an illustrative S of 12.000000 s on the Pi’s boot-relative clock, a rounded E of 1.000 ms and zero timing offset. Row 0 starts at 11.999000 s. Each successive row shifts by 13.3607 µs.
+[TABLE]
+Sensor row | Delay after first row | Exposure midpoint
+0 | 0.000 ms | 11.999500 s
+648 | 8.658 ms | 12.008158 s
+1295 | 17.302 ms | 12.016802 s
+[/TABLE]
+Using the frame center as a single time would leave up to 8.65 ms of row-dependent error, equivalent to 4.33 mm or 2.56 pixels of translation at 0.5 m/s.
+Verify the timestamp and row mapping
+Generic libcamera describes SensorTimestamp using first-row exposure. The Pi 4B Unicam path timestamps a frame-start interrupt, consistent with Picamera2’s readout-based guidance. Verify the event with the light-pulse test using two exposure settings. If the installed stack reports exposure start, use S plus E/2 for the first-row midpoint and fit the corresponding offset. [1, 5, 6]
+For the first test, record the full view with no crop or flip. When the saved image is cropped, resized, flipped, rotated or undistorted, map the point’s image coordinate back to the original sensor readout row. In a 2 × 2 binned mode, y counts binned output rows. Use a light pulse to confirm row order.
+Check the active sensor mode
+In Picamera2, request 2304 × 1296 as the sensor output size and 10 as the bit depth. Confirm the active sensor mode from the capture configuration, then identify the IMX708 subdevice in the media graph. [1–3]
+rpicam-hello --list-cameras
+v4l2-ctl -d /dev/v4l-subdevX --list-ctrls
+Replace X with the IMX708 subdevice number. Read horizontal blanking and pixel rate while the intended mode is active.
+Putting the camera and LiDAR on one clock
+Synchronize the LiDAR over Ethernet
+Use the Pi 4B as the Precision Time Protocol (PTP) grandmaster and connect the picoScan150 directly over Ethernet as its client. Check the device’s firmware and installed licenses for PICOSCAN TIME SYNC PTP (1134388) and Compact measurement output via PICOSCAN STREAMING (1134356). SICK has demonstrated this Pi 4 architecture using software PTP timestamping. [8–10]
+Set the Pi’s ptp4l instance to software timestamping (-S). Match the SICK profile with IEEE 1588 PTPv2, UDP over IPv4, domain 0 and end-to-end delay measurement. Use the announce and sync intervals in SICK’s configuration guide. Enable PTP on the LiDAR and verify the active grandmaster, LiDAR-side sync status where available, and acquisition timestamps from real packets. [8, 11]
+sudo ptp4l -i eth0 -S -4 -E -m
+Example for a direct link on eth0. Verify domain 0, 2 s announce, 1 s sync, 1 s minimum delay-request interval and an announce timeout of 3 messages. [8, 11]
+The camera and LiDAR keep separate capture cadences. A stable local Pi clock is sufficient for relative survey timing. Use the Pi’s CLOCK_REALTIME as the common reference for the software PTP setup, after checking that the LiDAR payload uses the same epoch and timescale. LinuxPTP’s hardware timestamping mode changes the timescale handling. Verify the offset explicitly if the network clock configuration changes. [8, 11–13]
+Map the camera clock to the PTP reference
+Use the boot-relative clock behind the camera timestamp. The Pi 4B Unicam driver uses CLOCK_MONOTONIC at frame start. The generic libcamera API names CLOCK_BOOTTIME, which includes system suspend time. Confirm the installed stack, log the clock choice and keep the recorder awake throughout the run. [5–7]
+About once a second, read the boot-relative clock, CLOCK_REALTIME, then the boot-relative clock again. Take m as the midpoint of the two boot-clock reads and R as the realtime sample. Record the three readings and their bracket width. Prefer narrow brackets, for example ≤0.2 ms for this budget.
+o = R − m       t_common = t_mid + o_interp(t_mid)
+Interpolate the measured offset o at each camera exposure time. Keep timestamps as integer nanoseconds and log clock steps, restarts and PTP lock loss. Start a new clock segment after a discontinuity and flag samples captured without a valid map. If PTP is unavailable, SICK documents a local NTP option. Apply the same end-to-end timing test before using it for precise fusion. [7, 8]
+LiDAR beam timing and image projection
+Recover each beam’s measurement time
+In Compact Type 1, timestamp_start and timestamp_stop give the first and last beam acquisition times for each scan line in the current module. They are in microseconds on the device time base. Keep the transmit timestamp and Pi packet-receive time for latency diagnostics. Group segments by frame number and track segment indices so missing data is visible. [12, 13]
+Verify the chosen profile’s beam order and timing. For an evenly timed sequence of n beams, approximate the time for beam k, indexed from 0 to n − 1, by interpolating between the two endpoints. Keep the original beam index even when an echo is missing. For a single beam use its start time.
+L(k) = L_start + (k)/(n − 1) (L_stop − L_start)
+Apply the verified time-base mapping and multiply by 1,000 to express microsecond values in nanoseconds. Use validated per-beam timing if the selected scan profile samples unevenly. At 25 Hz, an angle is revisited every 40 ms, or every 20 mm along track at 0.5 m/s. [10, 12, 13]
+For example, if 201 evenly timed beams span 12.000–12.020 s on the survey clock, beam 80 occurs at 12.008000 s. If the projected camera row has a midpoint of 12.008158 s on that same clock, evaluate the LiDAR and camera poses 0.158 ms apart.
+Use a pose at each acquisition time
+1. Align the flight controller’s time. Record the time of the navigation measurement on its native clock. Use a validated mapping to Pi time, such as MAVLink TIMESYNC if supported. [14]
+2. Place the LiDAR return in the world. Transform the return through the calibrated LiDAR-to-body mount and use the aircraft position and attitude interpolated at the beam time.
+3. Project the point into a camera frame. Start with the camera pose at the center-row time. Project with the camera intrinsics, lens distortion and mount transform. Use the resulting sensor row’s exposure time to update the pose and project again until the row stabilizes. Reject points outside the image or across a gap in pose coverage.
+Recording and bench validation
+Keep timing metadata with the data
+[TABLE]
+Stream | Preserve during each test run
+Camera | Frame ID, image reference, SensorTimestamp, ExposureTime, FrameDuration and crop/orientation. Pair each image with metadata from the same request.
+LiDAR | Raw Compact packets, profile, frame and segment IDs, acquisition endpoints, transmit and receive times, and sync status or events.
+Clock and pose | Clock sample triplets, clock IDs, time mapping and lock state. Log position and attitude with native measurement timestamps.
+[/TABLE]
+Save the camera mode, timing controls, software and firmware versions and calibration ID with the run. Use frame and segment IDs to identify drops. [1, 12]
+Measure the timing on the assembled recorder
+1. Measure exposure with a light pulse. Lock exposure, gain and focus with HDR off. Pulse a diffused LED that spans many rows and timestamp the optical edges with a photodiode referenced to the Pi clock. Vary the pulse phase over many frames. The first lit row ends its exposure near the rising edge and the last lit row begins near the falling edge. Fit row interval, direction and offset. Repeat with a different exposure, for example 1 ms and 4 ms, to check the correction for E.
+2. Run under acquisition load. Once the clock is stable, record the camera, LiDAR and pose streams to the SSD for at least 10 minutes. Check clock continuity, sync state and sequence gaps. Save residuals against the light-pulse reference under load and after restart.
+3. Check alignment on known motion. Move an encoder-tracked target with a sloped LiDAR-visible face and a camera fiducial in both directions. Compare both sensors’ observations to the encoder trajectory. On constant-speed sections, divide the signed position error by signed speed to estimate each timing residual. The reference needs enough timing and position resolution to resolve a 3 ms shift. Repeat with the rig moving past a fixed target to check pose and projection.
+Proposed acceptance criteria
+Freeze the calibration before scoring a fresh run. Compare the camera and LiDAR timing errors from matching time windows on the reference trajectory. Use their difference as the cross-sensor residual. Aim for a 95th percentile absolute camera-to-LiDAR timing residual of ≤3 ms, a signed median within ±1 ms and ≤1 ms of drift over 10 minutes. Report the maximum residual, reference uncertainty and coverage of rows, scan segments and test time. Flag missing or unlocked intervals. Score the geometric projection error separately on moving data to capture pose, mount and lens errors.
+A steady residual slope across image rows points to line time or row mapping. A jump at PTP relock points to clock continuity. A residual that varies by beam index calls for checking beam timing and scan geometry.
+Sources
+Camera and Linux timing
+	[1]	Raspberry Pi. Picamera2 manual, section 6.4.1 and Appendix C. Picamera2 manual
+	[2]	Raspberry Pi Linux. Non-HDR IMX708 mode definitions on rpi-6.18.y. IMX708 driver
+	[3]	Raspberry Pi and the Linux kernel project. Line time and blanking. Camera software  ·  V4L2 image-source controls
+	[4]	Raspberry Pi. Camera Module 3 Standard modes and field of view. Camera hardware specifications
+	[5]	libcamera. SensorTimestamp control definition. Core controls
+	[6]	Raspberry Pi Linux. Unicam frame-start interrupt timestamp. Unicam driver
+	[7]	Linux man-pages. Realtime, monotonic and boot-time clocks. clock_gettime
+Clock synchronization and LiDAR acquisition
+	[8]	SICK. PTP settings and local NTP configuration. Time synchronization guide
+	[9]	SICK. picoScan150 streaming and PTP licenses. License and part-number list
+	[10]	SICK. Pi 4 software PTP test configuration and scan profiles. Technical article KA-10645
+	[11]	LinuxPTP. Software timestamping and timescale usage. ptp4l manual
+	[12]	SICK. Compact Type 1 scan modules, segments and timestamps. Compact format guide
+	[13]	SICK. Binary definitions for beam acquisition endpoints. Compact Type 1 schema
+	[14]	MAVLink. Time synchronization between components. TIMESYNC protocol
+
+[DOCUMENT HYPERLINK TARGETS]
+rId12 https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf#page=39
+rId13 https://github.com/raspberrypi/linux/blob/rpi-6.18.y/drivers/media/i2c/imx708.c
+rId14 https://www.raspberrypi.com/documentation/accessories/camera-software.html
+rId15 https://www.kernel.org/doc/html/latest/userspace-api/media/v4l/ext-ctrls-image-source.html
+rId16 https://www.raspberrypi.com/documentation/accessories/camera.html
+rId17 https://github.com/raspberrypi/libcamera/blob/main/src/libcamera/control_ids_core.yaml
+rId18 https://github.com/raspberrypi/linux/blob/rpi-6.18.y/drivers/media/platform/broadcom/bcm2835-unicam.c
+rId19 https://www.man7.org/linux/man-pages/man3/clock_gettime.3.html
+rId20 https://sickag.github.io/sick_lidar_developer_guide/shared-features/time-synchronization/
+rId21 https://sickag.github.io/sick_lidar_developer_guide/picoScan100/picoScan150/licenses/
+rId22 https://support.sick.com/sick-knowledgebase/article/?code=KA-10645
+rId23 https://www.linuxptp.org/documentation/ptp4l/
+rId24 https://sickag.github.io/sick_lidar_developer_guide/data-streaming/compact-format/#type-1-scan-data
+rId25 https://github.com/SICKAG/KaitaiStructDescriptions/blob/public/formats/type_1_primary_data_spherical_coordinates.ksy
+rId26 https://mavlink.io/en/services/timesync.html

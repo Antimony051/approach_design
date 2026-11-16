@@ -40,11 +40,15 @@ See [the verification plan](../verification/plan.md) and SRC-007 for bench/full-
 
 | Topic | Current design input | Requirement / remaining action |
 | --- | --- | --- |
-| Survey speed | §§3.1.1/3.3.1 plan 0.25–1 m/s at 5–8 m | FP2 still evaluates 1–2 m/s; Q-17 requires explicit reconciliation |
+| Survey speed | §§3.1.1/3.3.1 plan approximately 0.25–1 m/s at 5–8 m; user confirmed speed November 16 (D-019) | Operating-range choice settled; Q-17 tracks alignment of older FP2 1–2 m/s test wording while preserving original-source provenance |
 | Flight energy | §3.3.1 estimates ~8.5 min at a 2.25 kg all-up target under assumed usable energy | S1/FP1 remains ≥10 min with ≥20% calibrated usable energy; revise the design and validate, Q-18 |
 | Budgets | $1,000 whole-design limit; $447.09 pre-fee aircraft estimate | Keep strictly under-$700 aircraft constraint; reconcile delivered totals, scope, and funding, Q-10 |
 | Sampling/camera/storage | Conditional ~50 Hz/0.25°–0.33° scan mode; 11.9 MP at 3 fps and ≤1 ms exposure; USB survey card | Planning inputs for S2/S4/S5/SA1–SA3, not acceptance bounds or measured performance |
 | Operator alerts | Pocket critical-alert display; laptop detailed status on separate telemetry | DT1–DT3 need full recorder→PX4→ELRS→Pocket fault/latency checks; bridge compatibility remains open |
 | Reporting | Hosted portal/PostgreSQL/PostGIS/cloud files primary; local SQLite fallback | RD1 evidence/warnings persist; RFC 7946 geometry uses geographic longitude/latitude, with local metric coordinates separate |
 
-The source reports sensor receipt/Ethernet streaming only. That does not satisfy concurrent recording, timing, range, loaded flight, detection, or export acceptance. Retain NOT_RUN in the verification matrix until attributable test artifacts support results.
+## Timing development goals — SRC-036
+
+[The timing plan](../integration/camera-lidar-timing.md) adds row/beam acquisition-time models, software PTP/native-clock maps, and independent optical/encoder tests. Its **P95 absolute camera/LiDAR residual ≤3 ms**, **signed median within ±1 ms**, and **drift ≤1 ms/10 min** are proposed bench goals. They do not replace SA2's ≤20 ms sensor-to-motion-reference timing bound, prove its required coverage, or demonstrate S3. Report maximum residual, reference uncertainty, valid coverage and gaps separately. The 3 m/binned 10–15 fps/SSD bench configuration does not amend flight height/speed/storage or set new camera/detection acceptance criteria.
+
+The final approach reports sensor receipt/Ethernet streaming only. That does not satisfy concurrent recording, timing, range, loaded flight, detection, or export acceptance. Retain NOT_RUN in the verification matrix until attributable test artifacts support results.

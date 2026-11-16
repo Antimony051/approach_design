@@ -2,34 +2,38 @@
 
 Lead: **Ankit Dhakal**. Charter support: **Aalok Uprety**. Requirements: **S1, S6, FP1–FP4**.
 
+Updated November 16, 2026. **Status: PW-APPROACH-01 selected in SRC-034 §§3.3.1/3.4; installed design and performance unverified.**
+
 ## Required function
 
-Fly the complete acquisition payload, execute supervised survey legs, permit operator takeover, provide timestamped pose, and supply power to the other airborne systems.
+Carry the acquisition payload, fly supervised survey legs, permit pilot takeover, provide timestamped pose, and distribute aircraft/payload power. Power remains within FP, not a seventh subsystem.
 
-## Existing direction and evidence
+## Selected approach and alternatives
 
-SRC-003 slides 13–15 and SRC-004 favor X500 v2 ARF + Kakute H7 Mini v1.5 as the aircraft planning choice. SRC-008 also compares S500 DIY and S500/Pixhawk configurations. The presentation retains the original F450/SpeedyBee/F9P concept; SRC-010's generic $405 estimate is not a compatible, released BOM. Research figures are $657.17 X500 DIY, $587.17 S500 DIY, and $669.20 S500 development kit before shipping/tax, with charger qualifications. Do not treat them as current quotes.
+Use a custom 500 mm hybrid X frame: CNC carbon-fiber center plates and tube arms form the primary load path; PA6-CF clamps, landing fittings, sensor carrier, and electronics mounts complete the structure. Holybro X500 v2 CAD supplies a dimensional reference, not a purchased frame or a transferable payload rating.
 
-The H7 proposal uses ArduCopter with a revision-specific target; the older application proposes Pixhawk/PX4. These are separate configurations. SRC-008 includes an on-paper H7 port map and power/current constraints that must be checked against the actually selected revisions. Motor size alone does not establish KV/voltage/prop/ESC compatibility. Published takeoff mass is not additional payload capacity.
+A MicoAir H743v2-AIO-35A combines flight control and four 35 A ESC channels. The document selects **PX4 1.16.0 / MicoAir743v2**, with QGroundControl and M10G GNSS/compass. Confirm the exact target/build and revision before flashing. Propulsion is **4 × SunnySky X2216 880 KV**, **Master Airscrew MR 10 × 4.5-inch props**, and **4S 14.8 V nominal 5,200 mAh LiPo**. Avoid separate duplicate ESC purchase lines. Pocket ELRS/RP1 V2 and separate MAVLink laptop telemetry are shared with GC/DT.
 
-## Work for the design agent
+The final approach compares X500 ARF/Kakute H7 Mini v1.5 ($657.17) and S500/Pixhawk 6C ($669.20) with the chosen custom frame ($447.09 aircraft hardware), all before fees and unverified. The original F450/SpeedyBee route remains a historical alternative; it is not combined with the active configuration.
 
-- Exact aircraft/controller/firmware/GCS and GNSS/compass/RC/radio combination, with kit inclusions and all harnesses.
-- Complete takeoff mass and loaded power/endurance estimates, installed payload allowance, current bottlenecks, and calibrated battery monitoring.
-- Power tree for propulsion, control/peripherals, sensor, and recorder; regulator/BEC interaction, grounds, protection, startup, and shutdown.
-- Exact mechanical interfaces, battery placement, controller adapter, landing clearance, and payload load paths with SA.
-- 4S charging arrangement and delivered aircraft cost under $700; inventory the owned 2S equipment without assuming compatibility.
-- Port allocation with GC/SA/DT; independent pose/attitude reference plan with PC.
+## Energy, mass, and installation
 
-## Required design handoff
+Provide separate protected/regulation-matched LiDAR and recorder branches, independent of flight-control power. Source supply guidance for the sensor is 9–30 V; regulator parts, pinouts, transients, grounds, and current limits remain open. The source's **2.25 kg all-up target**, **440–550 g sensing-payload estimate**, and **650 g payload target** need a complete mass ledger and installed CG/clearance checks.
 
-Use [the research template](../../templates/research-note.md) for options/evidence, then maintain the selected implementation here. Include exact parts and configuration, rationale, inputs/outputs, installed mass/power/dimensions where applicable, interfaces, failure behavior, assembly/calibration needs, verification, and open decisions. Mark the design status explicitly; the initial status is **implementation unresolved**.
+The [energy screen](../../integration/flight-energy-screen.md) reproduces the source's **~8.5 min** estimate using assumed usable energy and APC 10 × 4.7 proxy data. It falls below the unchanged **≥10 min / ≥20% usable reserve** requirement. No matched Master Airscrew thrust/current or loaded endurance result exists here. Existing **2S** packs are not the selected 4S supply; charger capability and connectors remain unknown.
 
-Write purchasing lines into [the shared BOM](../../procurement/bom.csv); write connection details into [interfaces](../../integration/interfaces.csv). Update [power](../../integration/power-budget.csv), [fit/mass](../../integration/mass-and-fit.csv), [compatibility](../../procurement/compatibility.csv), and [decisions](../../decisions/decision-log.md) when this subsystem changes them. Cross-reference shared components instead of duplicating them.
+## Remaining implementation work
 
-## Starting references
+- Release fabrication drawings, fasteners/load paths, landing/prop/optics clearance, whole-plate vibration isolation if needed, cable routing, battery placement, and actual mass/CG.
+- Verify PX4 board support, motor outputs/order, integrated ESC limits, full FC UART/I2C/RC/power allocation, and current/voltage calibration.
+- Reconcile **0.25–1 m/s** survey planning with **FP2 1–2 m/s**, preserving 5–8 m height (Q-17).
+- Reconcile delivered aircraft under $700 and the $1,000 whole-design limit; identify a usable 4S charger and leads (Q-09/10).
+- Map takeover, return, estimator/link failsafes, and prior proximity interruption intent onto PX4 with GC/DT. Additional proximity hardware remains unselected.
 
-- SRC-008: locate in [the source index](../../references/source-index.md).
-- SRC-010: locate in [the source index](../../references/source-index.md).
-- SRC-020: locate in [the source index](../../references/source-index.md).
-- SRC-028: locate in [the source index](../../references/source-index.md).
+Historical leads: SRC-008/010/020/028. Their ArduPilot/H7 wiring and propulsion assumptions are not the selected PX4/AIO installation.
+
+## Shared design records
+
+Maintain one owning row per component in [the BOM](../../procurement/bom.csv), exact connections in [interfaces](../../integration/interfaces.csv), and affected [power](../../integration/power-budget.csv), [mass/fit](../../integration/mass-and-fit.csv), [compatibility](../../procurement/compatibility.csv), [verification](../../verification/plan.md), and [decisions](../../decisions/decision-log.md). Design selection is not purchase authorization or test evidence. Blank installed/price values remain unknown.
+
+Current source: [SRC-034 final approach](../../references/new-evidence/2026-11-16-final-approach/PaveWatch_Approach_Final.docx), [readable text SRC-035](../../references/new-evidence/2026-11-16-final-approach/approach-text.txt), and [reconciliation](../../references/new-evidence/2026-11-16-final-approach.md). Earlier source IDs resolve through [the source index](../../references/source-index.md).

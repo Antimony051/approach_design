@@ -2,32 +2,30 @@
 
 Lead: **Shisir Baral**. Charter support: **Ankit Dhakal**. Requirements: **DT1–DT3; S1, S4, S6**.
 
+Updated November 16, 2026. **Status: recorder HealthMonitor and Pocket alert destination selected in SRC-034 §3.3.2; forwarding/display integration unverified.**
+
 ## Required function
 
-Report battery, acquisition, storage, and flight mode to the operator; detect stream gaps, sensor loss, and missing/invalid pose; retain faults in exported evidence.
+Report battery, acquisition, storage, and mode; identify stream gaps, sensor loss, and invalid/missing pose; retain faults with exported evidence.
 
-## Existing direction and evidence
+## Selected approach and alternatives
 
-The ground-demo plan uses real acquisition/storage status and explicitly emulated battery/mode if no aircraft is ready. A local transport/display is acceptable for that demo. Pritam implements/supports diagnostics tests under Shisir's review; ownership stays with Shisir. No specific airborne aggregation hardware or health transport has been frozen.
+HealthMonitor on the Raspberry Pi 4 consumes capture counters/state transitions, avoiding bulk-file rereads. It records field/value/units, source ID/time, sequence, validity, severity, and persistent events. Ground StatusModel retains newest valid samples and calculates age. Loss of recorder heartbeat must be distinguishable from a healthy payload.
 
-## Work for the design agent
+**RadioMaster Pocket 2.4 GHz ELRS** is the primary immediate critical-alert display; the laptop provides detailed status/review over separate MAVLink telemetry. Proposed short warnings: LOW BATTERY, LIDAR LOST, CAMERA LOST, STORAGE LOW, POSE INVALID. Pocket's source-listed price is $71.50 and its display 128 × 64; Boxer and TX16S Mark II were considered but offer no necessary benefit for this short-warning role at their higher source prices. These are document inputs, not current quotes.
 
-- Identify each real health source, units, event ID/time, rate, age/stale rule, and operator display endpoint.
-- Decide whether aggregation runs on recorder, ground station, or both, and its behavior if recorder/link fails.
-- Map battery current/voltage sensing and flight-state acquisition with FP; map payload status and faults with SA.
-- Specify transport/bandwidth, queueing, timestamps, disconnect/recovery, and persisted warning format with GC/RD.
-- Define fault-injection and end-to-display latency instrumentation; include any actual test hardware in the BOM.
-- Distinguish health freshness from GC3's historical buffered stream; do not silently replay old values as current.
+A software bridge must carry recorder faults through **MicoAir/PX4 → RP1 V2/ELRS → Pocket/EdgeTX** in a supported format. Exact protocol, firmware versions, field mapping, bridge, and display script remain open (Q-19/COMP-19). Cited Lua/Yaapu references do not prove this path works. Manual RC and handset telemetry share a radio failure path; laptop MAVLink is separate. FP retains aircraft recovery responsibility.
 
-## Required design handoff
+## Freshness and verification
 
-Use [the research template](../../templates/research-note.md) for options/evidence, then maintain the selected implementation here. Include exact parts and configuration, rationale, inputs/outputs, installed mass/power/dimensions where applicable, interfaces, failure behavior, assembly/calibration needs, verification, and open decisions. Mark the design status explicitly; the initial status is **implementation unresolved**.
+Mark stale/unavailable readings explicitly. Reconnect must not present old battery or fault values as current. Persist local events even if delivery fails; GC3's undefined historical backlog must not displace fresh control/health without an agreed interpretation.
 
-Write purchasing lines into [the shared BOM](../../procurement/bom.csv); write connection details into [interfaces](../../integration/interfaces.csv). Update [power](../../integration/power-budget.csv), [fit/mass](../../integration/mass-and-fit.csv), [compatibility](../../procurement/compatibility.csv), and [decisions](../../decisions/decision-log.md) when this subsystem changes them. Cross-reference shared components instead of duplicating them.
+Instrument recorder fault time, forwarded timestamps, Pocket display time, laptop display time, and recovery. Verify DT1's ≥90% ≤4 s over ≥10 min with ≥300 updates/field, >1 s gap detection, sensor loss, invalid pose, recorder heartbeat loss, and simultaneous RC/alert interruption. A local demo display and emulated battery/mode remain permitted by SRC-006/007 if labeled; that does not establish the installed handset path. Pritam supports implementation under Shisir's review; ownership is unchanged.
 
-## Starting references
+Historical leads: SRC-006/007/023/024.
 
-- SRC-006: locate in [the source index](../../references/source-index.md).
-- SRC-007: locate in [the source index](../../references/source-index.md).
-- SRC-023: locate in [the source index](../../references/source-index.md).
-- SRC-024: locate in [the source index](../../references/source-index.md).
+## Shared design records
+
+Maintain one owning row per component in [the BOM](../../procurement/bom.csv), exact connections in [interfaces](../../integration/interfaces.csv), and affected [power](../../integration/power-budget.csv), [mass/fit](../../integration/mass-and-fit.csv), [compatibility](../../procurement/compatibility.csv), [verification](../../verification/plan.md), and [decisions](../../decisions/decision-log.md). Design selection is not purchase authorization or test evidence. Blank installed/price values remain unknown.
+
+Current source: [SRC-034 final approach](../../references/new-evidence/2026-11-16-final-approach/PaveWatch_Approach_Final.docx), [readable text SRC-035](../../references/new-evidence/2026-11-16-final-approach/approach-text.txt), and [reconciliation](../../references/new-evidence/2026-11-16-final-approach.md). Earlier source IDs resolve through [the source index](../../references/source-index.md).

@@ -1,5 +1,7 @@
 # Ground-control operation: workflow and gap review
 
+**November 16 source alignment:** SRC-034 now selects Pi4/Camera3/USB survey card, MicoAir/PX4/QGroundControl, Pocket/RP1, separate laptop MAVLink telemetry, and hosted reporting. This October28 review retains its historical discussion below; statements that no hardware is selected describe that date. [Current GC brief](README.md) and [source reconciliation](../../references/new-evidence/2026-11-16-final-approach.md) govern current choices. Cloud reporting is primary; PC processing location and custom UI scope remain open.
+
 October 28, 2026. **Draft for discussion before user stories.** The workflow below comes from the user's proposal; recommendations are not approved implementation choices. No hardware, navigation estimator, transport, or application stack has been selected or tested by this review.
 
 **October 29 follow-up:** [Supervised mission operation](supervised-mission-operation.md) records the subsequent accepted operating direction and supersedes open questions here about allowing post-processed references, skip/early-end support, proximity stopping, pilot detours, and explicit resumption. The original gap analysis remains as discussion context; numeric reference conventions and implementation choices remain open.

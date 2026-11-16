@@ -4,9 +4,9 @@ Stable source IDs used throughout the workspace. Paths in the table refer to por
 
 | ID | Portable artifact | Use / limitation |
 | --- | --- | --- |
-| SRC-001 | [AGENTS.md](snapshot/project-context.txt) | context: Latest project context and user corrections |
+| SRC-001 | [AGENTS.md](snapshot/project-context.txt) | context: October 22–23 context and user corrections; sensor status later updated by SRC-034 |
 | SRC-002 | [final_docs/PaveWatch_DesignRequirementSpecifications_Final.docx](snapshot/final_docs/PaveWatch_DesignRequirementSpecifications_Final.docx) | requirements: Current final requirement source; contains FP4 stale test text |
-| SRC-003 | [final_docs/msdr.pptx](extracted/final-msdr-slide-text.txt) | presentation: Final saved presentation; 25 slides; latest planning labels |
+| SRC-003 | [final_docs/msdr.pptx](extracted/final-msdr-slide-text.txt) | presentation: Final saved MSDR; 25 slides; hardware preference superseded by SRC-034 |
 | SRC-004 | [MSDR/PaveWatch_MSDR_Notes.md](snapshot/MSDR/PaveWatch_MSDR_Notes.md) | planning: Editable 27-section MSDR notes; differs from final saved deck |
 | SRC-005 | [MSDR/TEAM-ASSIGNMENTS.md](snapshot/MSDR/TEAM-ASSIGNMENTS.md) | planning: Technical handoffs and review responsibilities |
 | SRC-006 | [Demonstration-Rubric-Draft/PaveWatch_Demonstration_Rubric.md](snapshot/Demonstration-Rubric-Draft/PaveWatch_Demonstration_Rubric.md) | demo-proposal: Proposed ground-demo rubric |
@@ -37,5 +37,7 @@ Stable source IDs used throughout the workspace. Paths in the table refer to por
 | SRC-031 | [sick-application/development-plan/04-verification-and-delivery.md](snapshot/sick-application/development-plan/04-verification-and-delivery.md) | historical-proposal: Older test proposals; not current acceptance criteria |
 | SRC-032 | [sick-application/development-plan/05-budget-and-references.md](snapshot/sick-application/development-plan/05-budget-and-references.md) | historical-proposal: Older $999 estimate with excluded operating environment |
 | SRC-033 | [sick-application/development-plan/README.md](snapshot/sick-application/development-plan/README.md) | historical-proposal: Older integrated choices; Purchased wording conflicts with current inventory |
+| SRC-034 | [final_docs/PaveWatch_Approach_Final.docx](new-evidence/2026-11-16-final-approach/PaveWatch_Approach_Final.docx) | final-approach: Current design selections and reported Pro receipt/Ethernet activity; estimates and acceptance unverified |
+| SRC-035 | [Final approach text](new-evidence/2026-11-16-final-approach/approach-text.txt) | extract: OOXML paragraphs/tables; figures and rendered layout remain in SRC-034 |
 
-Readable extracts: [final requirements](extracted/final-requirements.txt), [signed charter](extracted/signed-charter.txt), [problem statement](extracted/problem-statement.txt), [final saved MSDR](extracted/final-msdr-slide-text.txt), and [working MSDR](extracted/working-msdr-slide-text.txt).
+Readable extracts: [final approach](new-evidence/2026-11-16-final-approach/approach-text.txt), [final requirements](extracted/final-requirements.txt), [signed charter](extracted/signed-charter.txt), [problem statement](extracted/problem-statement.txt), [final saved MSDR](extracted/final-msdr-slide-text.txt), and [working MSDR](extracted/working-msdr-slide-text.txt).

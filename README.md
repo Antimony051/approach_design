@@ -1,6 +1,10 @@
 # PaveWatch hardware design workspace
 
-Prepared **October 24, 2026** from existing project material. This is the working home for whole-project hardware design, component selection, integration, and procurement planning. No new external research, hardware selection, purchases, or tests were performed to create it.
+Updated **November 16, 2026** to match [the final approach (SRC-034)](references/new-evidence/2026-11-16-final-approach/PaveWatch_Approach_Final.docx). This workspace covers whole-project hardware design, integration, and procurement planning. Its October 24 source snapshots remain intact. This update incorporates document selections and reported status; it adds no purchases, external verification, or hardware tests.
+
+The current configuration, **PW-APPROACH-01**, uses a custom 500 mm hybrid carbon-fiber/PA6-CF frame, MicoAir H743v2-AIO-35A with PX4 1.16.0, four SunnySky X2216 880 KV motors, Master Airscrew MR 10 × 4.5-inch props, and a 4S 5,200 mAh battery. The payload uses the supplied picoScan150 Pro, Raspberry Pi 4 Model B, Camera Module 3, and SanDisk Extreme 128 GB microSD in a USB 3 reader separate from boot media. RadioMaster Pocket ELRS/RP1 V2 handles pilot control and intended critical alerts; a separate MAVLink link serves the laptop. Post-flight processing feeds a hosted reporting portal with PostgreSQL/PostGIS and cloud evidence storage; processing deployment is still undecided.
+
+The [source reconciliation](references/new-evidence/2026-11-16-final-approach.md) distinguishes selections, estimates, reported sensor receipt/streaming, and pending checks. Resolve the planned 0.25–1 m/s versus FP2's 1–2 m/s, the ~8.5-minute endurance estimate versus the ≥10-minute target, and the unreconciled $1,000 whole-design limit alongside the under-$700 aircraft ceiling.
 
 Start with [the next-agent task](NEXT_AGENT_TASK.md), [project state](system/project-state.md), [requirements](system/requirements.md), and [open decisions](decisions/open-questions.md). Folder-level [agent instructions](AGENTS.md) explain evidence and update conventions.
 
@@ -17,7 +21,7 @@ Start with [the next-agent task](NEXT_AGENT_TASK.md), [project state](system/pro
 | [references](references/README.md) | Portable snapshots, document extracts, provenance manifest, and space for future evidence |
 | [templates](templates/research-note.md) | Research and decision templates |
 
-The CSVs are editable planning worksheets. Blank numerical cells mean **unknown**, never zero. Seeded descriptions identify functions to provision; they are not a shopping cart. Candidate prices in references are dated planning inputs. No subsystem has an approved, complete purchasing BOM here.
+The CSVs are editable planning worksheets for PW-APPROACH-01. Blank numerical cells mean **unknown**, never zero. Source selections and price estimates are identified, but accessories, pinouts, installed values, and delivered costs remain unresolved. No subsystem has an approved, complete purchasing BOM here.
 
 ## Intended workflow
 

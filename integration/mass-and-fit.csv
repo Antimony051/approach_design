@@ -1,12 +1,14 @@
 item_id,owner,assembly,target_allocation_g,selected_installed_g,quantity,dimensions_mm,mount_location,clearance_cable_cg_notes,source,status
-MASS-01,SA,picoScan body,220,,,,,60 × 60 × 82 mm historical body dimensions,SRC-008/SRC-021 manufacturer value; excludes system plug,ALLOCATION
-MASS-02,SA,System plug and Ethernet/power harness,90,,,,,Include connectors and actual cable lengths,SRC-008 planning allocation,ALLOCATION
-MASS-03,SA,Recorder cooling and light protection,90,,,,,Board plus expansion cooling enclosure,SRC-008 planning allocation,ALLOCATION
-MASS-04,SA,Camera and cable,20,,,,,Lens and retainer included,SRC-008 planning allocation,ALLOCATION
-MASS-05,SA,SSD and cable,30,,,,,Actual installed enclosure/cable,SRC-008 planning allocation,ALLOCATION
-MASS-06,FP+SA,Regulation filtering fuses,40,,,,,Include input/output conductors,SRC-008 planning allocation,ALLOCATION
-MASS-07,FP+SA,Mount fasteners retention,100,,,,,Rigid optical transform and ground clearance,SRC-008 planning allocation,ALLOCATION
-MASS-08,shared,Unallocated payload mass margin,60,,,,,Margin is not a physical part,SRC-008 planning allocation,ALLOCATION
-MASS-09,FP,Complete aircraft excluding flight battery and survey payload,,,,,,Do not count kit mass and its included parts twice,Unknown until selected build reconciled,UNKNOWN
-MASS-10,FP,Flight battery and adapter,,,,,,Owned 2S pack dimensions/masses unknown,Candidate 507 g only in SRC-008; not selected,UNKNOWN
+MASS-01,SA,picoScan150 Pro body,220,,,,Rigid removable sensor plate,Historical 60x60x82 mm body only; system plug and cables additional; installed label/size/mass check pending,SRC-034 ~220 g plus historical SRC-008/021,HISTORICAL_ALLOCATION_TO_RECONCILE
+MASS-02,SA,System plug and Ethernet/power harness,90,,,,,Include connectors and actual cable lengths,SRC-008 planning allocation,HISTORICAL_ALLOCATION_TO_RECONCILE
+MASS-03,SA,Pi 4 cooling ventilated cover and tray,90,,,,Electronics tray,Old 90 g recorder allocation not validated for Pi 4 case cooling and service clearance; reserve 120x90x60 mm assembly envelope,SRC-008 planning allocation,HISTORICAL_ALLOCATION_TO_RECONCILE
+MASS-04,SA,Camera Module 3 CSI cable and retention,20,,,,Rigid common sensor plate,Old 20 g allocation; actual ribbon bends strain relief FOV and focus access to measure,SRC-008 planning allocation,HISTORICAL_ALLOCATION_TO_RECONCILE
+MASS-05,SA,128 GB microSD and USB3 reader / retention,4,,,,Pi electronics tray,~4 g source estimate for card+reader only; installed retention/clearance additional; replaces 30 g SSD allocation; not a measured mass,SRC-034 Table 3-5,DOCUMENT_ESTIMATE
+MASS-06,FP+SA,Regulation filtering fuses,40,,,,,Old 40 g allocation; source 440-550 g sensing estimate excludes power distribution; reconcile mass boundary before adding,SRC-008 planning allocation,HISTORICAL_ALLOCATION_TO_RECONCILE
+MASS-07,FP+SA,Common sensor plate carrier fasteners and isolation if used,100,,,,Below frame near planned CG,Old 100 g allocation; avoid duplication with custom frame; 120x100x130 mm sensor envelope is reserved not fit evidence,SRC-008 planning allocation,HISTORICAL_ALLOCATION_TO_RECONCILE
+MASS-08,shared,Historical payload margin allocation,60,,,,,Old 60 g allowance not a physical item; not a recalculated margin for current configuration,SRC-008 planning allocation,HISTORICAL_ALLOCATION_TO_RECONCILE
+MASS-09,FP,Custom hybrid frame AIO motors props navigation RC and air telemetry,,,,,,Complete aircraft excluding battery and survey payload; itemize fabricated and purchased components once; actual CF/PA6-CF dimensions/strength unknown,SRC-034 selected configuration; installed total unknown,UNKNOWN
+MASS-10,FP,Selected 4S 5200 mAh flight battery and retention,,,,,,2S owned packs are separate inventory; former 507 g candidate not adopted; dimensions and installed CG unresolved,SRC-034 specification; no selected SKU/mass,UNKNOWN
 MASS-11,FP+GC,Proximity sensing interfaces mounts and wiring,,,,,,Field of view and blind areas; rotor/optics clearance; CG; include actual installed harness/mount mass,October 29 operating design; no components selected,UNKNOWN
+MASS-12,SA,Sensing payload subtotal estimate; summary only,650,,,Sensor 120x100x130; recorder 120x90x60 reserved envelopes,,440-550 g estimated subtotal; not additive with component rows. Source excludes aircraft battery power distribution; inclusion of shared mounts/regulators to reconcile; older 800 g stress case retained only as planning case,SRC-034 §§3.3.3/3.4.2; SRC-008 historical stress case,ESTIMATE_AND_TARGET_NOT_MEASURED
+MASS-13,FP,All-up design target; summary only,2250,,,,,All airborne parts once; not additive with components; not a verified lift limit or measured takeoff mass,SRC-034 §3.3.1,DOCUMENT_TARGET

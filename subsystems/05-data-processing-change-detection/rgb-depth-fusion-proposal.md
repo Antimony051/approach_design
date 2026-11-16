@@ -1,5 +1,7 @@
 # RGB and depth fusion proposal
 
+**November 16 source alignment:** SRC-034 selects independent post-flight geometry/image branches; this learned RGB-D proposal remains optional (D-011/Q-16). The sensor is now reported received as picoScan150 Pro, and Pi4/Camera3/USB survey card are selected. The 15Hz / 1–2m/s table below is a historical calculation case, not the current acquisition plan. The source conditionally plans ~50Hz at 0.25°–0.33° and 0.25–1m/s; verify the available profile. Local versus cloud PC execution remains open, while hosted reporting is primary. See [current PC brief](README.md) and [source reconciliation](../../references/new-evidence/2026-11-16-final-approach.md).
+
 November 3, 2026. **Status: user-proposed direction, assessed as feasible in principle; representation and model remain unselected.** This is a design assessment, with no implementation, training, new inventory confirmation, or project measurements. Evidence: [dated research note](../../references/new-evidence/2026-11-03-rgb-depth-fusion.md). Shared timing, transforms, and data-product semantics belong in [integration](../../integration/time-and-frames.md).
 
 ## Goal and fit with the current plan

@@ -1,6 +1,6 @@
 # Subsystem map
 
-The six charter subsystems remain the work boundaries. Numbering follows the signed charter; shared integration is maintained outside these folders.
+Updated November 16, 2026 against SRC-034. The six charter subsystems remain the work boundaries. Their briefs describe PW-APPROACH-01 document selections with pending integration and verification. Numbering follows the signed charter; shared integration is maintained outside these folders.
 
 | Code | Brief | Lead |
 | --- | --- | --- |

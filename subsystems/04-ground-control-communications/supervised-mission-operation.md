@@ -1,5 +1,7 @@
 # Supervised mission operation and interruption handling
 
+**November 16 source alignment:** SRC-034 selects MicoAir H743v2-AIO-35A/PX4 1.16.0, Pocket/RP1 and separate laptop MAVLink telemetry. The operating intent below is retained, but its ArduPilot examples are historical evidence and must be mapped/verified for PX4. No proximity hardware, stopping/hold implementation, or degraded-position fallback is selected. [Current GC brief](README.md) and [source reconciliation](../../references/new-evidence/2026-11-16-final-approach.md) identify current choices.
+
 Updated October 29, 2026 from the ground-control design discussion. **Agreed operating direction; implementation and numerical acceptance limits remain open.** This document records the discussion before detailed user stories. No aircraft, proximity system, estimator, control mode, or software integration has been selected or tested here.
 
 The [initial workflow and gap review](operational-gap-review.md) retains the broader laptop/communications/data-management discussion. This document refines its navigation, obstacle handling, interruption, and recovery behavior. It does not replace the existing [requirements](../../system/requirements.md).

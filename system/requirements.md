@@ -1,6 +1,6 @@
 # Requirements carried into hardware design
 
-This is a working summary of SRC-002, with the user-confirmed FP4 correction from SRC-001. Consult the original and its readable extract for exact wording, constraints, standards, and evaluation details. Numerical values are acceptance targets, not achieved performance. Ground-demo adaptations in SRC-006/SRC-007 do not replace final airborne requirements.
+Updated November 16, 2026. This is a working summary of SRC-002, with the user-confirmed FP4 correction from SRC-001. SRC-034 supplies the current implementation, not a silent amendment of acceptance criteria. Consult the original and its readable extract for exact wording, constraints, standards, and evaluation details. Numerical values are acceptance targets, not achieved performance. Ground-demo adaptations in SRC-006/SRC-007 do not replace final airborne requirements.
 
 | ID | Required capability / bound | Hardware consequence |
 | --- | --- | --- |
@@ -35,3 +35,16 @@ S2 evaluation includes ≥10 geometric cases and ≥10 negatives held out from t
 - Referenced standards: IEEE 802.3-2022, IEC 60825-1:2014, RFC 7946 for valid WGS84 geographic exports, and RFC 8446/TLS 1.3 where network transfer/access applies. Local metric coordinates must remain explicitly identified.
 
 See [the verification plan](../verification/plan.md) and SRC-007 for bench/full-system boundaries. GC3 meaning, gradient acceptance, and total error allocation remain [open decisions](../decisions/open-questions.md).
+
+## Final approach reconciliation — SRC-034
+
+| Topic | Current design input | Requirement / remaining action |
+| --- | --- | --- |
+| Survey speed | §§3.1.1/3.3.1 plan 0.25–1 m/s at 5–8 m | FP2 still evaluates 1–2 m/s; Q-17 requires explicit reconciliation |
+| Flight energy | §3.3.1 estimates ~8.5 min at a 2.25 kg all-up target under assumed usable energy | S1/FP1 remains ≥10 min with ≥20% calibrated usable energy; revise the design and validate, Q-18 |
+| Budgets | $1,000 whole-design limit; $447.09 pre-fee aircraft estimate | Keep strictly under-$700 aircraft constraint; reconcile delivered totals, scope, and funding, Q-10 |
+| Sampling/camera/storage | Conditional ~50 Hz/0.25°–0.33° scan mode; 11.9 MP at 3 fps and ≤1 ms exposure; USB survey card | Planning inputs for S2/S4/S5/SA1–SA3, not acceptance bounds or measured performance |
+| Operator alerts | Pocket critical-alert display; laptop detailed status on separate telemetry | DT1–DT3 need full recorder→PX4→ELRS→Pocket fault/latency checks; bridge compatibility remains open |
+| Reporting | Hosted portal/PostgreSQL/PostGIS/cloud files primary; local SQLite fallback | RD1 evidence/warnings persist; RFC 7946 geometry uses geographic longitude/latitude, with local metric coordinates separate |
+
+The source reports sensor receipt/Ethernet streaming only. That does not satisfy concurrent recording, timing, range, loaded flight, detection, or export acceptance. Retain NOT_RUN in the verification matrix until attributable test artifacts support results.

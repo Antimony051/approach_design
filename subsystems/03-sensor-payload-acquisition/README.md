@@ -2,38 +2,38 @@
 
 Lead: **Abhinav Dhakal**. Charter support: **Saugat Karki**. Requirements: **SA1–SA3; S3–S6**.
 
+Updated November 16, 2026. **Status: Pi 4/Camera Module 3/USB survey card selected in SRC-034 §§3.2.1/3.3.3/3.4; simultaneous performance and integration pending.**
+
 ## Required function
 
-Record real LiDAR and image streams concurrently, retain capture timing and pose association, detect continuity problems, and produce a replayable survey package for offboard analysis.
+Record real LiDAR/images concurrently, retain capture-time pose association and continuity evidence, and deliver a replayable, integrity-checked survey package for offboard analysis.
 
-## Existing direction and evidence
+## Selected sensor and recorder stack
 
-The supplied sensor has not been confirmed received; exact variant/licenses/plug/accessories are unknown. Existing material proposes a transverse downward LiDAR scan plane, nadir camera, rigid camera/LiDAR relationship, and Ethernet packet capture. An initial 15 Hz / 0.33° and ±30° useful sector are proposals subject to the delivered sensor.
+SRC-034 reports the supplied **picoScan150 Pro received and streaming Ethernet**. Confirm the physical label, firmware/licenses, system plug, cables, and supported modes; reference [20]'s PICS150-01000 Pro/1134610 is a cited datasheet identifier, not a checked label. Streaming alone is not SA1–SA3 acceptance evidence.
 
-Latest MSDR planning choice: Orange Pi Zero 3 + expansion board, USB InnoMaker U20CAM-1080P, external SSD. Alternatives include Pi 4, Pi Zero 2 W with hub, other USB cameras, and older Pi 5/CSI plans. The Arducam B0495 full mode requires USB 3 per the MSDR; the OV9281 option is monochrome and changes the color plan. Exact InnoMaker mode/lens/timing remains unresolved. Global shutter does not eliminate exposure blur. Raw compute/camera notes contain optimistic and inconsistent claims; use them as leads.
+Use **Raspberry Pi 4 Model B** native Ethernet for LiDAR, **standard color Camera Module 3** over CSI, and a **SanDisk Extreme 128 GB microSD in a USB 3 reader** for survey data, separate from the OS card. The source's reader reference is SanDisk MobileMate SDDR-B531-GN6NN; exact card SKU/Pi RAM/OS versions still need freezing. Selection rationale is native Ethernet, USB 3 storage, and greater image detail than the earlier InnoMaker options. Orange Pi Zero 3, Pi Zero 2 W/hub, InnoMaker U20CAM-9281M/1080P, OS-card-only storage, and Samsung T7 remain alternatives. The SSD is no longer the primary storage item.
 
-## Work for the design agent
+## Capture settings and estimates to test
 
-- Receipt inventory: sensor part number, firmware/licenses, plug, connector pinout, cables, supplied accessories, usable scan modes, timestamp access, optional PTP/IMU.
-- Joint camera/recorder/storage/OS decision, exact board revisions, expansion compatibility, USB/CSI bus layout, encoding, boot media, drivers, timing metadata, and measured-demand benchmark plan.
-- Exact SSD/cable/mount, regulator/cooling/protection, sensor power and Ethernet harness, and installed mass/volume/power.
-- Rigid sensor layout, clear useful scan/camera fields, lens/focus/exposure selection, cable bends and service access with FP.
-- Raw files, sequence counters, per-frame timing, session manifest, clock mapping and calibration IDs; pose/reference inputs with PC.
-- Independent timing/range fixtures and stand/manual-carriage hardware for the ground demo, including a laptop-recorder fallback.
+- Downward transverse LiDAR plane and downward camera on one rigid removable plate. Whole-plate isolation, if used, preserves relative calibration; the full 276° scanner plane is not all usable pavement coverage.
+- **~50 Hz at 0.25°–0.33°**, conditional on available scan profiles; **5–8 m, 0.25–1 m/s** plan. At 5 m near nadir, idealized spacing is ~22–29 mm across and 5–20 mm along track. Check full-envelope coverage, actual rates, and range at 5/6.5/8 m.
+- Camera plan: **4608 × 2592 (11.9 MP) JPEG, 3 fps, exposure ≤1 ms, focus locked at survey height**. Encoding extrapolations, ~1.4 mm/pixel at 5 m, blur, rolling-shutter correction, and overlap require real measurements; known speed alone does not establish correction.
+- Estimated camera writes **9–15 MB/s**; other streams **<1 MB/s**; ten-minute packages **6–10 GB**. Source card/reader throughput **~60–90 MB/s**, combined mass **~4 g**, and capacity **~12–20 runs** are unverified. Measure sustained per-card writes, shared load, thermals, retention, shutdown/recovery, and free space.
+- Sensing-payload estimate **440–550 g** versus **650 g target** excludes aircraft/battery/power distribution by source wording. Reconcile all mounts, protection, cooling, plugs, and cable mass in the shared ledger.
 
-## Required design handoff
+## Acquisition software and timing
 
-Use [the research template](../../templates/research-note.md) for options/evidence, then maintain the selected implementation here. Include exact parts and configuration, rationale, inputs/outputs, installed mass/power/dimensions where applicable, interfaces, failure behavior, assembly/calibration needs, verification, and open decisions. Mark the design status explicitly; the initial status is **implementation unresolved**.
+The selected direction is **Python** capture with Raspberry Pi camera support; C++ is a possible replacement for a capture bottleneck, while ROS 2 is an alternative rather than a required stack. Exact Raspberry Pi OS, Picamera2/libcamera, LiDAR library/format, MAVLink library, and parallel encoding setup remain to be specified.
 
-Write purchasing lines into [the shared BOM](../../procurement/bom.csv); write connection details into [interfaces](../../integration/interfaces.csv). Update [power](../../integration/power-budget.csv), [fit/mass](../../integration/mass-and-fit.csv), [compatibility](../../procurement/compatibility.csv), and [decisions](../../decisions/decision-log.md) when this subsystem changes them. Cross-reference shared components instead of duplicating them.
+RecorderSupervisor coordinates LidarCapture, CameraCapture, and PoseLogger; each writes through bounded queues with native/common timestamps and sequence IDs. HealthMonitor records drops/faults. ManifestWriter stores run identity/configuration, calibration IDs, file inventory/checksums, and complete/incomplete state. ExportService copies and verifies after landing. Interrupted packages remain incomplete even when individual files are usable.
 
-## Starting references
+Retain sensor timestamps and host/common times. The source proposes **PTP or NTP** LiDAR synchronization; exact support, offset/drift, camera timestamp semantics, beam phase, and FC time mapping remain unverified. Receipt time is insufficient. Independently check **≤20 ms over ≥10 min** and concurrent capture; map MAVLink serial pose through IF-09. Do not infer optional IMU/trigger features.
 
-- SRC-006: locate in [the source index](../../references/source-index.md).
-- SRC-007: locate in [the source index](../../references/source-index.md).
-- SRC-011: locate in [the source index](../../references/source-index.md).
-- SRC-012: locate in [the source index](../../references/source-index.md).
-- SRC-021: locate in [the source index](../../references/source-index.md).
-- SRC-022: locate in [the source index](../../references/source-index.md).
-- SRC-023: locate in [the source index](../../references/source-index.md).
-- SRC-028: locate in [the source index](../../references/source-index.md).
+Historical leads: SRC-006/007/011/012/021/022/023/028. Their 15 Hz, USB-camera, SSD, and Pi 5 assumptions are not current selections.
+
+## Shared design records
+
+Maintain one owning row per component in [the BOM](../../procurement/bom.csv), exact connections in [interfaces](../../integration/interfaces.csv), and affected [power](../../integration/power-budget.csv), [mass/fit](../../integration/mass-and-fit.csv), [compatibility](../../procurement/compatibility.csv), [verification](../../verification/plan.md), and [decisions](../../decisions/decision-log.md). Design selection is not purchase authorization or test evidence. Blank installed/price values remain unknown.
+
+Current source: [SRC-034 final approach](../../references/new-evidence/2026-11-16-final-approach/PaveWatch_Approach_Final.docx), [readable text SRC-035](../../references/new-evidence/2026-11-16-final-approach/approach-text.txt), and [reconciliation](../../references/new-evidence/2026-11-16-final-approach.md). Earlier source IDs resolve through [the source index](../../references/source-index.md).

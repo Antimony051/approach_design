@@ -1,34 +1,46 @@
-# Functional architecture to refine
+# Current functional architecture — PW-APPROACH-01
 
-The diagram describes responsibilities and expected exchanges. It is not a final wiring diagram or a selection of connectors, radios, firmware, or power components.
+Updated November 16, 2026 from SRC-034 §§3.2–3.4. Component names are document selections; connections below are intended contracts pending the pin/power/firmware checks in [interfaces](../integration/interfaces.csv). This is not an executable wiring diagram.
 
 ```mermaid
 flowchart TD
-    OP[Operator and ground station] <-->|Mission commands and status| FC[Flight controller and navigation]
-    RC[Manual RC] --> FC
-    FC --> PROP[ESCs and motors]
-    BAT[Flight battery] --> PWR[Power monitoring and distribution]
+    GCS["Laptop: QGroundControl and run/export app"] <-->|Separate MAVLink telemetry| FC["MicoAir H743v2 AIO-35A / PX4 1.16.0"]
+    POCKET["RadioMaster Pocket ELRS / critical alerts"] <-->|RC and handset telemetry| RX["RP1 V2 receiver"]
+    RX <--> FC
+    GNSS["M10G GNSS / compass"] --> FC
+    FC --> ESC["Four integrated ESC channels"]
+    ESC --> MOT["4 x X2216 880 KV / MR 10 x 4.5 props"]
+    BAT["4S 14.8 V / 5200 mAh"] --> PWR["Monitoring and distribution"]
     PWR --> FC
-    PWR --> PROP
-    PWR --> PP[Payload power branches]
-    PP --> L[Supplied picoScan]
-    PP --> REC[Recorder, camera, storage and cooling]
-    L -->|Ethernet range packets| REC
-    CAM[Downward camera] -->|Images and capture timing| REC
-    FC -->|Timestamped pose and flight state| REC
-    REC --> SSD[Onboard survey package]
-    FC --> DT[Diagnostics and telemetry]
-    REC --> DT
-    DT -->|Health and faults| OP
-    SSD -->|Verified post-flight transfer| PC[Offboard processing]
-    PC --> RD[Findings, images, geometry and warnings]
-    RD --> REVIEW[Maintenance reviewer]
+    PWR --> ESC
+    PWR --> LP["Protected LiDAR branch"]
+    PWR --> RP["Regulated recorder branch"]
+    LP --> L["Supplied picoScan150 Pro"]
+    RP --> PI["Raspberry Pi 4 / Python recorder"]
+    L -->|Ethernet scans and native time| PI
+    CAM["Camera Module 3"] -->|CSI images and capture time| PI
+    FC -->|Serial MAVLink pose and flight state| PI
+    PI --> CARD["128 GB survey microSD / USB 3 reader"]
+    PI --> HEALTH["HealthMonitor and persistent events"]
+    HEALTH -.->|Payload alert bridge: unverified| FC
+    CARD -->|Post-flight export and hash check| PC["Offboard processing: local or cloud undecided"]
+    PC --> GEOM["GeometryAnalyzer"]
+    PC --> VIS["VisualDetector"]
+    GEOM --> FIND["FindingAssembler / evidence and warnings"]
+    VIS --> FIND
+    FIND -->|Validated GeoJSON and evidence references| API["Hosted reporting ingestion API"]
+    API --> DB["PostgreSQL / PostGIS"]
+    API --> FILES["Cloud evidence files"]
+    DB --> PORTAL["Login / dashboard / evidence / PDF"]
+    FILES --> PORTAL
 ```
 
-The flight controller controls the aircraft; the recorder captures payload evidence. Raw LiDAR and imagery stay onboard during flight in the existing plans. Low-rate commands/health use ground communications; post-flight transfer carries the bulk data. The exact diagnostics transport and GC3 buffered stream remain open. Flight control must have a defined response when the payload recorder fails.
+FP owns aircraft/control and power distribution; DT owns health observability; SA owns the Pi capture/storage; GC owns missions and communications; PC owns post-flight analysis; RD owns the portal/database/evidence. Shared power/mounting/timing live in integration, with one BOM owner per component.
 
-The LiDAR supplies 2D cross-sections; vehicle or ground-rig motion and referenced pose supply surface coverage. Camera/LiDAR placement and timing must support the common frame used in processing. A single known launch coordinate does not establish reconstruction scale, orientation, or centimeter accuracy. LiDAR slant range is not automatically camera height above uneven ground.
+Flight control continues to own stabilization and recovery if the recorder fails. Raw imagery/ranges remain onboard during flight; only low-rate commands/status use operational radios. Pocket alert forwarding needs a supported PX4/ELRS/EdgeTX bridge. The separate laptop MAVLink radio is still to be specified; GC3's historical buffer stream remains undefined.
 
-The latest planning approach favors offline camera-position estimation with available GPS/LiDAR/control support as an option. Decide its inputs and validation alongside the physical sensor arrangement. Cloud hosting and historical comparison are unresolved extension choices; keep a usable single-survey processing/export path.
+Each 2D LiDAR cross-section needs acquisition-time pose to reconstruct pavement. Rigid sensor calibration, native/common clock mapping, original pose retention, and independent references are required. Post-processed image alignment is a candidate improvement, not a guarantee. Local survey coordinates need origin/axes/scale/datum and a documented geographic conversion; an origin alone does not establish accuracy.
 
-Operational scenarios to complete: bench commissioning; preflight configuration; start/stop capture; normal mission/manual takeover; low energy/link loss/recorder loss; landing and orderly shutdown; integrity-checked export; offline processing; review; replacement/remounting and recalibration. Cross-subsystem details belong in [interfaces](../integration/interfaces.csv), [assembly planning](../integration/assembly-plan.md), and [timing/frames](../integration/time-and-frames.md).
+The baseline produces findings from one survey. Prior-survey comparison and learned RGB-D fusion are optional. **Hosted reporting is selected; processing deployment remains open.** A local SQLite review app is a fallback. The [source note](../references/new-evidence/2026-11-16-final-approach.md) tracks speed, energy, budget, and schema conflicts.
+
+Commission in stages: ground power/capture/timing/telemetry, measured-pose stand/carriage and processing, installed commissioning, then authorized loaded flights. No step is presumed passed from the architecture diagram.

@@ -1,6 +1,6 @@
 # Reference guide and provenance
 
-[source-index.md](source-index.md) maps SRC IDs to artifacts. [source-manifest.csv](source-manifest.csv) records original repository paths, source SHA-256, snapshot artifact SHA-256, representation, and classification. Original source files were not modified. SRC-034/035 (final approach) and SRC-036–038 (supplied camera/LiDAR timing DOCX, extract and figure) were added November 16, 2026 under new-evidence; the initial snapshot/extracted directories remain unchanged. No external links were opened to create this folder, and no manufacturer manual was newly downloaded.
+[source-index.md](source-index.md) maps SRC IDs to artifacts. [source-manifest.csv](source-manifest.csv) records original repository paths, source SHA-256, snapshot artifact SHA-256, representation, and classification. Source documents and initial evidence are preserved. The Pi member/admin instructions were later amended at the user's explicit request; SRC-039/040 preserve their earlier text and SRC-043/044 preserve the shared-key revisions. SRC-034/035 (final approach) and SRC-036–038 (supplied camera/LiDAR timing DOCX, extract and figure) were added November 16, 2026 under new-evidence; the initial snapshot/extracted directories remain unchanged. No external links were opened to create this folder, and no manufacturer manual was newly downloaded.
 
 ## Reading order and precedence
 
@@ -28,6 +28,10 @@ The final requirements file is an OpenDocument ZIP despite its .docx extension. 
 Extracts are conveniences; original documents resolve extraction/layout ambiguity. Neither an extract nor this workspace establishes instructor approval, actual inventory changes after the last confirmation, or completed test results.
 
 SRC-037 preserves OOXML math with explicit fraction parentheses/subscripts, line breaks, table markers and hyperlink targets. SRC-038 is the unmodified embedded Figure 1. Neither is a measurement. The supplied timing note's external URLs were retained without a new documentation check.
+
+## Raspberry Pi connection records
+
+SRC-039–042 preserve November12/16 Pi access notes and a November11 laptop-to-LiDAR log, incorporated at the user's request on November16. SRC-043/044 then record the user-directed provided-private-key/shared-antimony workflow, superseding per-member Linux account/key creation in SRC-039/040. [The source note](new-evidence/2026-11-16-raspberry-pi-access.md) maps originals/copies/focused exact excerpts and distinguishes observed administrator SSH from unverified member access, Pi acquisition and timing. Newer Tailscale records take precedence over stale DHCP-address wording in older setup notes. Current login instructions are in [integration](../integration/raspberry-pi-access.md). No private backups, credentials or keys are included.
 
 ## Scope of collection
 

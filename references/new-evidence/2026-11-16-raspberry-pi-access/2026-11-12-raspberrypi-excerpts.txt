@@ -1,0 +1,88 @@
+Selected excerpts from picoscan150_hardware/logs/2026-11-12_raspberrypi.md
+Exact line ranges retained below; unrelated local Wi-Fi identifiers/card CID and setup-account details omitted.
+Addresses and observations are historical; use the November16 Tailscale source for current recorded access.
+
+[Source lines 1-4]
+# Raspberry Pi SD card inspection and Wi-Fi setup — November 12, 2026
+
+- User confirmed Raspberry Pi 4 Model B, powered through USB-C from a wall adapter.
+  Adapter rating and LED behavior have not been confirmed.
+
+[Source lines 7-7]
+- Existing system: Debian 11 Bullseye, 64-bit, hostname `raspberrypi`.
+
+[Source lines 40-41]
+The existing SSH Ed25519 host-key fingerprint remains:
+`SHA256:LydvSsaAsu9/3qfN5dFKHN8VTvqE5AYKEsS2UCf9LQk`.
+
+[Source lines 51-59]
+Both partitions were unmounted normally before read-only filesystem checks:
+
+- `e2fsck -fn /dev/mmcblk0p2`: exit 4; corrupted orphan-inode linked list,
+  referencing inode 20797. Filesystem errors remain.
+- `fsck.fat -n /dev/mmcblk0p1`: exit 1; dirty bit set and boot-sector backup
+  discrepancy at byte 65 (`01/00`). No FAT modifications were made.
+
+Full output is saved in
+`config/raspberry-pi/backups/20261112-003656-filesystem-check.txt`.
+
+[Source lines 71-73]
+The user subsequently chose **Leave the errors unchanged**. Do not repair these
+errors without a new explicit instruction. The BSSID pin is applied; no further
+card configuration changes are planned in this session.
+
+[Source lines 79-84]
+## First confirmed powered boot and SSH correction
+
+The user clarified that power had not been turned on during the earlier attempt.
+After powering the Pi, local neighbor discovery found Wi-Fi MAC
+`2C:CF:67:6A:FA:CF` at `100.70.49.73`. Ping succeeded (2/2 replies). SSH port 22
+refused connections; `raspberrypi.local` did not resolve. The laptop had roamed to
+
+[Source lines 88-105]
+Reinserting the card allowed inspection of the Pi's actual SSH startup journal,
+which reported:
+
+```text
+/etc/ssh/sshd_config.d/090-picoscan-account.conf line 4: Directive 'ChallengeResponseAuthentication' is not allowed within a Match block
+```
+
+The OpenSSH 9.6 compatibility check had missed an OpenSSH 8.4 restriction:
+`ChallengeResponseAuthentication` was global-only in 8.4. The supported
+`KbdInteractiveAuthentication` directive is allowed inside a Match block.
+This is confirmed in the
+[OpenSSH 8.4 parser](https://github.com/openssh/openssh-portable/blob/V_8_4_P1/servconf.c).
+
+`fix_ssh.py` replaced that directive in the managed snippet, verified the content,
+and unmounted both partitions. Original snippet, startup diagnostics, and change
+record are in `config/raspberry-pi/backups/20261112-010419-ssh-fix/`.
+The initial setup script and later audit were corrected as well. No filesystem
+repair commands were run. The next powered boot must confirm SSH login.
+
+[Source lines 107-119]
+## Confirmed SSH access
+
+The corrected SSH server started and presented the expected Ed25519 host key.
+It accepted the original laptop public key, but the local keyring agent refused
+to sign, and the encrypted private-key file required unlocking. The user added
+an alternate public key and requested `~/.ssh/tcdc_test_key` for login.
+
+Authenticated SSH succeeded as `antimony` using that key, with strict verification
+against the host key saved in the original backup. Observed results:
+
+- Hostname: `raspberrypi`; account UID/GID: 1001/1001.
+- Wi-Fi address: `100.70.49.73/25`; uptime: eight minutes at inspection.
+- `ssh`, `avahi-daemon`, and `dhcpcd` services: active.
+
+[Source lines 123-132]
+- `vcgencmd get_throttled`: `0x0`, indicating no current or recorded
+  under-voltage/throttling flags in this boot.
+
+Working command from this laptop:
+
+```bash
+ssh -o IdentitiesOnly=yes -i ~/.ssh/tcdc_test_key antimony@100.70.49.73
+```
+
+No explicit filesystem repairs were performed, per the user's decision.
+

@@ -14,6 +14,12 @@ SRC-034 reports the supplied **picoScan150 Pro received and streaming Ethernet**
 
 Use **Raspberry Pi 4 Model B** native Ethernet for LiDAR, **standard color Camera Module 3** over CSI, and a **SanDisk Extreme 128 GB microSD in a USB 3 reader** for survey data, separate from the OS card. The source's reader reference is SanDisk MobileMate SDDR-B531-GN6NN; exact card SKU/Pi RAM/OS versions still need freezing. Selection rationale is native Ethernet, USB 3 storage, and greater image detail than the earlier InnoMaker options. Orange Pi Zero 3, Pi Zero 2 W/hub, InnoMaker U20CAM-9281M/1080P, OS-card-only storage, and Samsung T7 remain alternatives. The SSD is no longer the primary storage item.
 
+## Existing Pi and service access — SRC-039–041
+
+Local records now identify an **existing Pi4 Model B, Debian11 Bullseye arm64 and roughly32GB boot card**, with successful administrator OpenSSH access recorded on November16 through Tailscale. [The connection guide](../../integration/raspberry-pi-access.md) gives the Tailscale member route, host identity, shared `antimony` login with the user-provided private key (D-025), and wired fallback. The selected Pi family is therefore supported by existing bench hardware, while RAM, power-adapter rating, driver/camera stack, recording performance and installed flight supply remain unverified. Do not price another Pi as necessary solely from the earlier $109 comparison estimate.
+
+The reused card retains existing accounts/projects and documented unrepaired filesystem findings; later SSH success is not a survey-storage pass. Initial card setup/repair scripts are not login steps. Sensor Ethernet/PTP remains a separate configuration to inventory and qualify; using the Pi Ethernet port for direct maintenance changes the sensor topology and must be recorded.
+
 ## Capture settings and estimates to test
 
 - Downward transverse LiDAR plane and downward camera on one rigid removable plate. Whole-plate isolation, if used, preserves relative calibration; the full 276° scanner plane is not all usable pavement coverage.

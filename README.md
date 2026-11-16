@@ -8,6 +8,8 @@ The [source reconciliation](references/new-evidence/2026-11-16-final-approach.md
 
 [Camera/LiDAR timing notes](integration/camera-lidar-timing.md) from the supplied November 16 document (SRC-036) add per-row exposure times, per-beam acquisition times, Pi/PTP clock mapping, calibration and proposed ≤3 ms P95 bench goals. Its 3 m/binned 10–15 fps/SSD test profile is recorded separately from the current flight plan; timing remains unmeasured and SA2's ≤20 ms requirement is unchanged.
 
+For recorder login and development, use [the Raspberry Pi connection guide](integration/raspberry-pi-access.md): November16 records show Tailscale/OpenSSH access to `picoscan-pi` at `100.72.89.22`. It uses the private key supplied by Shisir and the shared `antimony` login, plus Tailscale invitations, the trusted host fingerprint, original-laptop wired maintenance fallback, and the distinction from sensor Ethernet/PTP. Existing Pi4/Bullseye/32GB boot media are recorded as bench hardware; capture/timing readiness still needs qualification.
+
 Start with [the next-agent task](NEXT_AGENT_TASK.md), [project state](system/project-state.md), [requirements](system/requirements.md), and [open decisions](decisions/open-questions.md). Folder-level [agent instructions](AGENTS.md) explain evidence and update conventions.
 
 ## Where work belongs

@@ -39,6 +39,8 @@ FP owns aircraft/control and power distribution; DT owns health observability; S
 
 Flight control continues to own stabilization and recovery if the recorder fails. Raw imagery/ranges remain onboard during flight; only low-rate commands/status use operational radios. Pocket alert forwarding needs a supported PX4/ELRS/EdgeTX bridge. The separate laptop MAVLink radio is still to be specified; GC3's historical buffer stream remains undefined.
 
+[Pi service access](../integration/raspberry-pi-access.md) adds the recorded workstation→Tailscale→OpenSSH path (IF-22), using the Pi's separate network access. It supports maintenance/development and is not the RC/MAVLink flight-control path, a LiDAR subnet route, or a qualified bulk-export link. Direct laptop Ethernet maintenance replaces the cable attached to the Pi's sensor port and requires sensor/time-map rechecks afterward.
+
 The [timing plan](../integration/camera-lidar-timing.md) refines the recorder/processing boundary with native row/beam times, boot-to-realtime/PX4 clock maps, software PTP, discontinuity flags and independent bench checks. A single timestamp for an entire rolling-shutter image is insufficient for the proposed precise projection.
 
 Each 2D LiDAR cross-section needs acquisition-time pose to reconstruct pavement. Rigid sensor calibration, native/common clock mapping, original pose retention, and independent references are required. Post-processed image alignment is a candidate improvement, not a guarantee. Local survey coordinates need origin/axes/scale/datum and a documented geographic conversion; an origin alone does not establish accuracy.

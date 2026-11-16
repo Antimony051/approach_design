@@ -7,6 +7,7 @@ These worksheets connect subsystem choices into one installed system. Updated No
 - [mass-and-fit.csv](mass-and-fit.csv): existing payload allocations, installed masses, dimensions, placement, and clearances. Retain evidence for both mass and shape.
 - [time-and-frames.md](time-and-frames.md): shared pose/clock/frame contract.
 - [camera-lidar-timing.md](camera-lidar-timing.md): SRC-036 row/beam timing equations, Pi software PTP, metadata, separate bench profile, and independent calibration/scoring.
+- [raspberry-pi-access.md](raspberry-pi-access.md): recorded Tailscale/OpenSSH login, member onboarding, original-laptop wired fallback, troubleshooting, and maintenance-versus-sensor network boundaries.
 - [assembly-plan.md](assembly-plan.md): selected conceptual installation, required pin/layout drawings, interactions, and commissioning sequence.
 - [flight-energy-screen.md](flight-energy-screen.md): source energy/thrust assumptions, ~8.5 min shortfall, and unchanged flight acceptance.
 

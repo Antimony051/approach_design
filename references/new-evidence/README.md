@@ -9,3 +9,7 @@ Add dated manufacturer manuals/datasheets, exact supplier quotes, connector draw
 - [November 16 final approach alignment](2026-11-16-final-approach.md): supplied project DOCX (SRC-034) and readable text (SRC-035), adopted design choices, reported sensor activity, estimates, and conflicts; no new web research or executed tests.
 
 - [November 16 camera/LiDAR timing incorporation](2026-11-16-camera-lidar-timing.md): supplied DOCX/extract/figure (SRC-036–038), per-row/per-beam timing, Pi software PTP/clock mapping, bench profile, and proposed 3 ms goals; external links preserved without new verification; no executed tests.
+
+- [November16 Raspberry Pi access consolidation](2026-11-16-raspberry-pi-access.md): member/admin Tailscale/OpenSSH records, focused Pi boot/SSH excerpts and laptop-to-LiDAR log (SRC-039–042); existing Pi inventory, historical addresses and maintenance/acquisition boundaries; no new login or configuration.
+
+The Pi access entry also preserves SRC-043/044: updated member/admin instructions using the user-provided private key and shared antimony login (D-025). Earlier per-member Linux-account/key instructions remain historical snapshots.

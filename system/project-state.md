@@ -7,9 +7,15 @@ Updated November 16, 2026 from **SRC-034, PaveWatch_Approach_Final.docx** at the
 - PaveWatch / Aerovengers, ECE 4512, Mississippi State University; advisor Jingdao Chen. Supervised UAV pavement inspection supports human maintenance review. A rover was considered and not chosen (SRC-034 §3.1).
 - **SRC-034 §3.3.3 reports that the SICK$10K Challenge picoScan150 Pro was received and streams scans over Ethernet.** Its reference [20] names PICS150-01000 Pro, part 1134610; confirm the received label rather than treating a cited datasheet as inventory. Firmware/licenses, plug, accessories, scan profile, and test logs remain unrecorded. No acceptance results were supplied with this update.
 - October 22–23 confirmed two owned **2S** packs and chargers: each 5,200 mAh, 50C, 7.4 V nominal, 38.48 Wh. Connectors, dimensions/mass, condition, and charger cell support remain unknown. The design calls for a **4S** battery; neither series use nor 4S charger compatibility is established.
-- The final approach selects a design but does not establish purchase/receipt of its other components. Receiver/charger ownership checks remain open. The earlier no-orders statement describes October status, not a verified November inventory.
+- The final approach selects a design but does not establish purchase/receipt of its other components. Later local Pi records below identify existing bench recorder hardware separately; other inventory is not inferred. Receiver/charger ownership checks remain open. The earlier no-orders statement describes October status, not a verified November inventory.
 - Retain the user-confirmed **strictly under $700 complete-aircraft ceiling**, including flight battery, RC, and navigation, excluding supplied LiDAR and recording payload. Keep telemetry and usable charging visible. SRC-034 states a **$1,000 whole-design budget limit**; use it for planning and reconcile scope and actual funds. It is no longer merely an old budget reference.
 - FP4 remains **≤5° for ≥90% independently evaluated roll/pitch samples**, per user correction. The final requirements' ≤1° test text is stale.
+
+## Existing recorder and connection evidence — SRC-039–042
+
+November12/16 records in `picoscan150_hardware` identify an available **Pi4 Model B**, **Debian11 Bullseye arm64**, approximately **32GB existing boot card**, and USB-C wall-adapter power (adapter rating unconfirmed). November16 records report **Tailscale1.104.7**, device `picoscan-pi` at `100.72.89.22`, and successful original-administrator OpenSSH login on TCP22. The Linux hostname remains `raspberrypi`. See [Pi access](../integration/raspberry-pi-access.md) and [provenance](../references/new-evidence/2026-11-16-raspberry-pi-access.md).
+
+The user subsequently confirmed team login via the supplied private key and shared **antimony** account (D-025). These local records establish existing bench hardware/access, not a new purchase, completed key distribution or per-client connectivity, flight-rated supply, camera/acquisition compatibility or an acceptance pass. Historical `100.70.49.73` is a Wi-Fi address; campus Wi-Fi `172.18.2.95` is DHCP-dependent; use the recipient's Tailscale client endpoint for remote access. Recorded filesystem findings were left unchanged at the user's direction. Laptop-to-LiDAR ping/HTTP evidence on November11 is distinct from Pi-to-LiDAR streaming/PTP. No access was retested by this documentation update.
 
 ## Current design baseline — PW-APPROACH-01
 
@@ -19,7 +25,7 @@ Updated November 16, 2026 from **SRC-034, PaveWatch_Approach_Final.docx** at the
 | Propulsion/control | MicoAir H743v2-AIO-35A with integrated ESCs; PX4 1.16.0/MicoAir743v2; QGroundControl; 4 × SunnySky X2216 880 KV; Master Airscrew MR 10 × 4.5 in | Exact build/port map and matched motor/prop/voltage evidence |
 | Energy/navigation | 4S 14.8 V 5,200 mAh LiPo; M10G GNSS/compass | Battery SKU, charging, sensing, navigation/reference accuracy |
 | Pilot/status | RadioMaster Pocket 2.4 GHz ELRS and RP1 V2; separate MAVLink laptop telemetry | Receiver/cell inventory, protocols/radios/ports, payload-alert bridge |
-| Acquisition | picoScan150 Pro Ethernet; Pi 4 Model B; standard Camera Module 3 CSI; Python recorder | Pi memory/OS/library versions, scan mode, capture rate, timing, cooling/power |
+| Acquisition | picoScan150 Pro Ethernet; existing Pi4 Model B/Bullseye bench hardware; standard Camera Module3 CSI and Python capture plan | RAM, required camera/driver/OS stack qualification, scan mode, capture rate, timing, cooling/flight power; service SSH alone is insufficient |
 | Storage | SanDisk Extreme 128 GB microSD in USB 3 reader; separate OS card | Exact card/reader, sustained writes, retention, integrity/recovery |
 | Processing | Offboard after collection; independent geometry/image branches with evidence-based association | Laptop/workstation versus cloud execution; optional learned fusion |
 | Reporting | Hosted portal; PostgreSQL/PostGIS; cloud evidence storage; login/dashboard/PDF | Provider/resources, schema, backups, secure access/cost; local SQLite fallback |

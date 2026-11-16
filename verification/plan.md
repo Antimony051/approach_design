@@ -17,6 +17,12 @@ Check exact component revisions/kit contents, firmware support, all port/connect
 
 These are qualification tasks derived from the final approach, not additional numerical requirement approvals. The [source note](../references/new-evidence/2026-11-16-final-approach.md) and Q-01–20 track unresolved evidence.
 
+## Recorder access and network checks — SRC-039–042
+
+Use [Pi access](../integration/raspberry-pi-access.md) for the recorded maintenance path. November16 source notes report one administrator's Tailscale/OpenSSH success; this is historical connectivity evidence, not a new execution or a formal requirement pass. COMP-21 tracks member-specific Tailscale sharing/policy, supplied shared key and antimony login per D-025, host fingerprint, actual endpoint and original-laptop wired fallback. Recheck reachability and identity when commissioning; record service/network versions and whether the path is relayed. The shared-login method is confirmed; key handoff, accepted Tailscale invitations and successful client connections are not established by this documentation update.
+
+Verify that maintenance traffic and Wi-Fi loss/reconnect do not invalidate capture unnoticed. Inventory the actual Pi sensor Ethernet address/profile and sensor/PTP topology, distinguish the two direct NetworkManager profiles, and record revalidation after cable/network changes. Successful SSH does not show a working LiDAR subnet route, scan acquisition, camera driver, ≤20ms timing or ≥1GB integrity export. Existing Bullseye media and documented unrepaired filesystem findings still need appropriate recording/storage qualification; no repairs or system configuration were executed here.
+
 ## Ground commissioning and Capstone I
 
 ### Camera/LiDAR timing development — SRC-036

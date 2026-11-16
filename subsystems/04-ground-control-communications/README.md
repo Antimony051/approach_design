@@ -14,6 +14,12 @@ Use QGroundControl with the **MicoAir H743v2-AIO-35A / PX4 1.16.0** and **M10G G
 
 The source compares separate RC/telemetry, supported shared RC/MAVLink, and optional nearby Bluetooth service. Its Level 2 design retains separate laptop telemetry; a shared radio is an alternative requiring an explicit revision. A handset alert link does not automatically provide a laptop mission connection. Post-flight bulk data remain separate from in-flight radios.
 
+## Recorder maintenance connection — SRC-039–042
+
+[The Pi access guide](../../integration/raspberry-pi-access.md) documents recorded November16 Tailscale/OpenSSH service access: `picoscan-pi` / `100.72.89.22`, port22, with the trusted host fingerprint, individual Tailscale invitations and shared **antimony** SSH login using the **private key supplied by Shisir** (D-025/SRC-043–044). The Pi OS hostname is `raspberrypi`. The original administrator's shortcut/key and wired link-local profile are laptop-specific; client-visible shared addresses can differ.
+
+This is recorder setup/development access, separate from the selected RC and flight-controller MAVLink paths. The source records no advertised subnet routes; SSH does not establish remote SOPASair access. Bulk export can be evaluated over an appropriate path later, but recorded shell success does not pass PC3 or select its transport. The source guides record existing administrator login, not completed key distribution or fully verified team-member connectivity. No new remote connection or account changes were made here.
+
 ## Operator workflow and authority
 
 The laptop supports **Plan Run, Extract Data, Upload Data**. QGroundControl plus a small custom run/export app is the starting architecture; a unified UI remains an alternative. Upload a plan, read it back, and verify aircraft/run identity and recorder configuration. At the real launch site recheck home/fix, energy, links, recording, storage, and entry path. Recording and arming remain separate; pilot approval is required for takeoff. Reconnect or delayed commands must not launch automatically.

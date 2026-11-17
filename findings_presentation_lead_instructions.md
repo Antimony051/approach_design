@@ -1,7 +1,7 @@
 # Laptop agent instructions: findings presentation subsystem lead
 
 You are assisting the findings presentation subsystem lead from their laptop. The findings webapp and its database operations run on the server.
-Project files live on a remote Azure workstation. Your working folder is:
+Portal files live on a separate non-GPU Azure VM and stay available when processing stops. Your working folder is:
 
     /home/dev_admin/findings_presentation_subsystem
 
@@ -14,13 +14,13 @@ if needed while preserving the cache location and remote paths.
 
 Keep the current IP in this file **on the laptop**, outside the project:
 
-    ~/.config/gpu-dev-workstation/server-ip.txt
+    ~/.config/findings-portal-workstation/server-ip.txt
 
-Both subsystem guides use this same cache on a given laptop. Read it as plain
+This cache is for the CPU portal VM. Never reuse the GPU processing VM IP here. Read it as plain
 text; never source or execute it. At the start of each session:
 
 ```bash
-IP_FILE="$HOME/.config/gpu-dev-workstation/server-ip.txt"
+IP_FILE="$HOME/.config/findings-portal-workstation/server-ip.txt"
 if [ -s "$IP_FILE" ]; then
   SERVER_IP=$(cat "$IP_FILE")
   printf 'Previously saved server IP: %s\n' "$SERVER_IP"
@@ -36,7 +36,7 @@ ssh -o BatchMode=yes -o ConnectTimeout=10 -o StrictHostKeyChecking=accept-new \
 
 If there is no usable saved address, ask the human:
 
-> Please ask the Project Manager for the workstation's current public IP address and send it to me.
+> Please ask the Project Manager for the non-GPU portal VM's current public IP address and send it to me.
 
 Once supplied, validate it as a literal IPv4 or IPv6 address and save it promptly.
 Replace the placeholder below with the supplied address. Save only the IP, never
@@ -44,9 +44,9 @@ passwords or keys. Overwrite the cache when the Project Manager supplies a new I
 
 ```bash
 SERVER_IP='PASTE_THE_IP_HERE'
-mkdir -p "$HOME/.config/gpu-dev-workstation"
-printf '%s\n' "$SERVER_IP" > "$HOME/.config/gpu-dev-workstation/server-ip.txt"
-chmod 600 "$HOME/.config/gpu-dev-workstation/server-ip.txt"
+mkdir -p "$HOME/.config/findings-portal-workstation"
+printf '%s\n' "$SERVER_IP" > "$HOME/.config/findings-portal-workstation/server-ip.txt"
+chmod 600 "$HOME/.config/findings-portal-workstation/server-ip.txt"
 ```
 
 Retest the connection. On later sessions, reuse the saved IP if it works.
@@ -70,7 +70,7 @@ will not necessarily discover them automatically. Reload the saved IP in a new
 shell and run this read-only command:
 
 ```bash
-SERVER_IP=$(cat "$HOME/.config/gpu-dev-workstation/server-ip.txt")
+SERVER_IP=$(cat "$HOME/.config/findings-portal-workstation/server-ip.txt")
 ssh "dev_admin@$SERVER_IP" '
   set -eu
   cd /home/dev_admin/findings_presentation_subsystem
@@ -123,7 +123,7 @@ Start the app using its documented command **on the server**, binding to
 127.0.0.1:8000. In a separate **laptop** terminal:
 
 ```bash
-SERVER_IP=$(cat "$HOME/.config/gpu-dev-workstation/server-ip.txt")
+SERVER_IP=$(cat "$HOME/.config/findings-portal-workstation/server-ip.txt")
 ssh -N -o ExitOnForwardFailure=yes -L 127.0.0.1:8000:127.0.0.1:8000 "dev_admin@$SERVER_IP"
 ```
 

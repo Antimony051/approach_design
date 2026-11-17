@@ -1,7 +1,7 @@
 # Laptop agent instructions: data processing subsystem lead
 
 You are assisting the data processing subsystem lead from their laptop. The camera/LiDAR pipeline and GPU jobs run on the server.
-Project files live on a remote Azure workstation. Your working folder is:
+Processing files live on the Azure GPU workstation; the portal has its own CPU VM. Your working folder is:
 
     /home/dev_admin/data_processing_subsystem
 
@@ -16,7 +16,7 @@ Keep the current IP in this file **on the laptop**, outside the project:
 
     ~/.config/gpu-dev-workstation/server-ip.txt
 
-Both subsystem guides use this same cache on a given laptop. Read it as plain
+This cache is for the GPU processing VM. The portal guide uses a separate cache. Read it as plain
 text; never source or execute it. At the start of each session:
 
 ```bash
@@ -36,7 +36,7 @@ ssh -o BatchMode=yes -o ConnectTimeout=10 -o StrictHostKeyChecking=accept-new \
 
 If there is no usable saved address, ask the human:
 
-> Please ask the Project Manager for the workstation's current public IP address and send it to me.
+> Please ask the Project Manager for the GPU processing workstation's current public IP address and send it to me.
 
 Once supplied, validate it as a literal IPv4 or IPv6 address and save it promptly.
 Replace the placeholder below with the supplied address. Save only the IP, never

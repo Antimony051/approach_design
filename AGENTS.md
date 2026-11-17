@@ -18,3 +18,16 @@ This is a design workspace, not a completed design. Read README.md, NEXT_AGENT_T
 - Use stable IDs in requirements, interfaces, decisions, and BOM rows. Each purchased or fabricated item must have one owning row; cross-reference kit contents instead of charging for them twice. Unknown numerical values stay blank with a reason/status.
 - After a design change update the subsystem brief, decision log, affected interfaces, budgets, compatibility checks, and verification implications. Do useful independent work while questions remain open.
 - Deliver concrete planning artifacts. Do not order, publish, contact others, or claim passed tests as a consequence of a research task alone.
+
+## Azure workstation guides for subsystem leads
+
+When helping a subsystem lead work from a laptop on the Azure GPU workstation,
+read the relevant connection guide:
+
+- **Data Processing & Change Detection (PC):** [Data processing lead instructions](data_processing_lead_instructions.md).
+- **Reporting, Database & Alerts (RD):** [Findings presentation lead instructions](findings_presentation_lead_instructions.md).
+
+These guides cover the dev_admin SSH login, saving and checking the current
+server IP on the laptop, the correct remote working directory, and explicitly
+reading the server's AGENTS.md before starting work. Follow the remote links to
+detailed backup instructions when a backup or restore is requested.

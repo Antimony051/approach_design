@@ -13,3 +13,5 @@ Add dated manufacturer manuals/datasheets, exact supplier quotes, connector draw
 - [November16 Raspberry Pi access consolidation](2026-11-16-raspberry-pi-access.md): member/admin Tailscale/OpenSSH records, focused Pi boot/SSH excerpts and laptop-to-LiDAR log (SRC-039–042); existing Pi inventory, historical addresses and maintenance/acquisition boundaries; no new login or configuration.
 
 The Pi access entry also preserves SRC-043/044: updated member/admin instructions using the user-provided private key and shared antimony login (D-025). Earlier per-member Linux-account/key instructions remain historical snapshots.
+
+Latest Pi access update: D-026 / SRC-045–046 use **pavewatch** with the supplied key and document the Pi home README.md/AGENTS.md, /home/pavewatch/03-sensor-payload-acquisition (tools/docs), and ~/data/sessions recordings. Earlier usernames remain historical.

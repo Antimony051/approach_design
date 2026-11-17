@@ -1,6 +1,6 @@
 # Connect to the project Raspberry Pi
 
-Updated November 16, 2026 from the records in `picoscan150_hardware` (SRC-039–044) and the user's shared-key/login instruction (D-025). They record working Tailscale/OpenSSH access on November 16; this documentation update did not connect to or reconfigure the Pi. [Provenance and limits](../references/new-evidence/2026-11-16-raspberry-pi-access.md) preserve the source dates and observations.
+Updated November 16, 2026 from the records in `picoscan150_hardware` (SRC-039–046) and the user's shared-key/login instructions (D-025/D-026). They record working Tailscale/OpenSSH access on November 16; this documentation update did not connect to or reconfigure the Pi. [Provenance and limits](../references/new-evidence/2026-11-16-raspberry-pi-access.md) preserve the source dates and observations.
 
 ## Recorded connection details
 
@@ -13,14 +13,14 @@ Updated November 16, 2026 from the records in `picoscan150_hardware` (SRC-039–
 | Full Tailscale DNS name | `picoscan-pi.tail53123d.ts.net` |
 | Shell service | Regular OpenSSH on TCP 22; Tailscale SSH is disabled |
 | SSH host identity | Ed25519 `SHA256:LydvSsaAsu9/3qfN5dFKHN8VTvqE5AYKEsS2UCf9LQk` |
-| Team Linux login | **`antimony`**, using the **private SSH key provided by Shisir**; each recipient still uses their own Tailscale account/invitation |
+| Team Linux login | **`pavewatch`**, using the **private SSH key provided by Shisir**; each recipient still uses their own Tailscale account/invitation |
 
 The November 16 record reports Tailscale **1.104.7**, enabled at boot, registered and online without reported health warnings. The original laptop completed SSH through a Miami relay; that observation does not establish current connectivity, direct-peer transport, latency, or throughput for other clients.
 
-## Team member quick start — shared key and antimony
+## Team member quick start — shared key and pavewatch
 
 The user confirmed that Shisir will supply the private SSH key and everyone
-will connect as `antimony`. The current [shareable member guide](../references/new-evidence/2026-11-16-raspberry-pi-access/shared-key/FRIEND_ACCESS.md)
+will connect as `pavewatch` per the latest username update (D-026). The current [shareable member guide](../references/new-evidence/2026-11-16-raspberry-pi-access/pavewatch-login/FRIEND_ACCESS.md)
 uses this workflow; earlier per-member key/account instructions in SRC-039/040
 are historical and superseded for team login.
 
@@ -30,7 +30,7 @@ are historical and superseded for team login.
 2. Sign in using your own Tailscale account and turn the connection on.
 3. Accept the Pi-sharing invitation Shisir sends you. You should see **picoscan-pi** in your client.
 
-Keep Tailscale connected whenever you use the Pi. The Pi must be powered and online. The Tailscale account is your own; the Linux login below is always `antimony`.
+Keep Tailscale connected whenever you use the Pi. The Pi must be powered and online. The Tailscale account is your own; the Linux login below is always `pavewatch`.
 
 ## 2. Save the provided private key
 
@@ -58,12 +58,12 @@ chmod 700 "$HOME/.ssh"
 chmod 600 "$HOME/.ssh/picoscan_shared_key"
 ```
 
-## 3. Connect as antimony
+## 3. Connect as pavewatch
 
 Run in PowerShell or a terminal:
 
 ```sh
-ssh -o IdentitiesOnly=yes -i "$HOME/.ssh/picoscan_shared_key" antimony@100.72.89.22
+ssh -o IdentitiesOnly=yes -i "$HOME/.ssh/picoscan_shared_key" pavewatch@100.72.89.22
 ```
 
 If your Tailscale client shows a different address for the shared `picoscan-pi` device, substitute that address. If the private key has a passphrase, enter the supplied passphrase at the local key prompt.
@@ -74,25 +74,48 @@ On first connection, compare the Pi's Ed25519 fingerprint:
 SHA256:LydvSsaAsu9/3qfN5dFKHN8VTvqE5AYKEsS2UCf9LQk
 ```
 
-Accept it when it matches. If it differs, confirm the Pi identity with Shisir before updating saved trust. After login, `whoami` should report `antimony` and `hostname` should report `raspberrypi`. Use `exit` to disconnect.
+Accept it when it matches. If it differs, confirm the Pi identity with Shisir before updating saved trust. After login, `whoami` should report `pavewatch` and `hostname` should report `raspberrypi`. Use `exit` to disconnect.
 
 On the **original configured administrator laptop**, the previously recorded
-shortcut `ssh picoscan-pi` still uses its existing `~/.ssh/config` and key.
+shortcut uses its existing `~/.ssh/config` and key. Use
+`ssh -l pavewatch picoscan-pi` to override an older configured username.
 Teammates use the explicit command above; that laptop shortcut is not created
 automatically on their computers.
+
+## Onboard workspace — start here after login
+
+The user supplied the following paths **inside the Raspberry Pi**. As
+`pavewatch`, read the home-level instructions before operating the LiDAR:
+
+```sh
+cat ~/README.md
+cat ~/AGENTS.md
+cd /home/pavewatch/03-sensor-payload-acquisition
+```
+
+| Pi path | Contents |
+| --- | --- |
+| `/home/pavewatch/03-sensor-payload-acquisition/` | LiDAR workspace root |
+| `/home/pavewatch/03-sensor-payload-acquisition/tools/` | LiDAR scripts |
+| `/home/pavewatch/03-sensor-payload-acquisition/docs/` | Sensor documentation |
+| `~/data/sessions/` = `/home/pavewatch/data/sessions/` | Recorded data; outside the subsystem workspace root |
+
+`~` here is `/home/pavewatch` on the Pi, not the local workstation home.
+These are user-provided workspace instructions; no remote files were inspected
+or modified during this documentation update.
 
 ## Troubleshooting and account administration
 
 | Symptom | Check |
 | --- | --- |
 | Timeout | Pi power/online state, both Tailscale connections, accepted share, recipient's displayed address, and access policy permitting TCP 22 |
-| `Permission denied (publickey)` | Use `antimony` and the private key supplied by Shisir; verify its local filename/path and permissions; Tailscale sharing alone does not authenticate SSH |
+| `Permission denied (publickey)` | Use `pavewatch` and the private key supplied by Shisir; verify its local filename/path and permissions; Tailscale sharing alone does not authenticate SSH |
 | Agent refuses signing | The November 12 laptop encountered this; choose the intended working local key explicitly with `-i`/`IdentitiesOnly` rather than assuming a network failure |
 | Name lookup fails | Use the recipient's numeric Tailscale address; `raspberrypi.local` did not resolve reliably in earlier checks |
 | Different host fingerprint | Confirm Pi identity/reinstallation with the administrator before changing trust records |
 | Disconnected service shell | Check access again; do not assume capture stopped or succeeded solely from the SSH connection state |
 
-[The updated administrator guide](../references/new-evidence/2026-11-16-raspberry-pi-access/shared-key/TAILSCALE.md) covers Tailscale sharing, the shared-key `antimony` login, policy checks and wired maintenance. It records `--accept-dns=false --accept-routes=false --ssh=false`: existing DNS is retained, subnet routes are not accepted, and ordinary OpenSSH provides the shell. The Pi is already registered; registration/install/setup steps are recovery references, not routine login steps. No invitations, accounts, policies or services were changed by adding this guide.
+[The updated administrator guide](../references/new-evidence/2026-11-16-raspberry-pi-access/pavewatch-login/TAILSCALE.md) covers Tailscale sharing, the shared-key `pavewatch` login, policy checks and wired maintenance. It records `--accept-dns=false --accept-routes=false --ssh=false`: existing DNS is retained, subnet routes are not accepted, and ordinary OpenSSH provides the shell. The Pi is already registered; registration/install/setup steps are recovery references, not routine login steps. No invitations, accounts, policies or services were changed by adding this guide.
 
 ## Other network paths and historical addresses
 
@@ -103,16 +126,18 @@ automatically on their computers.
 | Direct laptop-to-Pi Ethernet | IPv6 link-local `fe80::cb69:61b7:5997:6b6d` in the original laptop's notes | Requires a direct cable, the correct laptop interface zone and its preconfigured `picoscan-pi-direct` profile |
 | Direct laptop-to-LiDAR Ethernet | Laptop `192.168.0.100/24`, sensor `192.168.0.1`, profile `picoscan150-direct` | November 11 laptop ping/HTTP evidence; a different connection from Pi maintenance access |
 
-For **the original Linux administrator laptop**, the recorded wired maintenance commands are:
+For **the original Linux administrator laptop**, the wired example below uses
+the recorded network values with the username/key filename updated to the
+current team instructions. This current-account combination was not retested:
 
 ```sh
 nmcli connection up picoscan-pi-direct
 ssh -o IdentitiesOnly=yes -o HostKeyAlias=100.70.49.73 \
-    -i "$HOME/.ssh/tcdc_test_key" \
-    'antimony@fe80::cb69:61b7:5997:6b6d%enp109s0'
+    -i "$HOME/.ssh/picoscan_shared_key" \
+    'pavewatch@fe80::cb69:61b7:5997:6b6d%enp109s0'
 ```
 
-`enp109s0`, the profile, the private-key filename and the link-local address are recorded laptop/bench details, not universal settings. `HostKeyAlias=100.70.49.73` selects the administrator's previously trusted host-key entry; it does not route the connection to that old address. Other clients use the supplied shared key with `antimony`, their own actual interface/address, and the verified Pi host identity. The profile has autoconnect disabled and no default route; it preserves the laptop's separate internet path.
+`enp109s0`, the profile, the private-key filename and the link-local address are recorded laptop/bench details, not universal settings. `HostKeyAlias=100.70.49.73` selects the administrator's previously trusted host-key entry; it does not route the connection to that old address. Other clients use the supplied shared key with `pavewatch`, their own actual interface/address, and the verified Pi host identity. The profile has autoconnect disabled and no default route; it preserves the laptop's separate internet path.
 
 The `picoscan150-direct` profile instead addresses the **sensor** for SOPASair at `http://192.168.0.1/`. Do not substitute one profile for the other. A Pi-to-LiDAR static address/profile is not documented as applied in these records; inventory it before configuring the planned sensor Ethernet/PTP path.
 

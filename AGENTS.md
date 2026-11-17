@@ -13,7 +13,7 @@ This is a design workspace, not a completed design. Read README.md, NEXT_AGENT_T
 - SRC-034 reports receipt of a picoScan150 Pro and Ethernet streaming. Attribute these statements to the document; accessory inventory, exact configuration, raw test evidence, and acceptance results remain open. Older unreceived/no-tests context is dated history.
 - The user confirmed approximately 0.25–1 m/s planned survey speed on November 16 (D-019), consistent with SRC-034. The operating-range choice is settled; Q-17 concerns alignment of older FP2 1–2 m/s test wording. SRC-034 retains 5–8 m height and a $1,000 whole-design limit. Retain the separate under-$700 aircraft ceiling and reconcile costs/funding. The source's ~8.5-minute energy screen does not meet the unchanged ≥10-minute loaded-flight target.
 - SRC-036, PaveWatch_Camera_and_LiDAR_Timing.docx, supplies the working timing plan: mode-dependent row times, Compact beam times, Pi software PTP/CLOCK_REALTIME with native boot/FC clock maps and validity segments. Verify timestamp event/clock semantics optically. Its 3 m/binned 10–15 fps/SSD settings and ≤3 ms P95, ±1 ms median, ≤1 ms/10 min drift are proposed bench configuration/goals; do not replace flight planning or SA2 ≤20 ms, infer installed PTP licenses, or claim tests passed.
-- SRC-039–042 preserve picoscan150_hardware access records: existing Pi4/Bullseye/roughly32GB boot card, November16 Tailscale picoscan-pi at 100.72.89.22 and regular OpenSSH22. Keep prior Wi-Fi addresses and original-laptop aliases/profiles labeled historical/specific; no remote login, access provisioning, sensor/PTP pass or filesystem repair is implied by a documentation task. Per the user's follow-up (D-025), the current team instructions SRC-043/044 use the provided shared private key and Linux user antimony; do not require new per-member Linux accounts/key pairs. Tailscale accounts/invitations remain individual. Do not copy private backups, credentials or keys; preserve the user's decision to leave recorded filesystem errors unchanged.
+- SRC-039–042 preserve picoscan150_hardware access records: existing Pi4/Bullseye/roughly32GB boot card, November16 Tailscale picoscan-pi at 100.72.89.22 and regular OpenSSH22. Keep prior Wi-Fi addresses and original-laptop aliases/profiles labeled historical/specific; no remote login, access provisioning, sensor/PTP pass or filesystem repair is implied by a documentation task. Per the user's follow-ups (D-025/D-026), the current team login uses the provided shared private key and Linux user pavewatch; SRC-043/044 retain the earlier username and are superseded by SRC-045/046; do not require new per-member Linux accounts/key pairs. Tailscale accounts/invitations remain individual. Do not copy private backups, credentials or keys; preserve the user's decision to leave recorded filesystem errors unchanged.
 - For DIY parts verify exact revisions, propulsion at the chosen voltage/prop, firmware target, port allocation, signal levels, connectors/pinouts, current limits, timing access, and installed clearances. Record documentation checks separately from physical tests.
 - Use stable IDs in requirements, interfaces, decisions, and BOM rows. Each purchased or fabricated item must have one owning row; cross-reference kit contents instead of charging for them twice. Unknown numerical values stay blank with a reason/status.
 - After a design change update the subsystem brief, decision log, affected interfaces, budgets, compatibility checks, and verification implications. Do useful independent work while questions remain open.
@@ -31,3 +31,19 @@ These guides cover the dev_admin SSH login, saving and checking the current
 server IP on the laptop, the correct remote working directory, and explicitly
 reading the server's AGENTS.md before starting work. Follow the remote links to
 detailed backup instructions when a backup or restore is requested.
+
+## Raspberry Pi login and onboard workspace
+
+- SSH over Tailscale as **`pavewatch`**, using the private key provided by the user. The documented device is `picoscan-pi`, address `100.72.89.22`; use the shared-device address shown by the client's Tailscale instance if different.
+- Example from a workstation with the provided key saved as `~/.ssh/picoscan_shared_key`:
+
+  ```sh
+  ssh -o IdentitiesOnly=yes -i "$HOME/.ssh/picoscan_shared_key" pavewatch@100.72.89.22
+  ```
+
+- **Inside the Pi**, start by reading `~/README.md` and `~/AGENTS.md` for workspace instructions before running scripts. For this account, `~` is `/home/pavewatch`.
+- The LiDAR workspace is `/home/pavewatch/03-sensor-payload-acquisition`:
+  - `tools/` — LiDAR scripts.
+  - `docs/` — sensor documentation.
+- Recorded data is in `~/data/sessions/`, i.e. `/home/pavewatch/data/sessions/`, outside the subsystem workspace root.
+- These are remote Pi paths, not local workstation paths. Preserve the shared-key workflow and use the current `pavewatch` username in team instructions; older `antimony` login records remain historical. See [the connection guide](integration/raspberry-pi-access.md).

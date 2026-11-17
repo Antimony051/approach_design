@@ -16,7 +16,7 @@ The source compares separate RC/telemetry, supported shared RC/MAVLink, and opti
 
 ## Recorder maintenance connection — SRC-039–042
 
-[The Pi access guide](../../integration/raspberry-pi-access.md) documents recorded November16 Tailscale/OpenSSH service access: `picoscan-pi` / `100.72.89.22`, port22, with the trusted host fingerprint, individual Tailscale invitations and shared **antimony** SSH login using the **private key supplied by Shisir** (D-025/SRC-043–044). The Pi OS hostname is `raspberrypi`. The original administrator's shortcut/key and wired link-local profile are laptop-specific; client-visible shared addresses can differ.
+[The Pi access guide](../../integration/raspberry-pi-access.md) documents recorded November16 Tailscale/OpenSSH service access: `picoscan-pi` / `100.72.89.22`, port22, with the trusted host fingerprint, individual Tailscale invitations and shared **pavewatch** SSH login using the **private key supplied by Shisir** (D-026/SRC-045–046). The Pi OS hostname is `raspberrypi`. The original administrator's shortcut/key and wired link-local profile are laptop-specific; client-visible shared addresses can differ.
 
 This is recorder setup/development access, separate from the selected RC and flight-controller MAVLink paths. The source records no advertised subnet routes; SSH does not establish remote SOPASair access. Bulk export can be evaluated over an appropriate path later, but recorded shell success does not pass PC3 or select its transport. The source guides record existing administrator login, not completed key distribution or fully verified team-member connectivity. No new remote connection or account changes were made here.
 

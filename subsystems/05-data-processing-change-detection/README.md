@@ -26,6 +26,10 @@ Recorded MAVLink poses are original evidence. Overlapping images with GPS/LiDAR/
 
 The [November 3 RGB/depth proposal](rgb-depth-fusion-proposal.md) remains an **optional experimental branch**, with representation/model and training resources unselected (D-011/Q-16). It must retain independent geometry/image paths and observed-versus-estimated depth provenance. No learned fusion performance is assumed.
 
+## Camera processing prototype
+
+The [camera pipeline](camera-pipeline/README.md) contains the runnable single-image detector, the registered multi-frame replay, and the tests. Use the [sequence replay guide](camera-pipeline/docs/sequence-replay.md) for the session manifest, development fixtures, and comparison commands. The workstation holds the trained model and benchmark artifacts.
+
 ## Handoff and verification
 
 Send findings/evidence/quality warnings to RD's ingestion API. Use valid geographic GeoJSON geometry only when registration supports it; keep metric local XYZ and frame/datum/transform separately identified (IF-16/Q-20). Preserve source/configuration/software/calibration IDs, units, measurement uncertainty, and image/scan links through reruns and reports.

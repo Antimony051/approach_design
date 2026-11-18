@@ -1,0 +1,35 @@
+[project]
+name = "pavewatch"
+version = "0.1.0"
+description = "Single-image pavement defect scoring for PaveWatch"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "numpy>=1.26,<3",
+    "opencv-python-headless>=4.10,<5",
+    "pillow>=11,<13",
+    "torch==2.9.1",
+    "torchvision==0.24.1",
+]
+
+[project.scripts]
+pavewatch = "pavewatch.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8,<9", "ruff>=0.12,<1"]
+
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform != 'darwin'" }]
+torchvision = [{ index = "pytorch-cpu", marker = "sys_platform != 'darwin'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

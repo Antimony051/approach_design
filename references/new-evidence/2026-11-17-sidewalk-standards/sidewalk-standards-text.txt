@@ -1,0 +1,153 @@
+REFERENCE GUIDE / COMPLIANCE INVENTORY
+Sidewalk Measurements & Accessibility Requirements
+Federal United States law  •  Mississippi statutes  •  MDOT design criteria
+Prepared 17 November 2026  |  Intended for sidewalk inspection, planning, and asset management
+[TABLE]
+EXECUTIVE CONCLUSION / Federal design standards provide measurable benchmarks, but there is no single nationwide numeric “trip-hazard” code applicable to every existing sidewalk. Mississippi has specific public-building access statutes and municipal curb-ramp duties. MDOT also maintains stricter project design criteria; these are agency specifications, not a universal statewide sidewalk-maintenance ordinance.
+[/TABLE]
+1  How to interpret the measurements
+[TABLE]
+Source / legal level | Where it applies | Inspection treatment
+2010 ADA Standards [F1] | Covered building/site routes and other ADA-regulated new construction/alterations. | Enforceable where applicable; do not assume all public street sidewalks are private-site routes.
+ADA Title II [F2–F3] | Public entities; existing sidewalks; altered streets/curb ramps. | Accessibility and maintenance duties apply. Existing-path corrective obligations are context dependent.
+2023 PROWAG [F4] | Technical guidelines for pedestrian facilities in public rights-of-way. | Strong ROW benchmark; not a blanket federally enforceable standard for every city sidewalk.
+DOT rule, 49 CFR §37.9(b) [F5] | New/altered transit stops in public ROW commencing after Jan. 17, 2025, with grandfather clause. | PROWAG is incorporated into enforceable DOT ADA standards in this scope.
+Mississippi Code [M1–M6] | Municipal authority/curb ramps and specified publicly funded buildings. | State statutes; numerical state-building standards do not automatically apply to all streets.
+MDOT 2020 Roadway Design Manual [M7] | MDOT road design and covered improvement projects, subject to approved deviations. | Apply MDOT criteria to MDOT work; not a statewide local-sidewalk maintenance statute.
+[/TABLE]
+A “measured nonconformity” means an observed condition exceeds a particular applicable technical threshold. It does not, standing alone, prove a violation of state tort law, a maintenance defect, or the absence of a lawful exception.
+2  Federal measurement reference
+Abbreviations: ADA = 2010 ADA Standards; PROWAG = 36 CFR part 1190, Appendix (section numbers beginning R). Widths are clear, unobstructed dimensions unless stated otherwise.
+Surface quality, discontinuities and openings
+[TABLE]
+Metric | Federal numerical rule | Authority / limits
+Abrupt change in level | ≤ 1/4 in (6.4 mm) may remain vertical. | ADA §303.2; PROWAG R302.6.2 [F1, F4]
+Beveled change | Over 1/4–1/2 in: bevel no steeper than 1:2 (50%). | ADA §303.3; PROWAG R302.6.2 [F1, F4]
+Change > 1/2 in | ADA: route by compliant ramp/curb ramp or other permitted vertical-access element. PROWAG: >1/2–6 in at ≤1:12; >6 in under R407. | ADA §303.4; PROWAG R302.6.2 [F1, F4]
+Horizontal opening / joint | Must not admit passage of sphere larger than 1/2 in (13 mm). | ADA §302.3; PROWAG R302.6.3 [F1, F4]
+Long narrow grate opening | Long axis perpendicular to dominant direction of travel; PROWAG excepts intersecting travel directions. | ADA §302.3; PROWAG R302.6.3 [F1, F4]
+Rail flangeway gap | ≤ 3 in for tracks subject to 49 CFR part 213; otherwise ≤ 2 1/2 in. | PROWAG R302.6.4.2 [F4]
+Surface texture / stability | Firm, stable, slip-resistant; not a single federal coefficient-of-friction number. | ADA §302.1; PROWAG R302.6 [F1, F4]
+Grade breaks on walking surface | Flush where they meet; ramp-specific restrictions also apply. | PROWAG R302.6.1, R304.2.3 [F4]
+[/TABLE]
+[TABLE]
+GAP INTERPRETATION / The rule is NOT “a 1/2-inch sphere must not pass.” It prohibits openings that allow a sphere LARGER than 1/2 inch to pass; exact test geometry and exceptions matter. Ordinary sidewalk crack width does not have a separate universal federal “crack length” threshold.
+[/TABLE]
+Running slope, cross slope and widths
+[TABLE]
+Metric | ADA building/site route | PROWAG public ROW reference
+Normal running slope | ≤ 1:20 = 5% (§403.3) | ≤ 5%; adjacent-roadway-grade exception where established road grade >5% (R302.4.1).
+Normal cross slope | ≤ 1:48 ≈ 2.08% (§403.3) | ≤ 1:48 ≈ 2.08% for routes outside a crosswalk (R302.5.1).
+Continuous clear width | ≥ 36 in; 32-in constriction allowed for ≤24 in length, with separation conditions (§403.5.1) | ≥ 48 in, exclusive of curb (R302.2).
+Passing spaces | 60 × 60 in or permitted T-space every ≤200 ft if route <60 in wide (§403.5.3) | ≥ 60 × 60 in every ≤200 ft where clear width <60 in (R302.3).
+Refuge median route | Site-specific curb-ramp / clear-route provisions; do not use a blanket “36-in refuge width.” | ≥ 60 in clear route through median / island (R302.2.1).
+Overhead clearance | ≥ 80 in (§307.4) | ≥ 80 in (R402.4).
+Side-mounted protrusion | Generally ≤4 in for leading edges >27 to <80 in (§307.2); post rules vary. | Generally ≤4 in for leading edges >27 to <80 in (R402.2); special post rules.
+[/TABLE]
+Crossings, curb ramps and detectable warnings
+[TABLE]
+Feature | PROWAG measurement / treatment | Section
+Crosswalk cross slope | ≤ 2.08% at STOP/YIELD approaches; ≤5% at uncontrolled or signal/beacon approaches; midblock/roundabout ≤ street grade. | R302.5.2
+Crosswalk running grade | ≤5%, except specified highway superelevation. | R302.4.3
+Curb ramp running slope | ≤1:12 (8.33%); 15-ft-length exception in constrained geometry. | R304.2.1; R304.3.1
+Curb ramp clear width | ≥48 in, excluding flares; shared-use path rules differ. | R304.5.1
+Curb ramp cross slope | ≤1:48 (≈2.08%); crosswalk-related exception. | R304.2.2; R304.3.2
+Top/bottom space | Typical required perpendicular top landing ≥48 ×48 in; beyond-bottom clear area ≥48 ×48 in; applicability rules matter. | R304.2.4–.5
+Blended transition | Running slope ≤5%. | R304.4.1
+Flared curb-ramp sides | Where crossed by circulation path, ≤1:10 (10%) parallel to curb. | R304.2.6
+Ramp/street opposing grades | Grade change ≤13.3 percentage points OR qualifying ≥24-in-deep transition with ≤1:48 running slope. | R304.5.2
+Detectable warning strip | ≥24 in depth in direction of travel and full applicable ramp/landing width. | R305.1.4
+Truncated domes | Base 0.9–1.4 in; height 0.2 in; center spacing 1.6–2.4 in. | R305.1.1–.2
+[/TABLE]
+Source for all rows in this section: final PROWAG technical text [F4]. The table summarizes key requirements and is not a substitute for full scoping and exception language.
+3  Mississippi statutory requirements
+Important: §43-6-101 limits Mississippi’s public-building design rules to covered publicly funded buildings and associated facilities. It does not convert every municipal street sidewalk into an entrance walk under that article. [M1]
+[TABLE]
+Mississippi authority | Requirement / measurement | Applicability
+Miss. Code §21-37-6 [M2] | Municipalities SHALL install wheelchair-usable curb ramps at crosswalks when newly installing, improving or replacing sidewalks, curbs, or gutters. No fixed ramp % or width specified in this section. | Municipal crosswalk work; federal ADA duties may also apply.
+Miss. Code §21-37-3 [M3] | Municipalities have power to construct, repair and maintain sidewalks; statute specifies no universal numeric rise/gap/slope tolerance. | Municipal administration.
+Miss. Code §21-37-5 [M4] | Municipalities may set sidewalk materials, plans, specifications, grades and construction/maintenance programs. | Municipal rules can add local requirements.
+Miss. Code §65-1-75(2) [M5] | For designated state highways within municipalities (except interstate system), municipality has responsibility beyond curb line including sidewalk maintenance, subject to statute. | Responsibility allocation; not a dimension standard.
+Miss. Code §43-6-101 [M1] | Public-building accessibility standards apply to specified publicly funded assembly, education, office and other public buildings, with stated impracticability exception. | Covers walks and ramps serving those buildings.
+Miss. Code §43-6-103(1) [M6] | Accessible primary-entrance walk ≥48 in wide; gradient ≤5%, or up to 8.33% with handrails; no steps/abrupt level changes. Walks crossing drives/parking blend to common level. | Specified publicly funded buildings; federal rules also apply.
+Miss. Code §43-6-103(1) [M6] | Door top platform ≥5 ×5 ft if door swings toward it; otherwise ≥3 ft deep ×5 ft wide; platform extends ≥1 ft either side of door. | Covered building entrance walks.
+Miss. Code §43-6-107 [M7] | Ramp slope ≤1:12 (8.33%); ≥32 in clear width; nonslip surface; handrail on at least one side, at 32-in height extending 12 in past ends. | State statute for specified publicly funded building ramps; see federal conflict warning.
+Miss. Code §43-6-107 [M7] | Ramp bottom level run ≥6 ft; if >30 ft long, level platform at 30-ft intervals and turns; statute platform ≥32 in ×5 ft; door/platform rules also apply. | State statute; ADA ramp rules may be more stringent.
+Miss. Code §43-6-121 [M8] | “Every effort” to eliminate hazards to people with physical disabilities; NO numeric trip-offset threshold specified. | Within Article 3 scope.
+[/TABLE]
+[TABLE]
+FEDERAL/STATE CONFLICTS MUST BE RESOLVED, NOT AVERAGED / Miss. Code §43-6-107 specifies a 32-in handrail height and 32-in clear ramp width, but federal ADA §505 generally requires handrails 34–38 in high, and ADA §405 generally requires a 36-in minimum clear ramp width and handrails on both sides where required. State statutory dimensions cannot be used to justify failure to comply with applicable federal ADA rules. Obtain project-specific code review.
+[/TABLE]
+4  MDOT road-project design criteria (not universal municipal law)
+Mississippi Department of Transportation, 2020 Roadway Design Manual §14-2.06.05 and current standard drawings. These design standards are especially relevant on MDOT projects. Consult contract specifications, version dates, and documented design exceptions. [D1–D2]
+[TABLE]
+MDOT metric | Design requirement / target | Location / note
+Sidewalk overall width | ≥5 ft. | Manual §14-2.06.05.3(3).
+Unobstructed pedestrian path | ≥4 ft where poles/signs/other appurtenances present. | Manual §14-2.06.05.3(3).
+Running slope | ≤5%, except may match adjacent existing roadway profile if steeper. | Manual §14-2.06.05.3(9).
+Cross slope | ≤2.0%; preferred construction design ≤1.5%; drainage design minimum 1.0%. | Manual §14-2.06.05.3(10).
+Surface quality | Continuous, non-vibratory, stable, firm, slip-resistant; vertical discontinuities limited by PROWAG. | Manual §14-2.06.05.3(11).
+Buffer, curb and no parking | Generally ≥3 ft between edge of pavement and sidewalk where no street parking; constraints noted. | Manual §14-2.06.05.3(4).
+Buffer, no curb and no parking | Generally ≥5 ft; consider barrier/rail if insufficient. | Manual §14-2.06.05.3(5).
+No buffer at curb | Use ≥6-ft sidewalk where buffer cannot be provided, per Manual text. | Manual §14-2.06.05.3(4).
+Curb ramp | ≥4 ft clear width; slope 5–8.33% (7.1% preferred); blended transition ≤5%. | MDOT standard drawing CR ramp elements [D2].
+Curb-ramp cross slope | ≤2.0% (1.5% preferred), with specified crossing exceptions. | MDOT standard drawing [D2].
+Curb-ramp bottom clear area | ≥4 ×4 ft, within crossing and outside parallel vehicle lanes. | MDOT standard drawing [D2].
+Potential drop-off treatment | Manual Figure 14-2-E recommends railing in certain slope/height/distance combinations; not a blanket state statute. | Manual §14-2.06.05.3(12).
+[/TABLE]
+5  Field inspection / data collection checklist
+Recommended structure for an inventory. For each defect, store source of authority, location, geometry, whether the route is a site/ROW/transit-stop path, any documented exception, and photographs. A flagged condition is an inspection finding, not an automatic legal determination.
+[TABLE]
+Data field | Record | Baseline flag (subject to scope)
+Vertical offset | Maximum step-up/down, inches; beveled? bevel ratio? | >0.25 in un-beveled; >0.50 in without compliant transition.
+Horizontal opening | Maximum clear aperture, inches; orientation. | Passage of sphere >0.50 in, outside exception.
+Sidewalk running slope | % uphill/downhill over measured segment; adjacent road % | >5% unless valid adjacent-roadgrade/other exception.
+Sidewalk cross slope | % perpendicular to travel; crosswalk control type. | >2.08% PROWAG reference; >2.0% MDOT project design.
+Usable clear width | Narrowest clear width, inches; length of pinch point. | <48 in PROWAG/MDOT ROW, where applicable; site ADA rules differ.
+Passing space | Dimensions and max interval between spaces. | <60 ×60 in or >200 ft interval on route narrower than 60 in.
+Overhead/protrusion | Low obstruction height and lateral projection. | <80-in headroom or prohibited side projection.
+Curb ramp | Running %, cross %, clear width, top/bottom space, grade break. | PROWAG R304; MDOT plans/drawings if MDOT project.
+Detectable warnings | Depth, width, dome sizes/spacing, contrast, location. | PROWAG R305 in scoped circumstances.
+Obstruction / upkeep | Tree roots, vegetation, utility work, standing debris, repair status. | Separate access/maintenance issue under ADA Title II; no single nationwide numeric threshold.
+[/TABLE]
+6  Scope decision sequence
+Identify whether the segment is a covered building/site accessible route, municipal public right-of-way, a DOT-regulated transit stop, an MDOT project, or a covered publicly funded building entrance route.
+Select the enforceable layer(s): ADA Title II/III, any DOT transit-stop standard, Mississippi statutes, MDOT plan/manual requirements, and adopted city/county ordinances.
+Measure each relevant dimension and retain measurement methodology, timestamps, photos, roadway grade, and exceptions.
+Record separate statuses: (a) design benchmark exceeded; (b) applicable binding requirement potentially violated; (c) maintenance/asset-management priority. Do not equate all three.
+7  Source register and links
+Primary federal provisions are official U.S. Access Board and federal government sources where available. Mississippi statutory text is linked to the published 2025 Mississippi Code reproduction on Justia (nonofficial); check any later enacted amendments and local ordinances before legal reliance.
+[F1] U.S. Access Board — ADA Accessibility Standards (2010), §§302–303, 307, 403, 405, 505
+[F2] 28 CFR §35.133 — Maintenance of accessible features
+[F3] DOJ/DOT 2015 guidance — existing sidewalk barriers, resurfacing/alteration and obligations
+[F4] 36 CFR part 1190 appendix — final PROWAG, particularly R302, R304, R305, R402
+[F5] 49 CFR §37.9(b) — DOT adoption for new/altered transit stops in ROW
+[F6] U.S. Access Board — PROWAG status and adoption history
+[M1] Miss. Code §43-6-101 (2025) — Public-building article applicability
+[M2] Miss. Code §21-37-6 (2025) — Municipal curb ramps
+[M3] Miss. Code §21-37-3 (2025) — Streets and sidewalks
+[M4] Miss. Code §21-37-5 (2025) — Municipal sidewalk specifications
+[M5] Miss. Code §65-1-75 (2025) — Sidewalk responsibilities on designated highways in cities
+[M6] Miss. Code §43-6-103 (2025) — Public-building entrance walks
+[M7] Miss. Code §43-6-107 (2025) — Public-building ramps
+[M8] Miss. Code §43-6-121 (2025) — Removal of hazards
+[D1] MDOT 2020 Roadway Design Manual, §§2-6.0 and 14-2.06.05 (pp. 14-14 to 14-19)
+[D2] MDOT Roadway Design Standard Drawings, curb ramps / detectable warnings
+
+[EXTERNAL HYPERLINK TARGETS IN DOCUMENT ORDER]
+https://www.access-board.gov/ada/
+https://www.law.cornell.edu/cfr/text/28/35.133
+https://www.ada.gov/doj-fhwa-ta-supplement-2015.html
+https://www.access-board.gov/prowag/complete.html
+https://www.law.cornell.edu/cfr/text/49/37.9
+https://www.access-board.gov/prowag/
+https://law.justia.com/codes/mississippi/title-43/chapter-6/article-3/section-43-6-101/
+https://law.justia.com/codes/mississippi/title-21/chapter-37/section-21-37-6/
+https://law.justia.com/codes/mississippi/title-21/chapter-37/section-21-37-3/
+https://law.justia.com/codes/mississippi/title-21/chapter-37/section-21-37-5/
+https://law.justia.com/codes/mississippi/title-65/chapter-1/article-1/section-65-1-75/
+https://law.justia.com/codes/mississippi/title-43/chapter-6/article-3/section-43-6-103/
+https://law.justia.com/codes/mississippi/title-43/chapter-6/article-3/section-43-6-107/
+https://law.justia.com/codes/mississippi/title-43/chapter-6/article-3/section-43-6-121/
+https://mdot.ms.gov/documents/Roadway%20Design/Standards/Manuals/2020%20Roadway%20Design%20Manual.pdf
+https://mdot.ms.gov/documents/Roadway%20Design/Standards/Drawings/Roadway%20Design%20Standard%20Drawings.pdf

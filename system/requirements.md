@@ -27,6 +27,8 @@ Updated November 16, 2026. This is a working summary of SRC-002, with the user-c
 
 S2 evaluation includes ≥10 geometric cases and ≥10 negatives held out from tuning. S5 demo uses ≥10 positives per class and ≥10 nuisance-only regions. Do not use calibration/control points as scored checkpoints. A previous survey is optional. No numerical gradient-error acceptance limit is settled.
 
+Use the sidewalk reference to explore smaller features and tighter measurement errors for future design work. It records candidate scales for local steps, openings, cross slope and clear width alongside the planned camera and LiDAR sampling. These are design inputs for considering future targets under Q-12 and Q-13. [Sidewalk measurement reference](../references/new-evidence/2026-11-17-sidewalk-standards.md)
+
 ## Constraints inherited from the documents
 
 - C1–C3: aircraft/site/pilot/airspace/registration/Remote ID and campus authorization are operating-plan inputs. The saved requirements describe Part 107, VLOS, <55 lb, ≤400 ft AGL, weather minima, and campus requests ≥3 weeks before flight. These are carried references, not a current legal determination or an approval. Later operational research should check applicability to the selected aircraft/site.

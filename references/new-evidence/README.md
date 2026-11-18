@@ -15,3 +15,5 @@ Add dated manufacturer manuals/datasheets, exact supplier quotes, connector draw
 The Pi access entry also preserves SRC-043/044: updated member/admin instructions using the user-provided private key and shared antimony login (D-025). Earlier per-member Linux-account/key instructions remain historical snapshots.
 
 Latest Pi access update: D-026 / SRC-045–046 use **pavewatch** with the supplied key and document the Pi home README.md/AGENTS.md, /home/pavewatch/03-sensor-payload-acquisition (tools/docs), and ~/data/sessions recordings. Earlier usernames remain historical.
+
+- The November 17 sidewalk reference covers federal and Mississippi/MDOT benchmarks, nominal sampling at the planned capture distances, and candidate bench measurements for choosing future resolution and accuracy targets. SRC-047/048 preserve the supplied DOCX and its text. [Sidewalk measurement reference](2026-11-17-sidewalk-standards.md)

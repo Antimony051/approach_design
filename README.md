@@ -12,6 +12,8 @@ For recorder login and development, use [the Raspberry Pi connection guide](inte
 
 Start with [the next-agent task](NEXT_AGENT_TASK.md), [project state](system/project-state.md), [requirements](system/requirements.md), and [open decisions](decisions/open-questions.md). Folder-level [agent instructions](AGENTS.md) explain evidence and update conventions.
 
+For future sidewalk survey resolution targets, see the dimensions, nominal camera and LiDAR sampling estimates, and candidate bench measurements in the [sidewalk measurement reference](references/new-evidence/2026-11-17-sidewalk-standards.md).
+
 ## Where work belongs
 
 | Folder | Contents |

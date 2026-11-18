@@ -44,6 +44,10 @@ SRC-006/SRC-007 define future tests for three workstreams. Actual hardware needs
 
 Control points used for calibration/alignment are separate from evaluation checkpoints. Measured ground poses do not demonstrate an image pose estimator; P1 checkpoint bounds do not demonstrate every camera position's accuracy or S3. Saved evidence is not presumed approved as a substitute for a live test. All current rubric checks are proposed acceptance checks.
 
+### Exploratory sidewalk resolution measurements
+
+For later target selection, use independent step, aperture and slope references near the sidewalk benchmarks. Record feature orientation, scan phase, valid sampling coverage, height or width error, slope error over a stated baseline, and reference uncertainty. Score edge detection and dimension error separately. The candidate measurements support Q-12 and Q-13 alongside the existing S2, S3 and S5 tests. [Sidewalk measurement reference](../references/new-evidence/2026-11-17-sidewalk-standards.md#candidate-bench-measurements)
+
 ## Full integrated and airborne evaluation
 
 ### Optional RGB/depth processing checks — November 3 (D-011)

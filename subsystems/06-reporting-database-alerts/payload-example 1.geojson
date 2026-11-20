@@ -1,0 +1,186 @@
+{
+  "type": "FeatureCollection",
+  "schema_version": "1.0",
+  "run": {
+    "run_id": "PW-20260912-1405-01",
+    "company": {
+      "company_id": "northgate-roads",
+      "name": "Northgate Municipal Roads"
+    },
+    "site_name": "Library Parking Lot",
+    "started_at": "2026-09-12T14:05:00-04:00",
+    "ended_at": "2026-09-12T14:21:30-04:00",
+    "status": "incomplete",
+    "aircraft_id": "PW-01",
+    "operator": "R. Okafor",
+    "software_version": "pw-proc 0.3.1",
+    "local_frame_origin": {
+      "lat": 43.77011,
+      "lon": -79.39876,
+      "alt_m": 127.4,
+      "heading_deg": 15.0
+    },
+    "flight_path": {
+      "type": "LineString",
+      "coordinates": [
+        [-79.39876, 43.77011],
+        [-79.39850, 43.77080],
+        [-79.39838, 43.77078],
+        [-79.39864, 43.77009],
+        [-79.39852, 43.77007],
+        [-79.39826, 43.77076]
+      ]
+    },
+    "data_warnings": [
+      {
+        "code": "NOT_SCANNED",
+        "message": "North-east corner blocked by a delivery truck",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-79.39835, 43.77060],
+              [-79.39826, 43.77076],
+              [-79.39816, 43.77074],
+              [-79.39825, 43.77058],
+              [-79.39835, 43.77060]
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-79.39858, 43.77035]
+      },
+      "properties": {
+        "finding_id": "F-0001",
+        "detected_at": "2026-09-12T14:08:12-04:00",
+        "defect_type": "pothole",
+        "description": "Pothole about 46 x 59 cm and 87 mm deep. Edges ravelled; loose aggregate in the bowl.",
+        "severity": "high",
+        "confidence": 0.96,
+        "detection_source": "fused",
+        "gps_accuracy_m": 1.8,
+        "position_local_m": { "x": 27.4, "y": 6.2, "z": -0.09 },
+        "measurements": {
+          "width":  { "value": 0.46,  "unit": "m" },
+          "length": { "value": 0.59,  "unit": "m" },
+          "depth":  { "value": 0.087, "unit": "m" },
+          "area":   { "value": 0.21,  "unit": "m2" }
+        },
+        "quality_warnings": [],
+        "evidence": [
+          {
+            "file": "F-0001_raw.jpg",
+            "kind": "image_raw",
+            "caption": "Nadir frame, 5.9 m AGL",
+            "captured_at": "2026-09-12T14:08:12-04:00",
+            "width_px": 2304,
+            "height_px": 1296,
+            "bounding_boxes": [
+              { "label": "pothole", "bbox": [800, 728, 940, 961], "confidence": 0.96 }
+            ]
+          },
+          {
+            "file": "F-0001_closeup.jpg",
+            "kind": "image_closeup",
+            "caption": "Close-up crop from the raw frame",
+            "width_px": 960,
+            "height_px": 1168,
+            "bounding_boxes": [
+              { "label": "pothole", "bbox": [323.7, 323.7, 636.3, 843.9], "confidence": 0.96 }
+            ]
+          },
+          {
+            "file": "F-0001_lidar_profile.png",
+            "kind": "lidar_profile",
+            "caption": "LiDAR cross-section through the deepest point"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-79.39847, 43.77052]
+      },
+      "properties": {
+        "finding_id": "F-0002",
+        "detected_at": "2026-09-12T14:11:40-04:00",
+        "defect_type": "crack",
+        "subtype": "transverse",
+        "description": "Transverse crack across the drive aisle, about 2 m long and up to 17 mm wide.",
+        "severity": "medium",
+        "confidence": 0.88,
+        "detection_source": "image",
+        "gps_accuracy_m": 3.4,
+        "position_local_m": { "x": 46.1, "y": 9.8 },
+        "measurements": {
+          "length":    { "value": 2.03, "unit": "m" },
+          "max_width": { "value": 16.7, "unit": "mm" }
+        },
+        "quality_warnings": [
+          { "code": "POSE_LOW_CONFIDENCE", "message": "Few GNSS satellites during this segment" }
+        ],
+        "evidence": [
+          {
+            "file": "F-0002_raw.jpg",
+            "kind": "image_raw",
+            "caption": "Nadir frame, 5.7 m AGL",
+            "captured_at": "2026-09-12T14:11:40-04:00",
+            "width_px": 2304,
+            "height_px": 1296,
+            "bounding_boxes": [
+              { "label": "crack", "bbox": [610, 260, 1720, 410], "confidence": 0.88 }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": null,
+      "properties": {
+        "finding_id": "F-0003",
+        "detected_at": "2026-09-12T14:15:05-04:00",
+        "defect_type": "other",
+        "subtype": "debris",
+        "description": "Loose gravel spill on the surface. Not structural, but may hide defects underneath.",
+        "severity": "low",
+        "confidence": 0.84,
+        "detection_source": "image",
+        "position_local_m": { "x": 28.4, "y": 12.9 },
+        "measurements": {
+          "width": { "value": 0.5, "unit": "m" }
+        },
+        "quality_warnings": [
+          { "code": "GPS_UNAVAILABLE", "message": "No GNSS fix; only the local position is known" },
+          { "code": "NO_LIDAR_COVERAGE" }
+        ],
+        "evidence": [
+          {
+            "file": "F-0003_raw.jpg",
+            "kind": "image_raw",
+            "caption": "Nadir frame, 6.0 m AGL",
+            "width_px": 2304,
+            "height_px": 1296,
+            "bounding_boxes": [
+              { "label": "debris", "bbox": [1020, 540, 1260, 780], "confidence": 0.84 }
+            ]
+          },
+          {
+            "file": "F-0003_scan.ply",
+            "kind": "lidar_scan",
+            "caption": "Point cloud of the surrounding 2 x 2 m patch"
+          }
+        ]
+      }
+    }
+  ]
+}

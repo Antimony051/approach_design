@@ -1,0 +1,5 @@
+#!/bin/sh
+case "$1" in
+  status|stop|diagnostics) exec /usr/local/bin/lidar "$@" ;;
+  *) exec /usr/local/bin/lidar capture "$@" ;;
+esac

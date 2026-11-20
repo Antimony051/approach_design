@@ -1,0 +1,19 @@
+[Unit]
+Description=PaveWatch recorder diagnostics
+After=pavewatch-recorder.service
+
+[Service]
+Type=simple
+User=pavewatch
+Group=pavewatch
+RuntimeDirectory=pavewatch-watchdog
+RuntimeDirectoryPreserve=yes
+StateDirectory=pavewatch-watchdog
+UMask=0027
+ExecStart=/usr/bin/python3 -u -B /usr/local/lib/pavewatch-lidar/recorder_watchdog.py
+Restart=on-failure
+RestartSec=2s
+Nice=5
+NoNewPrivileges=yes
+ProtectSystem=full
+ProtectHome=read-only

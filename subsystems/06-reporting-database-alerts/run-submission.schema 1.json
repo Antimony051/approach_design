@@ -1,0 +1,757 @@
+{
+  "$defs": {
+    "BoundingBox": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "bbox": {
+          "description": "[x_min, y_min, x_max, y_max] in pixels of the ORIGINAL image (origin top-left).",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Bbox",
+          "type": "array"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        }
+      },
+      "required": [
+        "label",
+        "bbox"
+      ],
+      "title": "BoundingBox",
+      "type": "object"
+    },
+    "Company": {
+      "additionalProperties": false,
+      "properties": {
+        "company_id": {
+          "description": "Stable identifier of the customer company (lowercase, digits, dashes).",
+          "examples": [
+            "northgate-roads"
+          ],
+          "pattern": "^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$",
+          "title": "Company Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "company_id",
+        "name"
+      ],
+      "title": "Company",
+      "type": "object"
+    },
+    "DataWarning": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "description": "e.g. NOT_SCANNED, POSE_LOW_CONFIDENCE, SCAN_IMAGE_MISALIGNED, NO_LIDAR_COVERAGE",
+          "examples": [
+            "POSE_LOW_CONFIDENCE"
+          ],
+          "pattern": "^[A-Z][A-Z0-9_]{1,63}$",
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        },
+        "geometry": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Optional GeoJSON geometry (usually a Polygon) of the affected area.",
+          "title": "Geometry"
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "title": "DataWarning",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "description": "Plain file name (no folders). Unique within the run.",
+          "examples": [
+            "F-0001_raw.jpg"
+          ],
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,199}$",
+          "title": "File",
+          "type": "string"
+        },
+        "kind": {
+          "description": "image_raw, image_closeup, lidar_profile, lidar_scan, other...",
+          "pattern": "^[a-z][a-z0-9_]{1,63}$",
+          "title": "Kind",
+          "type": "string"
+        },
+        "caption": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Caption"
+        },
+        "captured_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Captured At"
+        },
+        "width_px": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Original image width. Checked against the upload.",
+          "title": "Width Px"
+        },
+        "height_px": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Original image height. Checked against the upload.",
+          "title": "Height Px"
+        },
+        "bounding_boxes": {
+          "items": {
+            "$ref": "#/$defs/BoundingBox"
+          },
+          "title": "Bounding Boxes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "file",
+        "kind"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "Feature": {
+      "additionalProperties": true,
+      "properties": {
+        "type": {
+          "const": "Feature",
+          "title": "Type",
+          "type": "string"
+        },
+        "geometry": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PointGeometry"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Best-effort GPS position, or null if only a local position exists."
+        },
+        "properties": {
+          "$ref": "#/$defs/FindingProperties"
+        }
+      },
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ],
+      "title": "Feature",
+      "type": "object"
+    },
+    "FindingProperties": {
+      "additionalProperties": false,
+      "properties": {
+        "finding_id": {
+          "examples": [
+            "F-0001"
+          ],
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$",
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "detected_at": {
+          "format": "date-time",
+          "title": "Detected At",
+          "type": "string"
+        },
+        "defect_type": {
+          "enum": [
+            "pothole",
+            "crack",
+            "depression",
+            "raised_area",
+            "vertical_step",
+            "other"
+          ],
+          "title": "Defect Type",
+          "type": "string"
+        },
+        "subtype": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "examples": [
+            "alligator"
+          ],
+          "title": "Subtype"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "severity": {
+          "anyOf": [
+            {
+              "enum": [
+                "low",
+                "medium",
+                "high"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Severity"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        },
+        "detection_source": {
+          "anyOf": [
+            {
+              "enum": [
+                "image",
+                "lidar",
+                "fused"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detection Source"
+        },
+        "gps_accuracy_m": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Estimated horizontal GPS error (metres).",
+          "title": "Gps Accuracy M"
+        },
+        "position_local_m": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LocalPosition"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Position in metres from the drone's start point (local frame)."
+        },
+        "measurements": {
+          "examples": [
+            {
+              "width": {
+                "unit": "m",
+                "value": 0.42
+              }
+            }
+          ],
+          "patternProperties": {
+            "^[a-z][a-z0-9_]{0,63}$": {
+              "$ref": "#/$defs/Measurement"
+            }
+          },
+          "title": "Measurements",
+          "type": "object"
+        },
+        "quality_warnings": {
+          "items": {
+            "$ref": "#/$defs/QualityWarning"
+          },
+          "title": "Quality Warnings",
+          "type": "array"
+        },
+        "evidence": {
+          "description": "At least one evidence file is required.",
+          "items": {
+            "$ref": "#/$defs/Evidence"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "finding_id",
+        "detected_at",
+        "defect_type",
+        "evidence"
+      ],
+      "title": "FindingProperties",
+      "type": "object"
+    },
+    "LineString": {
+      "additionalProperties": true,
+      "properties": {
+        "type": {
+          "const": "LineString",
+          "title": "Type",
+          "type": "string"
+        },
+        "coordinates": {
+          "items": {
+            "items": {
+              "type": "number"
+            },
+            "maxItems": 3,
+            "minItems": 2,
+            "type": "array"
+          },
+          "minItems": 2,
+          "title": "Coordinates",
+          "type": "array"
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "title": "LineString",
+      "type": "object"
+    },
+    "LocalFrameOrigin": {
+      "additionalProperties": false,
+      "description": "Where the drone's local x/y frame starts.\n\nx points along ``heading_deg`` (0 = north, clockwise); y points 90 degrees clockwise\nfrom x (to the right, as in PX4's forward-right-down body frame). Units are metres.",
+      "properties": {
+        "lat": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "Lat",
+          "type": "number"
+        },
+        "lon": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Lon",
+          "type": "number"
+        },
+        "alt_m": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Alt M"
+        },
+        "heading_deg": {
+          "anyOf": [
+            {
+              "exclusiveMaximum": 360,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Heading Deg"
+        }
+      },
+      "required": [
+        "lat",
+        "lon"
+      ],
+      "title": "LocalFrameOrigin",
+      "type": "object"
+    },
+    "LocalPosition": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "title": "Y",
+          "type": "number"
+        },
+        "z": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Z"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "title": "LocalPosition",
+      "type": "object"
+    },
+    "Measurement": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "examples": [
+            "m",
+            "mm",
+            "m2"
+          ],
+          "maxLength": 20,
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "title": "Measurement",
+      "type": "object"
+    },
+    "PointGeometry": {
+      "additionalProperties": true,
+      "properties": {
+        "type": {
+          "const": "Point",
+          "title": "Type",
+          "type": "string"
+        },
+        "coordinates": {
+          "description": "[lon, lat] or [lon, lat, alt]",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 2,
+          "title": "Coordinates",
+          "type": "array"
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "title": "PointGeometry",
+      "type": "object"
+    },
+    "QualityWarning": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "examples": [
+            "POSE_LOW_CONFIDENCE"
+          ],
+          "pattern": "^[A-Z][A-Z0-9_]{1,63}$",
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "title": "QualityWarning",
+      "type": "object"
+    },
+    "RunInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "description": "Globally unique survey run id.",
+          "examples": [
+            "PW-20261114-1502-A1"
+          ],
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "company": {
+          "$ref": "#/$defs/Company"
+        },
+        "site_name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Site Name",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "ended_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ended At"
+        },
+        "status": {
+          "description": "'incomplete' if the flight or processing did not cover the planned area.",
+          "enum": [
+            "complete",
+            "incomplete"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "aircraft_id": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Aircraft Id"
+        },
+        "operator": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Operator"
+        },
+        "software_version": {
+          "examples": [
+            "pw-proc 0.3.1"
+          ],
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Software Version",
+          "type": "string"
+        },
+        "local_frame_origin": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LocalFrameOrigin"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "flight_path": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LineString"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "data_warnings": {
+          "items": {
+            "$ref": "#/$defs/DataWarning"
+          },
+          "title": "Data Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "run_id",
+        "company",
+        "site_name",
+        "started_at",
+        "status",
+        "software_version"
+      ],
+      "title": "RunInfo",
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "description": "A complete survey run: run metadata plus zero or more findings.",
+  "properties": {
+    "type": {
+      "const": "FeatureCollection",
+      "title": "Type",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "run": {
+      "$ref": "#/$defs/RunInfo"
+    },
+    "features": {
+      "description": "May be empty: a complete run with no findings is valid.",
+      "items": {
+        "$ref": "#/$defs/Feature"
+      },
+      "title": "Features",
+      "type": "array"
+    }
+  },
+  "required": [
+    "type",
+    "schema_version",
+    "run",
+    "features"
+  ],
+  "title": "PaveWatch run submission v1.0",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pavewatch.local/schema/run-submission-1.0.json"
+}

@@ -1,0 +1,27 @@
+[Unit]
+Description=PaveWatch manually controlled camera and LiDAR recorder
+After=network-online.target ptp4l-pavewatch.service
+Wants=network-online.target pavewatch-watchdog.service
+
+[Service]
+Type=simple
+User=pavewatch
+Group=pavewatch
+RuntimeDirectory=pavewatch-lidar
+RuntimeDirectoryPreserve=yes
+StateDirectory=pavewatch-lidar
+UMask=0027
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 -u /usr/local/lib/pavewatch-lidar/lidar_control.py record --request /run/pavewatch-lidar/request.json
+ExecStopPost=/usr/bin/python3 -u /usr/local/lib/pavewatch-lidar/lidar_control.py cleanup-capture
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=35
+RuntimeMaxSec=1240
+Restart=no
+NoNewPrivileges=yes
+ProtectSystem=full
+ProtectHome=read-only
+ReadWritePaths=/home/pavewatch/data /home/pavewatch/WORKLOG.md
+
+# Intentionally no Install section: recording starts only on request.

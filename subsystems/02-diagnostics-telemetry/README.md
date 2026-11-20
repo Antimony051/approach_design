@@ -12,6 +12,8 @@ Report battery, acquisition, storage, and mode; identify stream gaps, sensor los
 
 HealthMonitor on the Raspberry Pi 4 consumes capture counters/state transitions, avoiding bulk-file rereads. It records field/value/units, source ID/time, sequence, validity, severity, and persistent events. Ground StatusModel retains newest valid samples and calculates age. Loss of recorder heartbeat must be distinguishable from a healthy payload.
 
+The recorder checkout implements the local watchdog as a separate systemd service. It reads a one-second heartbeat, reports acquisition and recorder faults, and archives a per-request JSON summary on the Pi. `collect diagnostics --json` supplies the local report for testing and integration. [Recorder watchdog](../03-sensor-payload-acquisition/recorder/README.md#watch-a-capture).
+
 **RadioMaster Pocket 2.4 GHz ELRS** is the primary immediate critical-alert display; the laptop provides detailed status/review over separate MAVLink telemetry. Proposed short warnings: LOW BATTERY, LIDAR LOST, CAMERA LOST, STORAGE LOW, POSE INVALID. Pocket's source-listed price is $71.50 and its display 128 × 64; Boxer and TX16S Mark II were considered but offer no necessary benefit for this short-warning role at their higher source prices. These are document inputs, not current quotes.
 
 A software bridge must carry recorder faults through **MicoAir/PX4 → RP1 V2/ELRS → Pocket/EdgeTX** in a supported format. Exact protocol, firmware versions, field mapping, bridge, and display script remain open (Q-19/COMP-19). Cited Lua/Yaapu references do not prove this path works. Manual RC and handset telemetry share a radio failure path; laptop MAVLink is separate. FP retains aircraft recovery responsibility.

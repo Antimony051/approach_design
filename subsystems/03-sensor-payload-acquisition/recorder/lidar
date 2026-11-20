@@ -1,0 +1,2 @@
+#!/bin/sh
+exec sudo -n /usr/bin/python3 /usr/local/lib/pavewatch-lidar/lidar_control.py "$@"

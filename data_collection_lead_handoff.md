@@ -4,6 +4,8 @@
 
 Use the installed `collect` command on the shared PaveWatch Raspberry Pi 4 to record camera and LiDAR together. The installed release is `recorder-v2.0.4` (`5167c101fc24cb3103aa24675e6dc677f2755fe9`). The Pi keeps the source and rollback history in `/opt/pavewatch-recorder`. The existing `lidar start` command remains available for LiDAR-only work.
 
+The recorder source for the next Pi release includes per-run LiDAR profile verification, built-in IMU capture, and a separate watchdog. Use `collect diagnostics` with that release to inspect current faults and find the per-run report. The operator guide covers IMU setup and diagnostic checks. [Recorder guide](subsystems/03-sensor-payload-acquisition/recorder/README.md).
+
 ## What changed
 
 | Previous collection workflow | V2 workflow |
@@ -81,7 +83,7 @@ The diagnostic runs are in `~/data/diagnostics-v2/` under names ending in `v2-fi
 2. Check the live scanner’s spatial and temporal averaging settings. Record the filter state and window before any comparison run. Include a measured pavement step or target and a reference trajectory. Keep the operator and mast clear of the review corridor where practical.
 3. Qualify Module 3 and the intended USB survey medium under a simultaneous capture of at least ten minutes. Check sustained cadence and writes, clock and pose coverage, power, thermals, loss, and recovery. Use the optical and motion references in the timing plan to score SA2. The diagnostics above establish recorder behavior on the bench setup.
 
-In the Pi repo, `collect_v2.py` handles stream capture and file writes. `managed_collect.py` connects it to the service and operator commands. `lidar_control.py` handles scanner control and the LiDAR-only path. Commit changes in the repo, then deploy from a tagged release with the service idle. Keep credentials and recordings out of Git. Log deployments and verification in `~/WORKLOG.md`.
+In the Pi repo, `collect_v2.py` handles stream capture and file writes. `managed_collect.py` connects it to the service and operator commands. `lidar_control.py` handles scanner control and the LiDAR-only path. Commit changes in the repo, then deploy from a tagged release with the service idle. Keep credentials and recordings out of Git. Log deployments and verification in `~/WORKLOG.md`. [Recorder source in hardware_design](subsystems/03-sensor-payload-acquisition/recorder/README.md).
 
 ~~~sh
 sudo -n git -C /opt/pavewatch-recorder log --oneline --decorate -6

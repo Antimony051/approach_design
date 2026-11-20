@@ -34,6 +34,8 @@ The reused card retains existing accounts/projects and documented unrepaired fil
 
 On November 19, recorder V2.0.4 was deployed on the shared Pi and exercised with its Camera Module 2 and localhost Compact test packets. See the handoff for field commands, the run format, rollback, and live commissioning work. [Data collection lead handoff](../../data_collection_lead_handoff.md).
 
+The recorder directory contains the capture code and deployment files from the tested Pi release, along with a hardware-free test command. [Recorder source](recorder/README.md).
+
 The selected direction is **Python** capture with Raspberry Pi camera support; C++ is a possible replacement for a capture bottleneck, while ROS 2 is an alternative rather than a required stack. Exact Raspberry Pi OS, Picamera2/libcamera, LiDAR library/format, MAVLink library, and parallel encoding setup remain to be specified.
 
 RecorderSupervisor coordinates LidarCapture, CameraCapture, and PoseLogger; each writes through bounded queues with native/common timestamps and sequence IDs. HealthMonitor records drops/faults. ManifestWriter stores run identity/configuration, calibration IDs, file inventory/checksums, and complete/incomplete state. ExportService copies and verifies after landing. Interrupted packages remain incomplete even when individual files are usable.
